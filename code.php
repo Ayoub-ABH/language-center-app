@@ -883,8 +883,9 @@ if(isset($_POST['login_btn']))
      {
         $_SESSION['username'] = $username_login;
         $_SESSION['userType'] = $usertypes['Usertype'];
+        $_SESSION['EtudiantID'] = $usertypes['UserID'];
         $_SESSION['villeID'] = $usertypes['VilleID'];
-        header('location: formulaire.php');
+        header('location: etudiant_espace.php');
      }
      else if($usertypes['Usertype'] == "super")
      {

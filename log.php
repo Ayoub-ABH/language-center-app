@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['username'])){
     header('location: dashboard.php');
 }
-include 'includes/header.php';
+// include 'includes/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,9 @@ include 'includes/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/log.css">
+    <link rel="stylesheet" type="text/css"  href="css/log.css?v=1.0">
 </head>
+
 <body>
     <div class="wrapper">
         <div class="container">
