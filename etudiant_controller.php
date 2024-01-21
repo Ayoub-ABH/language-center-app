@@ -30,4 +30,56 @@ if(isset($_POST['modiferEtudiant']))
     }
 }
 
+if(isset($_POST['AjouterFichier'])) 
+{
+    $user_id = $_SESSION['EtudiantID'];
+    $file_name = $_FILES['file']['name'];
+    $file_size = $_FILES['file']['size'];
+    $file_tmp = $_FILES['file']['tmp_name'];
+    $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+
+
+    $upload_folder = 'upload/diplomes/';
+
+    if (empty($_FILES['file']['name'])) {
+        $_SESSION['status'] = "Aucun fichier sélectionné";
+        header('location: etudiant_fichiers.php');
+        exit;
+    }
+    // Check file size and type
+    if ($file_type !== 'pdf') {
+        $_SESSION['status'] = "Le fichier doit être un PDF";
+        header('location: etudiant_fichiers.php');
+        exit;
+    }
+    if ($file_size > 6 * 1024 * 1024) {
+        $_SESSION['status'] = "Le fichier doit être moins de 6 Mo";
+        header('location: etudiant_fichiers.php');
+        exit;
+    }
+    // Generate a unique file name
+    $new_file_name = uniqid() .'_'. $file_name;
+    $path = $upload_folder . $new_file_name;
+    
+    $query = "INSERT INTO fichiers (path, name, userID, uploadDateTime) VALUES ('$path', '$new_file_name', $user_id, NOW())";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        if (move_uploaded_file($file_tmp, $upload_folder . $new_file_name)) {
+            $_SESSION['success'] = "Le fichier a été ajouté avec succès";
+            header('location: etudiant_fichiers.php');
+        } else {
+            // File not saved
+            $_SESSION['status'] = "Une erreur s'est produite lors de l'enregistrement du fichier";
+            header('location: etudiant_fichiers.php');
+        }
+    } else {
+        $_SESSION['status'] = "Une erreur s'est produite lors de l'ajout du fichier";
+        header('location: etudiant_fichiers.php');
+    }
+}
+
+
+
 ?>

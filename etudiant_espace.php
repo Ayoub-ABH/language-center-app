@@ -79,7 +79,7 @@ secUser();
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Espace Etudiant</h6>
                         <a class="collapse-item" href="etudiant_espace.php">Profile</a>
-                        <a class="collapse-item" href="etudiant_diplomes.php">Votre diplomes</a>
+                        <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
                     </div>
                 </div>
             </li>

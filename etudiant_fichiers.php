@@ -233,76 +233,63 @@ secUser();
 
 
                     <form action="etudiant_controller.php" method="POST" enctype="multipart/form-data">
-                        <div class="form-group" id="diplomeContainer">
-                            <label for="diplome1">Ajouter votre diplomes</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="diplome1" name="diplome[]">
-                                    <label class="custom-file-label" for="diplome1">Choisir un fichier</label>
-                                </div>
+                        <div class="form-group">
+                            <label for="file">Ajouter votre fichier</label>
+                            <div>
+                                <input type="file" id="file" name="file">
                             </div>
                         </div>
 
 
-                        <button type="submit" name="AjouterDiplome" class="btn btn-primary">Ajouter</button>
+                        <button type="submit" name="AjouterFichier" class="btn btn-primary">Ajouter</button>
                     </form>
                 </div>
 
-                
-                <?php 
-                    $query = "SELECT * FROM visiteurs ";
-                    $query_run = mysqli_query($connection,$query);
+
+                <?php
+                $query = "SELECT * FROM fichiers where userID = '" . $_SESSION['EtudiantID'] . "'";
+                $query_run = mysqli_query($connection, $query);
                 ?>
 
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>diplome</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (mysqli_num_rows($query_run) > 0) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                        ?>
-                                <tr>
-                                    <td><?php echo $row['VisiteurID']; ?></td>
-                                    <td><?php echo $row['Visiteur_name']; ?></td>
-                                    <td><?php echo $row['Visiteur_prenom']; ?></td>
-                                    <td><?php echo $row['CIN']; ?></td>
-                                    <td><?php echo $row['Email']; ?></td>
-                                    <td><?php echo $row['Tele']; ?></td>
-                                    <td><?php echo $row['Adresse']; ?></td>
-                                    <td><?php echo $row['Date_visite']; ?></td>
-                                    <td><?php echo $row['Niveau']; ?></td>
-                                    <td><?php echo $row['Observation']; ?></td>
+                <div class="container">
+                    <h2>
+                        votre fichiers
+                    </h2>
 
-                                    <td>
-                                        <form action="visiteur_edit.php" method="post">
-                                            <input type="hidden" name="edit_id" value="<?php echo $row['VisiteurID']; ?>">
-                                            <button type="submit" name="editv_btn" class="btn btn-success">Éditer</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="code.php" method="post">
-                                            <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
-                                            <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
-                                        </form>
-                                    </td>
-
-
-
-                                </tr>
-                        <?php
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>fichier</th>
+                                <th>date</th>
+                                <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (mysqli_num_rows($query_run) > 0) {
+                                while ($row = mysqli_fetch_assoc($query_run)) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo $row['fileID']; ?></td>
+                                        <td><?php echo $row['name']; ?></td>
+                                        <td><?php echo $row['uploadDateTime']; ?></td>
+                                        <td>
+                                            <form action="code.php" method="post">
+                                                <input type="hidden" name="delete_id" value="<?php echo $row['FichierID']; ?>">
+                                                <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "no record found";
                             }
-                        } else {
-                            echo "no record found";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
 
 
 
