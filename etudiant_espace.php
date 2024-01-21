@@ -214,7 +214,7 @@ secUser();
 
                             if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                                 echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
-                                <meta http-equiv="refresh" content="5; url = formulaire.php" />
+                                <meta http-equiv="refresh" content="5; url = etudiant_espace.php" />
                                 ';
                                 unset($_SESSION['success']);
                             }

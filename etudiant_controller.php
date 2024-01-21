@@ -80,6 +80,30 @@ if(isset($_POST['AjouterFichier']))
     }
 }
 
+if(isset($_POST['supprimerFichier']))
+{
+
+    $file_id = $_POST['fichierID'];
+    $file_path = $_POST['fichierPath'];
+
+
+    echo $file_id;
+    $query = "DELETE FROM fichiers WHERE fileID = $file_id";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        if (unlink($file_path)) {
+            $_SESSION['success'] = "Le fichier a été supprimé avec succès";
+            header('location: etudiant_fichiers.php');
+        } else {
+            $_SESSION['status'] = "Une erreur s'est produite lors de la suppression du fichier";
+            header('location: etudiant_fichiers.php');
+        }
+    } else {
+        $_SESSION['status'] = "Une erreur s'est produite lors de la suppression du fichier";
+        header('location: etudiant_fichiers.php');
+    }
+}
 
 
 ?>

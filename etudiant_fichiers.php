@@ -214,7 +214,7 @@ secUser();
 
                             if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                                 echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
-                                <meta http-equiv="refresh" content="5; url = formulaire.php" />
+                                <meta http-equiv="refresh" content="5; url = etudiant_fichiers.php" />
                                 ';
                                 unset($_SESSION['success']);
                             }
@@ -275,9 +275,10 @@ secUser();
                                         <td><?php echo $row['name']; ?></td>
                                         <td><?php echo $row['uploadDateTime']; ?></td>
                                         <td>
-                                            <form action="code.php" method="post">
-                                                <input type="hidden" name="delete_id" value="<?php echo $row['FichierID']; ?>">
-                                                <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
+                                            <form action="etudiant_controller.php" method="post">
+                                                <input type="hidden" name="fichierID" value="<?php echo $row['fileID']; ?>">
+                                                <input type="hidden" name="fichierPath" value="<?php echo $row['path']; ?>">
+                                                <button type="submit" name="supprimerFichier" class="btn btn-danger">Supprimer</button>
                                             </form>
                                         </td>
                                     </tr>
