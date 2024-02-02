@@ -107,4 +107,25 @@ if(isset($_POST['supprimerFichier']))
 }
 
 
+if(isset($_POST['downloadFichier']))
+{
+    $file_id = $_POST['fichierID'];
+    $file_path = $_POST['fichierPath'];
+
+    if (file_exists($file_path)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($file_path).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file_path));
+        readfile($file_path);
+        exit;
+    } else {
+        $_SESSION['status'] = "Le fichier n'existe pas";
+        header('location: etudiant_fichiers.php');
+    }
+
+}
 ?>
