@@ -166,6 +166,38 @@ $query_run = mysqli_query($connection, $query);
                 </tr>
             </thead>
             <tbody>
+
+
+
+<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue dans votre fichier etudiants.php -->
+<div class="modal fade" id="confirmDeleteEtudiantModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteEtudiantModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteEtudiantModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment supprimer cet étudiant?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <form action="code.php" method="post">
+                    <input type="hidden" name="delete_id" value="<?php echo $row['EtudiantID']; ?>">
+
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteEtudiantModal">Supprimer</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
                        <?php
     if (mysqli_num_rows($query_run) > 0) {
         while ($row = mysqli_fetch_assoc($query_run)) {
@@ -191,7 +223,10 @@ $query_run = mysqli_query($connection, $query);
                   <td>
                   <form action="code.php" method="post">
                           <input type="hidden" name="delete_id" value="<?php echo $row['EtudiantID']; ?>">
-                      <button type="submit" name="deletee_btn"  class="btn btn-danger">Supprimer</button>
+
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteEtudiantModal">Supprimer</button>
+
+
                       </form>
                   </td>
 

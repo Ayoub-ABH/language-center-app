@@ -45,46 +45,27 @@ secUser();
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <!-- <li class="nav-item active">
-                <a class="nav-link" href="formulaire.php" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>
-                        Tableau de bord</span></a>
-            </li> -->
-
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
-            </div>
-
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-
-
+            </div> 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fab fa-wpforms"></i>
-                    <span>Espace Etudiant</span>
-                </a>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-user-graduate"></i> 
+            <span>Espace Etudiant</span>
+              </a>
 
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Espace Etudiant</h6>
-                        <a class="collapse-item" href="etudiant_espace.php">Profile</a>
-                        <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
-                    </div>
-                </div>
-            </li>
-
-
+               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                 <h6 class="collapse-header">Espace Etudiant</h6>
+                 <a class="collapse-item" href="etudiant_espace.php">Profile</a>
+                 <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
+               </div>
+           </div>
+           </li>
 
 
             <!-- Divider -->
@@ -94,8 +75,6 @@ secUser();
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-
 
         </ul>
         <!-- End of Sidebar -->
@@ -230,6 +209,7 @@ secUser();
                         </div>
                     </div>
 
+
                     <?php
                     $etudiantID = $_SESSION['EtudiantID'];
                     $query = "SELECT * FROM etudiants WHERE EtudiantID = $etudiantID";
@@ -242,7 +222,7 @@ secUser();
                             if (mysqli_num_rows($query_run) > 0) {
                                 $row = mysqli_fetch_assoc($query_run);
                             ?>
-
+                                  
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Nom etudiant</label>
                                     <input type="text" name="etudiant_nom" class="form-control" value="<?php echo $row['Etudiant_name']; ?>">
@@ -279,7 +259,7 @@ secUser();
                             }
                             ?>
 
-                            <button type="submit" name="modiferEtudiant" class="btn btn-primary">modifier</button>
+                            <button type="submit" name="modiferEtudiant" class="btn btn-primary">Modifier</button>
                         </div>
                     </form>
                         

@@ -18,7 +18,8 @@ if (isset($_SESSION['username'])){
 <body>
     <div class="wrapper">
         <div class="container">
-            <h1>Welcome</h1>
+            <img src="img/logo_min.png" alt="Logo" class="logo">
+            <h1>Willkommen</h1>
             <form  action="code.php" class="form" method="POST">
                     <?php
                             if(isset($_SESSION['status']) && $_SESSION['status'] !='')

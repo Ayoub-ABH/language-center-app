@@ -19,6 +19,7 @@ secUser();
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
@@ -26,6 +27,10 @@ secUser();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@8.2.5/dist/dbr.js"></script>
+
+
+
+
 
 
 </head>
@@ -47,15 +52,6 @@ secUser();
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <!-- <li class="nav-item active">
-                <a class="nav-link" href="formulaire.php" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>
-                        Tableau de bord</span></a>
-            </li> -->
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -65,26 +61,20 @@ secUser();
             </div>
 
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fab fa-wpforms"></i>
-                    <span>Espace Etudiant</span>
-                </a>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-user-graduate"></i> <!-- Hier wurde die Klasse geändert -->
+            <span>Espace Etudiant</span>
+              </a>
 
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Espace Etudiant</h6>
-                        <a class="collapse-item" href="etudiant_espace.php">Profile</a>
-                        <a class="collapse-item" href="etudiant_diplomes.php">Votre diplomes</a>
-                    </div>
-                </div>
-            </li>
-
-
+               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                 <h6 class="collapse-header">Espace Etudiant</h6>
+                 <a class="collapse-item" href="etudiant_espace.php">Profile</a>
+                 <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
+               </div>
+           </div>
+           </li>
 
 
             <!-- Divider -->
@@ -96,10 +86,8 @@ secUser();
             </div>
 
 
-
         </ul>
         <!-- End of Sidebar -->
-
 
 
         <!-- Content Wrapper -->
@@ -127,9 +115,6 @@ secUser();
                             </div>
                         </div>
                     </form>
-
-
-
 
 
                     <!-- Topbar Navbar -->
@@ -231,19 +216,19 @@ secUser();
                     </div>
 
 
+                   <form action="etudiant_controller.php" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Ajouter votre fichier</label>
+        <div class="input-group">
+            <input type="file" id="file" name="file" class="form-control">
+            <div class="input-group-append">
+                <button type="submit" name="AjouterFichier" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</form>
 
-                    <form action="etudiant_controller.php" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="file">Ajouter votre fichier</label>
-                            <div>
-                                <input type="file" id="file" name="file">
-                            </div>
-                        </div>
 
-
-                        <button type="submit" name="AjouterFichier" class="btn btn-primary">Ajouter</button>
-                    </form>
-                </div>
 
 
                 <?php
@@ -252,48 +237,90 @@ secUser();
                 ?>
 
                 <div class="container">
-                    <h2>
-                        votre fichiers
-                    </h2>
+                  
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Fichier</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>fichier</th>
-                                <th>date</th>
-                                <th>action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (mysqli_num_rows($query_run) > 0) {
-                                while ($row = mysqli_fetch_assoc($query_run)) {
-                            ?>
-                                    <tr>
-                                        <td><?php echo $row['fileID']; ?></td>
-                                        <td><?php echo $row['name']; ?></td>
-                                        <td><?php echo $row['uploadDateTime']; ?></td>
-                                        <td>
-                                            <form action="etudiant_controller.php" method="post">
-                                                <input type="hidden" name="fichierID" value="<?php echo $row['fileID']; ?>">
-                                                <input type="hidden" name="fichierPath" value="<?php echo $row['path']; ?>">
-                                                <button type="submit" name="supprimerFichier" class="btn btn-danger">Supprimer</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                            <?php
-                                }
-                            } else {
-                                echo "no record found";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+            <!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer ce fichier ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <form action="etudiant_controller.php" method="post">
+                    <input type="hidden" id="fichierIDToDelete" name="fichierID">
+                    <input type="hidden" id="fichierPathToDelete" name="fichierPath">
+                    <button type="submit" name="supprimerFichier" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <?php
+            if (mysqli_num_rows($query_run) > 0) {
+                while ($row = mysqli_fetch_assoc($query_run)) {
+            ?>
+                    <tr>
+                        <td><?php echo $row['fileID']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['uploadDateTime']; ?></td>
+                        <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" data-fichierid="<?php echo $row['fileID']; ?>" data-fichierpath="<?php echo $row['path']; ?>">
+        Supprimer
+    </button>
+</td>
+
+                    </tr>
+            <?php
+                }
+            } else {
+                echo '<tr><td colspan="4" class="text-center">Aucun fichier trouvé</td></tr>';
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var fichierID = button.data('fichierid');
+            var fichierPath = button.data('fichierpath');
+
+            $('#fichierIDToDelete').val(fichierID);
+            $('#fichierPathToDelete').val(fichierPath);
+        });
+    });
+</script>
 
 
 
+<script>
+    function confirmerSuppression() {
+        return confirm("Êtes-vous sûr de vouloir supprimer ce fichier ?");
+    }
+</script>
 
 
 

@@ -26,12 +26,13 @@ include('includes/navbar.php');
                     <div class="card">
                         <img src="upload/<?php echo $row['Image']; ?>" width="250px" height="200px" alt="Etudiant_image">
                         <div class="card-body">
-                            <h4 class="card-title"><?php echo $row['Etudiant_name']; ?></h4>
-                            <h3 class="card-title"><?php echo $row['Niveau']; ?></h3>
+                            <h5 class="card-title"><?php echo $row['Etudiant_name']; ?></h4>
+                            <h5 class="card-title"><?php echo $row['Etudiant_prenom']; ?></h3>
                             <p class="card-text">
                                 <?php echo $row['Description']; ?>
                             </p>
-                            <button class="btn btn-success">Afficher Details</button>
+                           <a href="etudiant_details.php?id=<?php echo $row['EtudiantID']; ?>" class="btn btn-success">Afficher Details</a>
+
                         </div>
                     </div>
                 </div>

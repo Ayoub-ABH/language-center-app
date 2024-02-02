@@ -2,13 +2,9 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 <!-- Sidebar - Brand -->
-<!--<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
-    <div class="sidebar-brand-icon rotate-n-15">-->
-        <!-- <i class="fas fa-laugh-wink"></i> -->
-        <!--<i class="fas fa-plane-departure"></i>
-    </div>
-    <div class="sidebar-brand-text mx-3">SITA Admin </div>
-</a>-->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+    <div class="sidebar-brand-text mx-3">BILKER</div>
+</a>
 
 
 <!-- Divider -->
@@ -16,15 +12,6 @@
 
 
 
-
-
-<!-- Nav Item - Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" href="dashboard.php">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>
-Tableau de bord</span></a>
-</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -52,19 +39,19 @@ Tableau de bord</span></a>
 </li>
 
 <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Groupes</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="groupes.php">Ajouter Groupes</a>
-                        <a class="collapse-item" href="liste_groupes.php">liste groupes</a>
-                    </div>
-                </div>
-            </li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGroupes"
+        aria-expanded="true" aria-controls="collapseGroupes">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Groupes</span>
+    </a>
+    <div id="collapseGroupes" class="collapse" aria-labelledby="headingGroupes" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="groupes.php">Ajouter Groupes</a>
+            <a class="collapse-item" href="liste_groupes.php">liste groupes</a>
+        </div>
+    </div>
+</li>
 
 
 <li class="nav-item">
@@ -75,18 +62,21 @@ Tableau de bord</span></a>
     
 </li>
 
+
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-<i class="fas fa-fw fa-cog"></i>
-        <span>Etudiants</span>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants"
+        aria-expanded="true" aria-controls="collapseEtudiants">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Étudiants</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="etudiants.php">Ajouter Etudiants</a>
-                        <a class="collapse-item" href="liste_etudiants.php">liste Etudiants</a>
-                    </div>
-                </div>
+    <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="etudiants.php">Ajouter Etudiants</a>
+            <a class="collapse-item" href="liste_etudiants.php">liste Etudiants</a>
+        </div>
+    </div>
 </li>
+
 
 
 
@@ -99,26 +89,23 @@ Tableau de bord</span></a>
 </li>
 
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-<i class="fas fa-fw fa-cog"></i>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiement"
+        aria-expanded="true" aria-controls="collapsePaiement">
+        <i class="fas fa-fw fa-cog"></i>
         <span>Paiement</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Ajouter_paiement.php">Ajouter paiement</a>
-                        <a class="collapse-item" href="paiement.php">liste paiements</a>
-                    </div>
-                </div>
+    <div id="collapsePaiement" class="collapse" aria-labelledby="headingPaiement" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="Ajouter_paiement.php">Ajouter paiement</a>
+            <a class="collapse-item" href="paiement.php">liste paiements</a>
+        </div>
+    </div>
 </li>
 
 
 <!-- Divider -->
 <hr class="sidebar-divider">
 
-<!-- Heading -->
-<div class="sidebar-heading">
-    Addons
-</div>
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
@@ -127,12 +114,6 @@ Tableau de bord</span></a>
         <span>Graphique</span></a>
 </li>
 
-<!-- Nav Item - Tables 
-<li class="nav-item">
-    <a class="nav-link" href="tables.php">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Calendrier</span></a>
-</li>-->
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
@@ -176,40 +157,7 @@ Tableau de bord</span></a>
                 </div>
             </div>
         </form>
-        <ul class="navbar-nav text-center">
-        <?php if($_SESSION['userType'] == ""){
-            ?>
-            <li class="nav-item ">
-       <form method="post" >
-       <div class="row">
-       <div class="col-9">
-                    <select name="currentVille" id="currentVille" class="form-control bg-light border-0 small">
-                        <?php 
-                        $query = "SELECT * FROM `ville`";
-                        $connection = mysqli_connect("localhost","root","","sita");
-                        $query_run = mysqli_query($connection,$query);
-                        if($query_run){
-                        while($row = mysqli_fetch_assoc($query_run)){
-                            if(isset($_SESSION['villeID']) && $_SESSION['villeID'] == $row['VilleID']){ 
-                               
-                        ?>
-                        <option selected="selected" value="<?php echo $row['VilleID'];?>"><?php echo $row['Libelle'];?></option>
-                        <?php
-                    }else{
-                        ?>
-                        <option value="<?php echo $row['VilleID'];?>"><?php echo $row['Libelle'];?></option>
-                        <?php
-                    }
-                    }} ?>
-                        
-                    </select>
-                </div>
-        <div class="col-3"><button type="submit" class="btn btn-primary">change</button></div>
-       </div>
-       </form>
-            </li>
-            <?php }?>
-        </ul>
+        
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
@@ -242,36 +190,6 @@ Tableau de bord</span></a>
                 </div>
             </li>
 
-            <!-- Nav Item - Alerts -->
-            <!-- <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i> -->
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span>
-                </a> -->
-                <!-- Dropdown - Alerts -->
-                <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">
-                        Alerts Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-file-alt text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 12, 2019</div>
-                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                        </div>
-                    </a>
-                    
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                </div>
-            </li> -->
-
            
 
             <!-- Nav Item - User Information -->
@@ -293,15 +211,7 @@ Tableau de bord</span></a>
                       
                     Editer le profil
                     </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        
-                    Paramètres
-                    </a>
-                    <!-- <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                    </a> -->
+            
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

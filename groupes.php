@@ -114,6 +114,32 @@ $query_run = mysqli_query($connection,$query);
                 </tr>
             </thead>
             <tbody>
+
+<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue dans votre fichier groupes.php -->
+<div class="modal fade" id="confirmDeleteGroupeModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteGroupeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteGroupeModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment supprimer ce groupe?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <form action="code.php" method="post">
+                    <input type="hidden" name="delete_id" value="<?php echo $row['GroupeID']; ?>">
+                    <button type="submit" name="deleteg_btn" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
                 <?php
                 if(mysqli_num_rows($query_run) > 0)
                 {
@@ -135,7 +161,9 @@ $query_run = mysqli_query($connection,$query);
                   <td>
                   <form action="code.php" method="post">
                           <input type="hidden" name="delete_id" value="<?php echo $row['GroupeID']; ?>">
-                      <button type="submit" name="deleteg_btn"  class="btn btn-danger">Supprimer</button>
+             
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteGroupeModal">Supprimer</button>
+
                       </form>
                   </td>
 

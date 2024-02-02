@@ -1,6 +1,6 @@
-
 <?php
 session_start();
+
 class Model
 {
     private $server = "localhost";
@@ -9,25 +9,23 @@ class Model
     private $db = "deutsch_school";
     private $conn;
 
-
     public function __construct()
     {
         try {
             $this->conn = new mysqli($this->server, $this->username, $this->password, $this->db);
         } catch (\Throwable $th) {
-            //throw $th;
             echo "Connection error " . $th->getMessage();
         }
     }
 
-     public function fetch()
+    public function fetch()
     {
-        
         $data = [];
-        
-        $query = "SELECT etudiants.*, Etudiant_name.etudiants  as ComptoirName from etudiants ";
-        if ($sql = $this->conn->query($query)) {
-            while ($row = mysqli_fetch_assoc($sql)) {
+        $query = "SELECT * FROM etudiants";
+        $sql = $this->conn->query($query);
+
+        if ($sql) {
+            while ($row = $sql->fetch_assoc()) {
                 $data[] = $row;
             }
         }
@@ -35,15 +33,16 @@ class Model
         return $data;
     }
 
-    public function date_range($start_date, $end_date,$systeme)
+    public function date_range($start_date, $end_date)
     {
-        $villeID = $_SESSION['villeID'];
         $data = [];
 
-        if (isset($start_date) && isset($end_date)  && isset($systeme)) {
-            $query = "SELECT intervention.*, comptoir.Comptoirs  as ComptoirName from intervention, comptoir WHERE intervention.ComptoirID = comptoir.ComptoirID AND  `Date` BETWEEN '$start_date' AND '$end_date' AND intervention.Type_intervention = '$systeme' AND intervention.VilleID =  $villeID";
-            if ($sql = $this->conn->query($query)) {
-                while ($row = mysqli_fetch_assoc($sql)) {
+        if (isset($start_date) && isset($end_date)) {
+            $query = "SELECT * FROM etudiants WHERE `Date` BETWEEN '$start_date' AND '$end_date'";
+            $sql = $this->conn->query($query);
+
+            if ($sql) {
+                while ($row = $sql->fetch_assoc()) {
                     $data[] = $row;
                 }
             }

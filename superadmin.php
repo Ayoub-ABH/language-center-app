@@ -316,8 +316,12 @@ Tableau de bord</span></a>
                               <table class="table table-borderless display nowrap" id="records" style="width:100%">
                                   <thead>
                                       <tr>
-                                              <th>Etudiant</th>
-                                             >
+                                            <th>Date_inscription</th>
+                                              <th>Nom</th>
+                                              <th>Prenom</th>
+                                              <th>Cin</th>
+                                              <th>Telephone</th>
+                                              <th>Adresse</th>
                                             
                                       </tr>
                                   </thead>
@@ -382,12 +386,40 @@ Tableau de bord</span></a>
                     "responsive": true,
                     "columns": [
                         {
-                            "data": "Etudiant",
-                            "render": function (data, type, row, meta) {
-                                return `${row.Etudiant_name}`;
-                            }
-                    
-                        },
+                        "data": "Date_inscription",
+                        "render": function (data, type, row, meta) {
+                            return moment(row.Date_inscription).format('DD-MM-YYYY'); 
+                        }
+                    },
+                    {
+                        "data": "Nom", 
+                        "render": function (data, type, row, meta) {
+                            return `${row.Etudiant_name}`;
+                        }
+                    },
+                    {
+                        "data": "Prenom", 
+                        "render": function (data, type, row, meta) {
+                            return `${row.Etudiant_prenom}`;
+                        }
+                    },
+                    {
+                        "data": "CIN",
+                        "render": function (data, type, row, meta) {
+                            return `${row.CIN}`;
+                        }
+                    },
+                    {
+                        "data": "Tele",
+                        "render": function (data, type, row, meta) {
+                            return `${row.Tele}`;
+                        }
+                    },
+                    {
+                        "data": "Adresse",
+                        "render": function (data, type, row, meta) {
+                            return `${row.Adresse}`;
+                        }}
                         // Add rendering for other columns as needed
                     ]
                 });

@@ -49,15 +49,18 @@ include('includes/navbar.php');
                         </select>
                     </div>
 
-                    <!-- Ajout du bouton de recherche -->
-                    <div class="form-group col-md-4">
-                        <label></label>
-                        <button type="submit" name="btn_recherche" class="btn btn-primary">Rechercher</button>
+                
+                  <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="invisible">Submit</label>
+                            <button type="submit" class="btn btn-primary btn-block" name="btn_recherche">Afficher les étudiants</button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
 
     <div class="row mt-4">
         <?php

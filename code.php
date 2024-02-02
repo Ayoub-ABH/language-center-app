@@ -4,39 +4,6 @@ session_start();
 
 
 
-/* if(isset($_POST['registerbtn']))
-{
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $cpassword = $_POST['confirmepassword'];
-    $usertype = $_POST['usertype'];
-    if($_SESSION['userType'] == "admin"){
-        $villeID = $_SESSION['villeID'];
-    }else{
-        $villeID = $_POST['ville'];
-    }
-
-    if($password === $cpassword)
-    {
-       
-     
-        $query = "INSERT INTO users (Username,Email,Password,Usertype,VilleID) VALUES ('$username','$email','$password','$usertype','$villeID')";
-        $query_run = mysqli_query($connection,$query);
-        if ($query_run){
-            $_SESSION['success'] = "profil administrateur a été ajouté";
-            header('location: register.php');
-        }else{
-            $_SESSION['status'] = "profil administrateur non ajouté";
-            header('location: register.php');
-        }
-    }
-    else{
-        $_SESSION['status'] = "le mot de passe et le mot de passe de confirmation ne correspondent pas";
-        header('location: register.php');
-    }
-}*/
-
 
 if (isset($_POST['payer_btn'])) {
     $etudiant_id = $_POST['etudiant_id'];

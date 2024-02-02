@@ -145,6 +145,32 @@ $query_run = mysqli_query($connection,$query);
                 </tr>
             </thead>
             <tbody>
+
+<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue  -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment supprimer cet utilisateur?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <form action="code.php" method="post">
+                    <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
+                    <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
                 <?php
                 if(mysqli_num_rows($query_run) > 0)
                 {
@@ -172,7 +198,9 @@ $query_run = mysqli_query($connection,$query);
                   <td>
                   <form action="code.php" method="post">
                           <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
-                      <button type="submit" name="deletev_btn"  class="btn btn-danger">Supprimer</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Supprimer</button>
+
+
                       </form>
                   </td>
 

@@ -28,6 +28,7 @@ if(isset($_POST['modiferEtudiant']))
         $_SESSION['status'] = "Veuillez remplir tous les champs";
         header('location: etudiant_espace.php');
     }
+
 }
 
 if(isset($_POST['AjouterFichier'])) 

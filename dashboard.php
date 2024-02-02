@@ -39,7 +39,7 @@ include('includes/navbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                        <i class="fas fa-users fa-2x" style="color:#4e73df;"></i>
+                                        <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@ include('includes/navbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                           <i class="fas fa-users fa-2x" style="color:#1cc88a;"></i>
+                                           <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -100,51 +100,48 @@ include('includes/navbar.php');
                                                 </div>
                                                 
                                         <div class="col-auto">
-                                            <i class="fas fa-users fa-2x" style="color:#36b9cc;"></i>
+                                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>   
 
 
-
-                     <!-- Earnings (Monthly) Card Example 
-                     <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
+                         <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                               Total Compagnie</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <?php
-                                          require 'dbconfig.php';
-                                          $villeID = $_SESSION['villeID'];
-                                            $query = "SELECT CompagnieID FROM compagnie Where VilleID = $villeID ";
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Total Groupes</div>
+
+
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <?php
+                                            require 'dbconfig.php';
+                                            $query = "SELECT GroupeID FROM groupes ";
                                             $query_run = mysqli_query($connection, $query);
                                             
                                             $row = mysqli_num_rows($query_run);
                                             
                                             echo '<h5>' .$row. '</h5>'
                                             ?>
-
-
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                         <div class="col-auto">
-                                        <i class="fas fa-building fa-2x" style="color:#CC0000;"></i>
+                                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>-->
+                        </div> 
                             
 
 
                     <!-- Content Row -->
-                    
-
 
 <div class="card shadow mb-4">
   
@@ -166,16 +163,7 @@ include('includes/navbar.php');
                                               <input type="date" class="form-control" id="end_date" >
                                           </div>
                                           </div>
-                                          <div class="row">
-                                          <div class="col-12">
-                                          <label>Systeme</label>
-                                           <select name="fetchval" id="fetchval" class="form-control border-1 small">
-                                               <option value="" disabled="" selected="">selectionner Systeme</option>
-                                           </select>
-                                          
-
-                                       </div>
-                                        </div>
+                                       
   
                                           <div class="col-md-3">
                                           <div class="form-group">
@@ -196,24 +184,26 @@ include('includes/navbar.php');
                               
                                   <thead>
                                       <tr>
-                                        <!-- <th>ID</th> -->
-                                        <!-- <th>Date</th> -->
-                                              <th>Etudiant</th>
-                                              <th>Professeur</th>
-                                              <th>Visiteur</th>
-                                          
+                                            
+                                              <th>Date_inscription</th>
+                                              <th>Nom</th>
+                                              <th>Prenom</th>
+                                              <th>Cin</th>
+                                              <th>Telephone</th>
+                                              <th>Adresse</th>
+                                             
                                             
                                       </tr>
                                   </thead>
                               </table>
                               </div>
+    
   
                   </div>
                   <!-- /.container-fluid -->
   
               </div>
               <!-- End of Main Content -->
-
 
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
@@ -241,97 +231,106 @@ include('includes/navbar.php');
     <script>
     // Fetch records
 
-    function fetch(start_date, end_date ,systeme) {
+    function fetch(start_date, end_date) {
         $.ajax({
-            url: "records_adm.php",
+            url: "records.php",
             type: "POST",
             data: {
                 start_date: start_date,
-                end_date: end_date,
-                systeme: systeme
+                end_date: end_date
             },
-            dataType: "json",
-            success: function(data) {
+          dataType: "json",
+            success: function (data) {
                 // Datatables
-                var i = "1";
-
                 $('#records').DataTable({
-                    "data": data,   
-                    
-                // buttons
+                    "data": data,
                     "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                    "buttons": [
-                         'excel', 'print'
-                    ],
-                    // responsive
+                    "buttons": ['excel', 'print'],
                     "responsive": true,
                     "columns": [
-                       
                         {
-                            "data": "Emplacement",
-                            "render": function(data, type, row, meta) {
-                                return `${row.Etudiant}`;
-                            }
-                        },
-                        {
-                            "data": "Equipement",
-                            "render": function(data, type, row, meta) {
-                                return `${row.Professeur}`;
-                            }
-                        },
-                        {
-                            "data": "Comptoir",
-                            "render": function(data, type, row, meta) {
-                                return `${row.Visiteur}`;
-                            }
+                        "data": "Date_inscription",
+                        "render": function (data, type, row, meta) {
+                            return moment(row.Date_inscription).format('DD-MM-YYYY'); 
                         }
-
-                       
+                    },
+                    {
+                        "data": "Nom", 
+                        "render": function (data, type, row, meta) {
+                            return `${row.Etudiant_name}`;
+                        }
+                    },
+                    {
+                        "data": "Prenom", 
+                        "render": function (data, type, row, meta) {
+                            return `${row.Etudiant_prenom}`;
+                        }
+                    },
+                    {
+                        "data": "CIN",
+                        "render": function (data, type, row, meta) {
+                            return `${row.CIN}`;
+                        }
+                    },
+                    {
+                        "data": "Tele",
+                        "render": function (data, type, row, meta) {
+                            return `${row.Tele}`;
+                        }
+                    },
+                    {
+                        "data": "Adresse",
+                        "render": function (data, type, row, meta) {
+                            return `${row.Adresse}`;
+                        }}
+                        // Add rendering for other columns as needed
                     ]
                 });
             }
         });
     }
-    fetch();
+fetch();
 
     // Filter
 
-    $(document).on("click", "#filter", function(e) {
-        e.preventDefault();
+   
 
-        var start_date = $("#start_date").val();
-        var end_date = $("#end_date").val();
-        var systeme = $("#fetchval").val();
+$(document).on("click", "#filter", function (e) {
+    e.preventDefault();
 
-        if (start_date !== "" && end_date !== "" && systeme !== "") {
-            $('#records').DataTable().destroy();
-            fetch(start_date, end_date,systeme);
-        } else if (start_date !== "" && end_date == "" && systeme == "") {
-            $('#records').DataTable().destroy();
-            fetch(start_date, '','');
-        } else if (start_date == "" && end_date !== "" && systeme !== "") {
-            $('#records').DataTable().destroy();
-            fetch('', end_date,systeme);
-        } else {
-            $('#records').DataTable().destroy();
-            fetch();
-        }
-    });
+    var start_date = $("#start_date").val();
+    var end_date = $("#end_date").val();
 
-    // Reset
-
-    $(document).on("click", "#reset", function(e) {
-        e.preventDefault();
-
-        $("#start_date").val(''); // empty value
-        $("#end_date").val('');
-        $("#fetchval").val('');
-
+    if (start_date !== "" && end_date !== "") {
+        $('#records').DataTable().destroy();
+        fetch(start_date, end_date);
+    } else if (start_date !== "" && end_date == "") {
+        $('#records').DataTable().destroy();
+        fetch(start_date, '', '');
+    } else if (start_date == "" && end_date !== "") {
+        $('#records').DataTable().destroy();
+        fetch('', end_date);
+    } else {
         $('#records').DataTable().destroy();
         fetch();
-    });
+    }
+});
+
+// Reset
+
+$(document).on("click", "#reset", function (e) {
+    e.preventDefault();
+
+    $("#start_date").val(''); // empty value
+    $("#end_date").val('');
+    $("#fetchval").val('');
+
+    $('#records').DataTable().destroy();
+    fetch();
+});
+
 
     //filter systeme
 
