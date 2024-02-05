@@ -97,7 +97,9 @@
     <div id="collapsePaiement" class="collapse" aria-labelledby="headingPaiement" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="Ajouter_paiement.php">Ajouter paiement</a>
-            <a class="collapse-item" href="paiement.php">liste paiements</a>
+            <a class="collapse-item" href="paiement_complet.php">paiements complet</a>
+            <a class="collapse-item" href="paiement_par_avance.php">liste par avance</a>
+            <a class="collapse-item" href="paiement_non_paye.php">liste non paye</a>
         </div>
     </div>
 </li>

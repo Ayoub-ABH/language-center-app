@@ -158,7 +158,7 @@ $query_run = mysqli_query($connection,$query);
                   <td><?php echo $row['Email']; ?></td>
                   <td><?php echo $row['Tele']; ?></td>
                   <td><?php echo $row['Adresse']; ?></td>
-                  <td><?php echo '<img src="upload/' . $row['Image'] . '" width="100px;" height="100px;" alt="Image">'; ?></td>
+                  <td><img src="upload/images/<?php echo $row['Image']; ?>" width="100px;" height="100px;" alt="Image"/></td>
                   <td>
                       <form action="professeur_edit.php" method="post">
                           <input type="hidden" name="edit_id" value="<?php echo $row['ProfesseurID']; ?>">

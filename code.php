@@ -270,6 +270,9 @@ if(isset($_POST['deletee_btn']))
 
 
 
+
+
+
 /*----------------------------professeurs------------------------------------- */
 
 
@@ -284,12 +287,13 @@ if (isset($_POST['professeurbtn'])) {
     $email = $_POST['email'];
     $telephone = $_POST['telephone'];
     $adresse = $_POST['adresse'];
-    $professeur_image = $_FILES['professeur_image']['name'];
+    $professeur_image = $_FILES['professeur_image']['tmp_name'];
 
     // Vérifier le type d'utilisateur
-    if ($_SESSION['userType'] == "admin") {
-        // Vous pouvez ajouter du code spécifique pour les administrateurs ici
-    }
+    // if ($_SESSION['userType'] == "admin") {
+    //     $_SESSION['status'] = "Vous n'êtes pas autorisé à ajouter un professeur";
+    //     header('location: professeurs.php');
+    // }
 
     // Vérifier si le fichier image existe déjà
     if (file_exists("upload/" . $professeur_image)) {
@@ -297,11 +301,12 @@ if (isset($_POST['professeurbtn'])) {
         header('location: professeurs.php');
     } else {
         // Déplacer le fichier téléchargé vers le répertoire d'upload
-        $target_path = "upload/" . $professeur_image;
-        move_uploaded_file($_FILES["professeur_image"]["tmp_name"], $target_path);
+        $path = "upload/images/".uniqid().'_'.$_FILES['professeur_image']['name'];
+        $professeur_image_name = uniqid().'_'.$_FILES['professeur_image']['name'];
+        move_uploaded_file($professeur_image, $path);
 
         // Insérer les données dans la base de données
-        $query = "INSERT INTO professeurs (Professeur_name, Professeur_prenom, CIN, Email, Tele, Adresse, Image) VALUES ('$nom', '$prenom', '$cin', '$email', '$telephone', '$adresse', '$etudiant_image')";
+        $query = "INSERT INTO professeurs (Professeur_name, Professeur_prenom, CIN, Email, Tele, Adresse, Image) VALUES ('$nom', '$prenom', '$cin', '$email', '$telephone', '$adresse', '$professeur_image_name')";
         $query_run = mysqli_query($connection, $query);
 
         // Vérifier si la requête d'insertion a réussi
@@ -875,6 +880,63 @@ if(isset($_POST['login_btn']))
 
 
 
+if(isset($_POST['AjouterPaiementBtn']))
+{
+    $cin = $_POST['CIN'];
+    $type_de_paiement = $_POST['type_de_paiement'];
+    $nature_de_paiement = $_POST['nature_de_paiement'];
+    $avance = $_POST['avance'];
+    $date = $_POST['mois_paiement'];
 
-    ?>
+    $timestamp = strtotime($date);
+
+    $mois = date("F", $timestamp); 
+    $annee = date("Y", $timestamp);
+
+
+
+    $query = "INSERT INTO paiements (CIN, type, nature, Avance, mois,annee) VALUES ('$cin', '$type_de_paiement', '$nature_de_paiement ', '$avance', '$mois','$annee')";
+    $query_run = mysqli_query($connection, $query);
+
+    if($query_run){
+        $_SESSION['success'] = "Paiement ajouté";
+        header('location: Ajouter_paiement.php');
+    }else{
+        $_SESSION['status'] = "Paiement non ajouté";
+        header('location: Ajouter_paiement.php');
+    }
+
+}
+
+if(isset($_POST['UpdatePaiementBtn']))
+{
+    $cin = $_POST['CIN'];
+    $cin = $_POST['Id'];
+    $type_de_paiement = $_POST['type_de_paiement'];
+    $nature_de_paiement = $_POST['nature_de_paiement'];
+    $avance = $_POST['avance'];
+    $date = $_POST['mois_paiement'];
+
+    $timestamp = strtotime($date);
+
+    $mois = date("F", $timestamp); 
+    $annee = date("Y", $timestamp);
+
+
+
+    $query = "UPDATE paiements SET type = '$type_de_paiement', nature = '$nature_de_paiement', avance = '$avance', mois = '$mois', annee = '$annee'  WHERE CIN = '$cin' and Id = '$id'";
+    $query_run = mysqli_query($connection, $query);
+    if($query_run){
+        $_SESSION['success'] = "Paiement mise à jour";
+        header('location: update_paiement.php');
+    }else{
+        $_SESSION['status'] = "Paiement non mise à jour";
+        header('location: update_paiement.php');
+    }
+}
+
+?>
+
    
+
+

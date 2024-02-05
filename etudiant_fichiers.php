@@ -29,10 +29,6 @@ secUser();
     <script src="https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@8.2.5/dist/dbr.js"></script>
 
 
-
-
-
-
 </head>
 
 <body id="page-top">

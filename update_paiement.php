@@ -28,6 +28,14 @@ include('includes/navbar.php');
 
         <div class="card-body">
             <form action="code.php" method="post">
+                <?php
+                if (isset($_GET['Id'])) {
+                    $Id = $_GET['Id'];
+                ?>
+                    <input type="hidden" name="Id"  value=<?php echo $Id; ?>>
+                <?php
+                }
+                ?>
                 <div class="form-group">
                     <label> Carte d'identiter nationale</label>
                     <?php
@@ -82,7 +90,7 @@ include('includes/navbar.php');
 
 
 
-                <button type="submit" name="AjouterPaiementBtn" class="btn btn-primary">Ajouter paiement</button>
+                <button type="submit" name="UpdatePaiementBtn" class="btn btn-primary">modifier paiement</button>
             </form>
 
         </div>
@@ -94,22 +102,3 @@ include('includes/navbar.php');
 include('includes/scripts.php');
 include('includes/footer.php');
 ?>
-
-<script>
-    function incrementMonths(etudiantID) {
-        var input = document.querySelector('input[name="nombre_mois_' + etudiantID + '"]');
-        var value = parseInt(input.value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        input.value = value;
-
-        var prixInput = document.querySelector('input[name="prix_' + etudiantID + '"]');
-        var prix = parseFloat(prixInput.value);
-        var totalSpan = document.getElementById('total_' + etudiantID);
-        totalSpan.textContent = (value * prix).toFixed(2);
-
-        // Mettre à jour les champs cachés
-        document.getElementById('hidden_nombre_mois_' + etudiantID).value = value;
-        document.getElementById('hidden_prix_' + etudiantID).value = prix;
-    }
-</script>
