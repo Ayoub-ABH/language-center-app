@@ -911,7 +911,7 @@ if(isset($_POST['AjouterPaiementBtn']))
 if(isset($_POST['UpdatePaiementBtn']))
 {
     $cin = $_POST['CIN'];
-    $cin = $_POST['Id'];
+    $id = $_POST['Id'];
     $type_de_paiement = $_POST['type_de_paiement'];
     $nature_de_paiement = $_POST['nature_de_paiement'];
     $avance = $_POST['avance'];
@@ -922,7 +922,7 @@ if(isset($_POST['UpdatePaiementBtn']))
     $mois = date("F", $timestamp); 
     $annee = date("Y", $timestamp);
 
-
+    
 
     $query = "UPDATE paiements SET type = '$type_de_paiement', nature = '$nature_de_paiement', avance = '$avance', mois = '$mois', annee = '$annee'  WHERE CIN = '$cin' and Id = '$id'";
     $query_run = mysqli_query($connection, $query);
