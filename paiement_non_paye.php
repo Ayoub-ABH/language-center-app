@@ -7,6 +7,47 @@ include('includes/navbar.php');
 ?>
 
 <div class="container-fluid">
+
+<div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des Groupes</h6>
+            <form method="get" action="">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail4">Moins</label>
+                        <select name="mois" class="form-control">
+                            <option value="" selected disabled>sélectionner le moins</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                    </div>
+                  <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="invisible">Submit</label>
+                            <button type="submit" class="btn btn-primary btn-block" name="btn_list_etudiants" value="true">Afficher les étudiants</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Non Paiements</h6>
@@ -26,14 +67,17 @@ include('includes/navbar.php');
             ?>
             <div class="table-responsive">
                 <?php
-                $query = "SELECT *
-                FROM etudiants
-                WHERE NOT EXISTS (
-                    SELECT 1
-                    FROM paiements
-                    WHERE paiements.CIN = etudiants.CIN
-                );
-                ";
+                if (isset($_GET['btn_list_etudiants'])) {
+                    $mois = $_GET['mois'];
+                    $query = "SELECT *
+                    FROM etudiants
+                    WHERE NOT EXISTS (
+                        SELECT 1
+                        FROM paiements
+                        WHERE paiements.CIN = etudiants.CIN 
+                        AND paiements.mois = '$mois'
+                    ) ;
+                    ";
                 $query_run = mysqli_query($connection, $query);
                 ?>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -76,6 +120,11 @@ include('includes/navbar.php');
                         ?>
                     </tbody>
                 </table>
+                <?php
+                } else {
+                    echo "Veuillez sélectionner un mois";
+                }
+                ?>
             </div>
         </div>
     </div>
