@@ -96,14 +96,14 @@ include('includes/navbar.php');
         Ajouter un visiteur
         </button>
         </h6>
-    </div>
-<div class="card-body">
+     </div>
+ <div class="card-body">
 
 <?php
 
 if(isset($_SESSION['success']) && $_SESSION['success'] !='')
 {
-    echo '<h2 class="bg-primary text-white"> '.$_SESSION['success'].' </h2>
+    echo '<h6 class="alert alert-success" role="alert"> '.$_SESSION['success'].' </h2>
     <meta http-equiv="refresh" content="5; url = visiteurs.php" />
     ';
     unset($_SESSION['success']);
@@ -111,117 +111,98 @@ if(isset($_SESSION['success']) && $_SESSION['success'] !='')
 
 if(isset($_SESSION['status']) && $_SESSION['status'] !='')
 {
-    echo '<h2 class="bg-danger  text-white"> '.$_SESSION['status'].' </h2>';
+    echo '<h6 class="alert alert-danger" role="alert"> '.$_SESSION['status'].' </h2>';
     unset($_SESSION['status']);
 }
 
 ?>
+ 
+
+
     <div class="table-responsive">
 
 
 <?php 
-/*$UserID = $_SESSION['UserID'];
-/*$villeID = $_SESSION['villeID'];*/
 $query = "SELECT * FROM visiteurs ";
 $query_run = mysqli_query($connection,$query);
 
 ?>
-
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>CIN</th>
-                    <th>Email</th>
-                    <th>Tele</th>
-                    <th>Adresse</th>
-                    <th>Date de visite</th>
-                    <th>Niveau</th>
-                    <th>Observation</th>
-                    <th>Éditer</th>
-                    <th>supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-
-<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue  -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Voulez-vous vraiment supprimer cet utilisateur?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <form action="code.php" method="post">
-                    <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
-                    <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-                <?php
-                if(mysqli_num_rows($query_run) > 0)
-                {
-                    while($row = mysqli_fetch_assoc($query_run))
-                    {
-                        ?>
-                <tr>
-                  <td><?php echo $row['VisiteurID']; ?></td>
-                  <td><?php echo $row['Visiteur_name']; ?></td>
-                  <td><?php echo $row['Visiteur_prenom']; ?></td>
-                  <td><?php echo $row['CIN']; ?></td>
-                  <td><?php echo $row['Email']; ?></td>
-                  <td><?php echo $row['Tele']; ?></td>
-                  <td><?php echo $row['Adresse']; ?></td>
-                  <td><?php echo $row['Date_visite']; ?></td>
-                  <td><?php echo $row['Niveau']; ?></td>
-                  <td><?php echo $row['Observation']; ?></td>
-
-                  <td>
-                      <form action="visiteur_edit.php" method="post">
-                          <input type="hidden" name="edit_id" value="<?php echo $row['VisiteurID']; ?>">
-                      <button type="submit" name="editv_btn"  class="btn btn-success">Éditer</button>
-                      </form>
-                  </td>
-                  <td>
-                  <form action="code.php" method="post">
-                          <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Supprimer</button>
-
-
-                      </form>
-                  </td>
-
-
-
-                </tr>
-                <?php
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>CIN</th>
+                <th>Email</th>
+                <th>Tele</th>
+                <th>Adresse</th>
+                <th>Date de visite</th>
+                <th>Niveau</th>
+                <th>Observation</th>
+                <th>Éditer</th>
+                <th>supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if(mysqli_num_rows($query_run) > 0) {
+                while($row = mysqli_fetch_assoc($query_run)) {
+            ?>
+            <tr>
+                <td><?php echo $row['VisiteurID']; ?></td>
+                <td><?php echo $row['Visiteur_name']; ?></td>
+                <td><?php echo $row['Visiteur_prenom']; ?></td>
+                <td><?php echo $row['CIN']; ?></td>
+                <td><?php echo $row['Email']; ?></td>
+                <td><?php echo $row['Tele']; ?></td>
+                <td><?php echo $row['Adresse']; ?></td>
+                <td><?php echo $row['Date_visite']; ?></td>
+                <td><?php echo $row['Niveau']; ?></td>
+                <td><?php echo $row['Observation']; ?></td>
+                <td>
+                    <form action="visiteur_edit.php" method="post">
+                        <input type="hidden" name="edit_id" value="<?php echo $row['VisiteurID']; ?>">
+                        <button type="submit" name="editv_btn"  class="btn btn-success">Éditer</button>
+                    </form>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal<?php echo $row['VisiteurID']; ?>">Supprimer</button>
+                    <!-- Ajouter une boîte de dialogue de confirmation de suppression pour chaque visiteur -->
+                    <div class="modal fade" id="confirmDeleteModal<?php echo $row['VisiteurID']; ?>" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Voulez-vous vraiment supprimer cet utilisateur?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <form action="code.php" method="post">
+                                        <input type="hidden" name="delete_id" value="<?php echo $row['VisiteurID']; ?>">
+                                        <button type="submit" name="deletev_btn" class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php
                 }
+            } else {
+                echo "no record found";
             }
-                 else{
-                        echo "no record found";
-                         }
-                    ?>
-            </tbody>
-        </table>
-       </div>
-     </div>
-   </div>
+            ?>
+        </tbody>
+    </table>
 </div>
 
-</div>
             <!-- End of Main Content -->
 <?php
 include('includes/scripts.php');

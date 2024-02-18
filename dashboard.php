@@ -13,7 +13,7 @@ include('includes/navbar.php');
     <!-- Content Row -->
     <div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Total Visiteurs -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -36,14 +36,14 @@ include('includes/navbar.php');
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
+                            <i class="fas fa-user-friends fa-2x" style="color:#c8241c;"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- TOTAL Etudiants -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -66,14 +66,14 @@ include('includes/navbar.php');
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
+                            <i class="fas fa-graduation-cap fa-2x" style="color:#c8241c;"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Total Professeurs -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -97,7 +97,7 @@ include('includes/navbar.php');
                         </div>
 
                         <div class="col-auto">
-                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
+                            <i class="fas fa-chalkboard-teacher fa-2x" style="color:#c8241c;"></i>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ include('includes/navbar.php');
         </div>
 
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Total Groupes -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -137,6 +137,8 @@ include('includes/navbar.php');
         </div>
 
     </div>
+</div>
+
 
     <!-- Content Row -->
     <div class="row">

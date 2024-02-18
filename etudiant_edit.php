@@ -28,7 +28,6 @@ if(isset($_POST['edite_btn']))
         ?>
 
 
-
             <form action="code.php" method="post"  enctype="multipart/form-data">
 
                 <input type="hidden" name="edit_id" value="<?php echo $row['EtudiantID'] ?>">
@@ -61,33 +60,56 @@ if(isset($_POST['edite_btn']))
                 <input type="date" name="edit_etudiantdate" value="<?php echo $row['Date_inscription'] ?>" class="form-control" placeholder="Entrer Date d'inscription">
             </div>
             
-         <div class="form-group">
-    <label  for="niveau">Niveau du etudiant</label>
-
-    <select name="edit_visiteurniveau" class="form-control">
-        <option value="" selected disabled>Sélectionner un niveau</option>
+      <div class="form-group">
+    <label for="niveau">Niveau du étudiant</label>
+    <select name="edit_etudiantniveau" class="form-control">
+        <option value="" disabled>Sélectionner un niveau</option>
         <?php 
-            $query = "SELECT * FROM `niveau`";
-            $query_run = mysqli_query($connection, $query);
-            if ($query_run) {
-                while ($niveauRow = mysqli_fetch_assoc($query_run)) { 
-        ?>
-        <option value="<?php echo $niveauRow['Niveau_name']; ?>"><?php echo $niveauRow['Niveau_name']; ?></option>
-        <?php
-                }
+        $query = "SELECT * FROM `niveau`";
+        $query_run = mysqli_query($connection, $query);
+        if ($query_run) {
+            while ($niveauRow = mysqli_fetch_assoc($query_run)) {
+                $selected = ($niveauRow['Niveau_name'] == $row['Niveau']) ? 'selected' : '';
+                ?>
+                <option value="<?php echo $niveauRow['Niveau_name']; ?>" <?php echo $selected; ?>><?php echo $niveauRow['Niveau_name']; ?></option>
+                <?php
             }
+        }
         ?>
     </select>
 </div>
 
-            <div class="form-group">
-                <label> Groupe </label>
-                <input type="text" name="edit_etudiantgroupe" value="<?php echo $row['Groupe'] ?>" class="form-control" placeholder="choisir groupe">
-            </div>
-            <div class="form-group">
-                <label> Image d'etudiant</label>
-                <input type="file" name="edit_etudiantimage" value="<?php echo $row['Image'] ?>" class="form-control" placeholder="Entrer image d'etudiant">
-            </div>
+<div class="form-group">
+    <label for="groupe">Groupe</label>
+    <select name="edit_etudiantgroupe" class="form-control">
+        <option value="" disabled>Sélectionner un groupe</option>
+        <?php 
+        $query = "SELECT * FROM `groupes`";
+        $query_run = mysqli_query($connection, $query);
+        if ($query_run) {
+            while ($groupeRow = mysqli_fetch_assoc($query_run)) {
+                $selected = ($groupeRow['Groupe_name'] == $row['Groupe']) ? 'selected' : '';
+                ?>
+                <option value="<?php echo $groupeRow['Groupe_name']; ?>" <?php echo $selected; ?>><?php echo $groupeRow['Groupe_name']; ?></option>
+                <?php
+            }
+        }
+        ?>
+    </select>
+</div>
+
+<div class="form-group">
+                            <label> Image d'étudiant actuelle</label>
+                            <br>
+                            <img src="upload/<?php echo $row['Image']; ?>" alt="Image d'étudiant" width="100">
+                        </div>
+                        <div class="form-group">
+                            <label> Nouvelle image d'étudiant</label>
+                            <input type="file" name="edit_etudiantimage" class="form-control">
+                        </div>
+
+
+
             <a href="etudiants.php" class="btn btn-danger">Cancel</a>
             <button type="submit" name="updateebtn" class="btn btn-primary">Mettre à jour </button>
     </form>

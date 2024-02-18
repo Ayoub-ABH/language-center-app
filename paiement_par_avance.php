@@ -64,7 +64,7 @@ include('includes/navbar.php');
                                     <td><?php echo $row['mois'] ?></td>
                                     <td><?php echo $row['annee'] ?></td>
                                     <td>
-                                        <?php echo $row['avance'] ?>
+                                        <?php echo $row['Avance'] ?>
                                     </td>
                                     <td>
                                         <a href="update_paiement.php?cin=<?php echo $row['CIN']; ?>&Id=<?php echo $row['Id']; ?>" class="badge badge-success" style="font-size: 16px;">
@@ -83,7 +83,11 @@ include('includes/navbar.php');
             </div>
         </div>
 
-
+        <!-- WhatsApp Floating Button -->
+        <div class="whatsapp-float">
+            <a href="https://api.whatsapp.com/send?phone=YOUR_PHONE_NUMBER" target="_blank" class="whatsapp-float-button">WhatsApp</a>
+        </div>
+        <!-- End WhatsApp Floating Button -->
         
     </div>
 </div>

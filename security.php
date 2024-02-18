@@ -27,7 +27,7 @@ function secUser(){
 
 function secAdmin(){
     if($_SESSION['userType'] == "user" ){
-        header('location: formulaire.php');
+        header('location: etudiant_espace.php');
     }elseif($_SESSION['userType'] !="admin"){
         unset($_SESSION['username']);
         unset($_SESSION['userType']);

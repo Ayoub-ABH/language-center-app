@@ -95,96 +95,75 @@ if(isset($_SESSION['status']) && $_SESSION['status'] !='')
 
 
 <?php 
-/*$UserID = $_SESSION['UserID'];
-/*$villeID = $_SESSION['villeID'];*/
 $query = "SELECT * FROM groupes ";
 $query_run = mysqli_query($connection,$query);
 
 ?>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Niveau</th>
+                <th>Date_creation</th>
+                <th>Éditer</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if(mysqli_num_rows($query_run) > 0) {
+                while($row = mysqli_fetch_assoc($query_run)) {
+            ?>
+            <tr>
+                <td><?php echo $row['GroupeID']; ?></td>
+                <td><?php echo $row['Groupe_name']; ?></td>
+                <td><?php echo $row['Niveau']; ?></td>
+                <td><?php echo $row['Date_creation']; ?></td>
+                <td>
+                    <form action="groupe_edit.php" method="post">
+                        <input type="hidden" name="edit_id" value="<?php echo $row['GroupeID']; ?>">
+                        <button type="submit" name="editg_btn"  class="btn btn-success">Éditer</button>
+                    </form>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteGroupeModal<?php echo $row['GroupeID']; ?>">Supprimer</button>
+                    <!-- Ajouter une boîte de dialogue de confirmation de suppression pour chaque groupe -->
+                    <div class="modal fade" id="confirmDeleteGroupeModal<?php echo $row['GroupeID']; ?>" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteGroupeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteGroupeModalLabel">Confirmation de suppression</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Voulez-vous vraiment supprimer ce groupe?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                    <form action="code.php" method="post">
+                                        <input type="hidden" name="delete_id" value="<?php echo $row['GroupeID']; ?>">
+                                        <button type="submit" name="deleteg_btn" class="btn btn-danger">Supprimer</button>
 
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Niveau</th>
-                    <th>Date_creation</th>
-                    <th>Éditer</th>
-                    <th>supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-
-<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue dans votre fichier groupes.php -->
-<div class="modal fade" id="confirmDeleteGroupeModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteGroupeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmDeleteGroupeModalLabel">Confirmation de suppression</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Voulez-vous vraiment supprimer ce groupe?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <form action="code.php" method="post">
-                    <input type="hidden" name="delete_id" value="<?php echo $row['GroupeID']; ?>">
-                    <button type="submit" name="deleteg_btn" class="btn btn-danger">Supprimer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-                <?php
-                if(mysqli_num_rows($query_run) > 0)
-                {
-                    while($row = mysqli_fetch_assoc($query_run))
-                    {
-                        ?>
-                <tr>
-                  <td><?php echo $row['GroupeID']; ?></td>
-                  <td><?php echo $row['Groupe_name']; ?></td>
-                  <td><?php echo $row['Niveau']; ?></td>
-                  <td><?php echo $row['Date_creation']; ?></td>
-
-                  <td>
-                      <form action="groupe_edit.php" method="post">
-                          <input type="hidden" name="edit_id" value="<?php echo $row['GroupeID']; ?>">
-                      <button type="submit" name="editg_btn"  class="btn btn-success">Éditer</button>
-                      </form>
-                  </td>
-                  <td>
-                  <form action="code.php" method="post">
-                          <input type="hidden" name="delete_id" value="<?php echo $row['GroupeID']; ?>">
-             
-                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteGroupeModal">Supprimer</button>
-
-                      </form>
-                  </td>
-
-
-
-                </tr>
-                <?php
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php
                 }
+            } else {
+                echo "no record found";
             }
-                 else{
-                        echo "no record found";
-                         }
-                    ?>
-            </tbody>
-        </table>
-       </div>
-     </div>
-   </div>
+            ?>
+        </tbody>
+    </table>
 </div>
 
-</div>
             <!-- End of Main Content -->
 <?php
 include('includes/scripts.php');

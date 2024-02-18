@@ -4,9 +4,8 @@ include('security.php');
 secAdmin();
 include('includes/header.php');
 include('includes/navbar.php');
-
 ?>
-  
+
 <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -15,15 +14,10 @@ include('includes/navbar.php');
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
           <span aria-hidden="true">&times;</span>
         </button>
-            
-       
       </div>
 
-      
       <form action="code.php" method="POST"  enctype="multipart/form-data">
-
-      <div class="modal-body">
-        
+        <div class="modal-body">       
             <div class="form-group">
                 <label>Nom de professeur </label>
                 <input type="text" name="nom" class="form-control" placeholder="Entrer Nom de professeur">
@@ -48,151 +42,124 @@ include('includes/navbar.php');
                 <label> Adresse</label>
                 <input type="text" name="adresse" class="form-control" placeholder="Entrer Adresse">
             </div>
-            <div class="form-group">
-                <label> Image </label>
-                <input type="file" name="professeur_image" id="professeur_image" class="form-control" placeholder="Entrer image">
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" name="professeurbtn" class="btn btn-primary">Enregistrer</button>
-      </div>
-         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" name="professeurbtn" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-
-
-<div class="card shadow mb-4">
+  <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Profils professeurs
+      <h6 class="m-0 font-weight-bold text-primary">Profils professeurs
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addadminprofile">        
-        Ajouter un professeur
+          Ajouter un professeur
         </button>
-        </h6>
+      </h6>
     </div>
-<div class="card-body">
+    <div class="card-body">
+      <?php
+      if(isset($_SESSION['success']) && $_SESSION['success'] !='') {
+          echo '<div class="alert alert-success">'.$_SESSION['success'].'</div>';
+          unset($_SESSION['success']);
+      }
 
-<?php
-
-if(isset($_SESSION['success']) && $_SESSION['success'] !='')
-{
-    echo '<h2 class="bg-primary text-white"> '.$_SESSION['success'].' </h2>
-    <meta http-equiv="refresh" content="5; url = professeurs.php" />
-    ';
-    unset($_SESSION['success']);
-}
-
-if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-{
-    echo '<h2 class="bg-danger  text-white"> '.$_SESSION['status'].' </h2>';
-    unset($_SESSION['status']);
-}
-
-?>
-    <div class="table-responsive">
-
-
-<?php 
-$query = "SELECT * FROM professeurs ";
-$query_run = mysqli_query($connection,$query);
-
-?>
-
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      if(isset($_SESSION['status']) && $_SESSION['status'] !='') {
+          echo '<div class="alert alert-danger">'.$_SESSION['status'].'</div>';
+          unset($_SESSION['status']);
+      }
+      ?>
+      <div class="table-responsive">
+        <?php 
+        $query = "SELECT * FROM professeurs ";
+        $query_run = mysqli_query($connection,$query);
+        
+        if($query_run) {
+          ?>
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>CIN</th>
-                    <th>Email</th>
-                    <th>Tele</th>
-                    <th>Adresse</th>
-                    <th>Image</th>
-                    <th>Éditer</th>
-                    <th>supprimer</th>
-                </tr>
+              <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>CIN</th>
+                <th>Email</th>
+                <th>Tele</th>
+                <th>Adresse</th>
+                <th>Éditer</th>
+                <th>supprimer</th>
+              </tr>
             </thead>
             <tbody>
-
-
-<!-- Ajoutez cela où vous voulez afficher la boîte de dialogue dans votre fichier professeurs.php -->
-<div class="modal fade" id="confirmDeleteProfesseurModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteProfesseurModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmDeleteProfesseurModalLabel">Confirmation de suppression</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Voulez-vous vraiment supprimer ce professeur?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <form action="code.php" method="post">
-                    <input type="hidden" name="delete_id" value="<?php echo $row['ProfesseurID']; ?>">
-                    <button type="submit" name="deletep_btn" class="btn btn-danger">Supprimer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-                <?php
-                if(mysqli_num_rows($query_run) > 0)
-                {
-                    while($row = mysqli_fetch_assoc($query_run))
-                    {
-                        ?>
-                <tr>
-                  <td><?php echo $row['ProfesseurID']; ?></td>
-                  <td><?php echo $row['Professeur_name']; ?></td>
-                  <td><?php echo $row['Professeur_prenom']; ?></td>
-                  <td><?php echo $row['CIN']; ?></td>
-                  <td><?php echo $row['Email']; ?></td>
-                  <td><?php echo $row['Tele']; ?></td>
-                  <td><?php echo $row['Adresse']; ?></td>
-                  <td><img src="upload/images/<?php echo $row['Image']; ?>" width="100px;" height="100px;" alt="Image"/></td>
-                  <td>
+              <?php
+              if(mysqli_num_rows($query_run) > 0) {
+                while($row = mysqli_fetch_assoc($query_run)) {
+                  ?>
+                  <tr>
+                    <td><?php echo $row['ProfesseurID']; ?></td>
+                    <td><?php echo $row['Professeur_name']; ?></td>
+                    <td><?php echo $row['Professeur_prenom']; ?></td>
+                    <td><?php echo $row['CIN']; ?></td>
+                    <td><?php echo $row['Email']; ?></td>
+                    <td><?php echo $row['Tele']; ?></td>
+                    <td><?php echo $row['Adresse']; ?></td>
+                    <td>
                       <form action="professeur_edit.php" method="post">
-                          <input type="hidden" name="edit_id" value="<?php echo $row['ProfesseurID']; ?>">
-                      <button type="submit" name="editp_btn"  class="btn btn-success">Éditer</button>
+                        <input type="hidden" name="edit_id" value="<?php echo $row['ProfesseurID']; ?>">
+                        <button type="submit" name="editp_btn"  class="btn btn-success">Éditer</button>
                       </form>
-                  </td>
-                  <td>
-                  <form action="code.php" method="post">
-                          <input type="hidden" name="delete_id" value="<?php echo $row['ProfesseurID']; ?>">
-                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteProfesseurModal">Supprimer</button>
-
-
+                    </td>
+                    <td>
+                      <form action="code.php" method="post">
+                        <input type="hidden" name="delete_id" value="<?php echo $row['ProfesseurID']; ?>">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal<?php echo $row['ProfesseurID']; ?>">Supprimer</button>
                       </form>
-                  </td>
-
-
-
-                </tr>
-                <?php
+                    </td>
+                  </tr>
+                  <!-- Boîte de dialogue de confirmation de suppression -->
+                  <div class="modal fade" id="confirmDeleteModal<?php echo $row['ProfesseurID']; ?>" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Voulez-vous vraiment supprimer ce professeur?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                          <form action="code.php" method="post">
+                            <input type="hidden" name="delete_id" value="<?php echo $row['ProfesseurID']; ?>">
+                            <button type="submit" name="deletep_btn" class="btn btn-danger">Supprimer</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <?php
                 }
-            }
-                 else{
-                        echo "no record found";
-                         }
-                    ?>
+              } else {
+                echo "<tr><td colspan='9'>Aucun enregistrement trouvé</td></tr>";
+              }
+              ?>
             </tbody>
-        </table>
-       </div>
-     </div>
-   </div>
+          </table>
+          <?php
+        }
+        ?>
+      </div>
+    </div>
+  </div>
 </div>
 
-</div>
-            <!-- End of Main Content -->
+<!-- Fin du contenu principal -->
 <?php
 include('includes/scripts.php');
 include('includes/footer.php');

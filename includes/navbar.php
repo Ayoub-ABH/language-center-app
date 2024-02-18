@@ -24,7 +24,7 @@
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="register.php">
-        <i class="fas fa-user-plus"></i>
+        <i class="fas fa-user"></i>
         <span>Mon compte</span>
     </a>
     
@@ -32,7 +32,7 @@
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="visiteurs.php">
-        <i class="fas fa-user-plus"></i>
+        <i class="fas fa-users"></i>
         <span>Visiteurs</span>
     </a>
     
@@ -42,7 +42,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGroupes"
         aria-expanded="true" aria-controls="collapseGroupes">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-cogs"></i>
         <span>Groupes</span>
     </a>
     <div id="collapseGroupes" class="collapse" aria-labelledby="headingGroupes" data-parent="#accordionSidebar">
@@ -56,7 +56,7 @@
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="professeurs.php">
-        <i class="fas fa-user-plus"></i>
+        <i class="fas fa-chalkboard-teacher"></i>
         <span>Professeurs</span>
     </a>
     
@@ -66,7 +66,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants"
         aria-expanded="true" aria-controls="collapseEtudiants">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-user-graduate"></i>
         <span>Étudiants</span>
     </a>
     <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants" data-parent="#accordionSidebar">
@@ -79,19 +79,25 @@
 
 
 
-
 <li class="nav-item">
-    <a class="nav-link collapsed" href="list_groupe2.php">
-    <i class="fas fa-chair"></i>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbsence"
+        aria-expanded="true" aria-controls="collapseEtudiants">
+        <i class="fas fa-calendar-times"></i>
         <span>Absence</span>
     </a>
-    
+    <div id="collapseAbsence" class="collapse" aria-labelledby="headingAbsence" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="list_groupe2.php">Ajouter Absence</a>
+            <a class="collapse-item" href="liste_absence.php">liste Absence</a>
+        </div>
+    </div>
 </li>
+
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaiement"
         aria-expanded="true" aria-controls="collapsePaiement">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-money-check-alt"></i>
         <span>Paiement</span>
     </a>
     <div id="collapsePaiement" class="collapse" aria-labelledby="headingPaiement" data-parent="#accordionSidebar">
@@ -103,6 +109,7 @@
         </div>
     </div>
 </li>
+
 
 
 <!-- Divider -->
