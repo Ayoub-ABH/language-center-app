@@ -66,6 +66,13 @@ secUser();
                </div>
            </div>
            </li>
+           <li class="nav-item">
+           <a class="nav-link collapsed" href="Contact.php">
+        <i class="fas fa-user"></i>
+        <span>Contact</span>
+       </a>
+    
+</li>
 
 
             <!-- Divider -->

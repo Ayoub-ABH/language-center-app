@@ -71,14 +71,7 @@ secUser();
                     </div>
                 </div>
             </li>
-        </li>
-           <li class="nav-item">
-           <a class="nav-link collapsed" href="Contact.php">
-        <i class="fas fa-user"></i>
-        <span>Contact</span>
-       </a>
-    
-</li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -196,134 +189,51 @@ secUser();
                 <div class="container-fluid">
 
 
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <?php
-
-                            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-                                echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
-                                <meta http-equiv="refresh" content="5; url = etudiant_fichiers.php" />
-                                ';
-                                unset($_SESSION['success']);
-                            }
-
-                            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                                echo '<h6 class="alert alert-danger" role="alert"> ' . $_SESSION['status'] . ' </h6>';
-                                unset($_SESSION['status']);
-                            }
-
-                            ?>
+<body>
 
 
-                        </div>
-                    </div>
-
-
-                    <form action="etudiant_controller.php" method="POST" enctype="multipart/form-data">
+  <!-- Section Contact -->
+    <section class="contact-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Nous Contacter</h2>
+                    <p>Pour toute demande de renseignements, veuillez remplir le formulaire ci-dessous :</p>
+                    <form>
                         <div class="form-group">
-                            <label for="file">Ajouter votre fichier</label>
-                            <div class="input-group">
-                                <input type="file" id="file" name="file" class="form-control">
-                                <div class="input-group-append">
-                                    <button type="submit" name="AjouterFichier" class="btn btn-primary">Ajouter</button>
-                                </div>
-                            </div>
+                            <label for="name">Votre Nom</label>
+                            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom">
                         </div>
+                        <div class="form-group">
+                            <label for="email">Votre Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" rows="3" placeholder="Entrez votre message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
                     </form>
+                </div>
+        <--   <div class="col-md-6">
+    <h2>Nous Trouver</h2>
+    <!-- Lien vers Google Maps -->
+    <p><a href="https://maps.app.goo.gl/ZkmHuctxhW1SEUkG7" target="_blank">Cliquez ici pour ouvrir Google Maps</a></p>
+</div>--
 
 
-
-
-                    <?php
-                    $query = "SELECT * FROM fichiers where userID = '" . $_SESSION['EtudiantID'] . "'";
-                    $query_run = mysqli_query($connection, $query);
-                    ?>
-
-                    <div class="container">
-
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Fichier</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <!-- Modal de confirmation de suppression -->
-                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Êtes-vous sûr de vouloir supprimer ce fichier ?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                    <form action="etudiant_controller.php" method="post">
-                                                        <input type="hidden" id="fichierIDToDelete" name="fichierID">
-                                                        <input type="hidden" id="fichierPathToDelete" name="fichierPath">
-                                                        <button type="submit" name="supprimerFichier" class="btn btn-danger">Supprimer</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    if (mysqli_num_rows($query_run) > 0) {
-                                        while ($row = mysqli_fetch_assoc($query_run)) {
-                                    ?>
-                                            <tr>
-                                                <td><?php echo $row['fileID']; ?></td>
-                                                <td><?php echo $row['name']; ?></td>
-                                                <td><?php echo $row['uploadDateTime']; ?></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" data-fichierid="<?php echo $row['fileID']; ?>" data-fichierpath="<?php echo $row['path']; ?>">
-                                                        Supprimer
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-                                    <?php
-                                        }
-                                    } else {
-                                        echo '<tr><td colspan="4" class="text-center">Aucun fichier trouvé</td></tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                        <script>
-                            $(document).ready(function() {
-                                $('#confirmDeleteModal').on('show.bs.modal', function(event) {
-                                    var button = $(event.relatedTarget);
-                                    var fichierID = button.data('fichierid');
-                                    var fichierPath = button.data('fichierpath');
-
-                                    $('#fichierIDToDelete').val(fichierID);
-                                    $('#fichierPathToDelete').val(fichierPath);
-                                });
-                            });
-                        </script>
-
-
-
-                        <script>
-                            function confirmerSuppression() {
-                                return confirm("Êtes-vous sûr de vouloir supprimer ce fichier ?");
-                            }
-                        </script>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
