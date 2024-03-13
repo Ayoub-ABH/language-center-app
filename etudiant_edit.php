@@ -43,6 +43,11 @@ if(isset($_POST['edite_btn']))
                 <label> CIN </label>
                 <input type="text" name="edit_etudiantcin" value="<?php echo $row['CIN'] ?>" class="form-control" placeholder="Entrer cin d'etudiant">
             </div>
+
+            <div class="form-group">
+                <label> Password </label>
+                <input type="text" name="edit_etudiantpassword" value="<?php echo $row['Password'] ?>" class="form-control" placeholder="Entrer password d'etudiant">
+            </div>
             <div class="form-group">
                 <label> Email</label>
                 <input type="email" name="edit_email" value="<?php echo $row['Email'] ?>"  class="form-control" placeholder="Entrer Email">

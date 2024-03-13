@@ -1,10 +1,11 @@
 <?php
+session_start();
 include('dbconfig.php');
-include('security.php');
-secUser();
+// include('security.php');
+if (!isset($_SESSION['EtudiantID'])) {
+    header('location: etudiant_log.php');
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +68,7 @@ secUser();
            </div>
            </li>
            <li class="nav-item">
-           <a class="nav-link collapsed" href="Contact.php">
+           <a class="nav-link collapsed" href="etudiant_contact.php">
         <i class="fas fa-user"></i>
         <span>Contact</span>
        </a>
@@ -146,7 +147,7 @@ secUser();
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php echo $_SESSION['username']; ?>
+                                    <?php echo $_SESSION['Etudiant_name']; ?>
 
                                 </span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
@@ -183,7 +184,7 @@ secUser();
                             <div class="modal-body">Sélectionnez "Se déconnecter" ci-dessous si vous êtes prêt à mettre fin à votre session en cours.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                                <form action="logout.php" method="POST">
+                                <form action="etudiant_controller.php" method="POST">
                                     <button type="submit" name="logout_btn" class="btn btn-primary">Se déconnecter</button>
                                 </form>
 

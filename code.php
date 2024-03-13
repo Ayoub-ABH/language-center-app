@@ -180,12 +180,13 @@ if(isset($_POST['deletev_btn']))
 // Vérifier si le formulaire a été soumis
 if (isset($_POST['etudiantbtn'])) {
     // Vérifier si les champs requis ne sont pas vides
-    if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['cin']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['adresse']) && !empty($_POST['date_inscription']) && !empty($_POST['niveau']) && !empty($_POST['groupe']) && !empty($_FILES['etudiant_image']['name'])) {
+    if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password']) && !empty($_POST['cin']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['adresse']) && !empty($_POST['date_inscription']) && !empty($_POST['niveau']) && !empty($_POST['groupe']) && !empty($_FILES['etudiant_image']['name'])) {
         
         // Récupérer les données du formulaire
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $cin = $_POST['cin'];
+        $password = $_POST['password'];
         $email = $_POST['email'];
         $telephone = $_POST['telephone'];
         $adresse = $_POST['adresse'];
@@ -220,7 +221,7 @@ if (isset($_POST['etudiantbtn'])) {
             $niveauID = $rowNiveau['NiveauID'];
 
             // Insérer les données dans la base de données
-            $query = "INSERT INTO etudiants (Etudiant_name, Etudiant_prenom, CIN, Email, Tele, Adresse, Date_inscription, NiveauID, GroupeID, Image) VALUES ('$nom', '$prenom', '$cin', '$email', '$telephone', '$adresse', '$date_inscription', '$niveauID', '$groupeID', '$etudiant_image')";
+            $query = "INSERT INTO etudiants (Etudiant_name, Etudiant_prenom, CIN, Password, Email, Tele, Adresse, Date_inscription, NiveauID, GroupeID, Image) VALUES ('$nom', '$prenom', '$cin','$password', '$email', '$telephone', '$adresse', '$date_inscription', '$niveauID', '$groupeID', '$etudiant_image')";
             $query_run = mysqli_query($connection, $query);
 
             // Vérifier si la requête d'insertion a réussi
@@ -246,6 +247,7 @@ if(isset($_POST['updateebtn'])) {
     $nom = $_POST['edit_etudiantname'];
     $prenom = $_POST['edit_etudiantprenom'];
     $cin = $_POST['edit_etudiantcin'];
+    $password = $_POST['edit_etudiantpassword'];
     $email = $_POST['edit_email'];
     $telephone = $_POST['edit_etudianttele'];
     $adresse = $_POST['edit_etudiantadresse'];
@@ -282,7 +284,7 @@ if(isset($_POST['updateebtn'])) {
     $groupeID = $rowGroupe['GroupeID'];
 
     // Modifier les données de l'étudiant dans la base de données
-    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID'";
+    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Password = '$password', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID'";
     
     // Si un nouveau fichier image est téléchargé, inclure le champ Image dans la requête
     if(isset($_FILES['edit_etudiantimage']['name']) && !empty($_FILES['edit_etudiantimage']['name'])) {
@@ -508,14 +510,14 @@ if(isset($_POST['login_btn']))
         $_SESSION['villeID'] = $usertypes['VilleID'];
         header('location: dashboard.php');
 	 }
-     else if($usertypes['Usertype'] == "user")
-     {
-        $_SESSION['username'] = $username_login;
-        $_SESSION['userType'] = $usertypes['Usertype'];
-        $_SESSION['EtudiantID'] = $usertypes['UserID'];
-        $_SESSION['villeID'] = $usertypes['VilleID'];
-        header('location: etudiant_espace.php');
-     }
+    //  else if($usertypes['Usertype'] == "user")
+    //  {
+    //     $_SESSION['username'] = $username_login;
+    //     $_SESSION['userType'] = $usertypes['Usertype'];
+    //     $_SESSION['EtudiantID'] = $usertypes['UserID'];
+    //     $_SESSION['villeID'] = $usertypes['VilleID'];
+    //     header('location: etudiant_espace.php');
+    //  }
      else if($usertypes['Usertype'] == "super")
      {
         $_SESSION['username'] = $username_login;

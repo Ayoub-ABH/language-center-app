@@ -15,20 +15,20 @@ if(!(isset($_SESSION['username'])) && !(isset($_SESSION['userType']))){
 }
 
 
-function secUser(){
-    if($_SESSION['userType'] == 'admin' ){
-        header('location: dashboard.php');
-    }elseif($_SESSION['userType'] !='user'){
-        unset($_SESSION['username']);
-        unset($_SESSION['userType']);
-        header('location: log.php');  
-    }
-}
+// function secUser(){
+//     if($_SESSION['userType'] == 'admin' ){
+//         header('location: dashboard.php');
+//     }elseif($_SESSION['userType'] !='user'){
+//         unset($_SESSION['username']);
+//         unset($_SESSION['userType']);
+//         header('location: log.php');  
+//     }
+// }
+
+
 
 function secAdmin(){
-    if($_SESSION['userType'] == "user" ){
-        header('location: etudiant_espace.php');
-    }elseif($_SESSION['userType'] !="admin"){
+    if($_SESSION['userType'] != "admin"){
         unset($_SESSION['username']);
         unset($_SESSION['userType']);
         header('location: log.php'); 
@@ -37,12 +37,10 @@ function secAdmin(){
 
 
 function secSuper(){
-    if($_SESSION['userType'] == "admin" && $_SESSION['userType'] == "user" ){
-        header('location: superadmin.php');
-    }elseif($_SESSION['userType'] !="super"){
+    if($_SESSION['userType'] !="super"){
         unset($_SESSION['username']);
         unset($_SESSION['userType']);
-        header('location: log.php');  
+        header('location: log.php');
     }
 }
 

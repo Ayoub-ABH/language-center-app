@@ -35,10 +35,18 @@ include('includes/navbar.php');
                 <label>CIN</label>
                 <input type="text" name="cin" class="form-control" placeholder="Entrer CIN">
             </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" name="password" class="form-control" placeholder="Entrer Password">
+            </div>
+
             <div class="form-group">
                 <label> Email</label>
                 <input type="email" name="email" class="form-control" placeholder="Entrer Email">
             </div> 
+
+            
              <div class="form-group">
                 <label>Numéro de téléphone</label>
                 <input type="text" name="telephone" class="form-control" placeholder="Entrer Numéro de téléphone">
@@ -52,43 +60,43 @@ include('includes/navbar.php');
                 <input type="date" name="date_inscription" class="form-control" placeholder="Entrer Date d'inscription">
             </div>
 
-<div class="form-group">
-    <label for="niveau">Niveau</label>
-    <!-- Utiliser un seul champ (select) pour le niveau -->
-    <select name="niveau" class="form-control">
-        <option value="" selected disabled>Sélectionner un niveau</option>
-        <?php 
-        $query = "SELECT * FROM `niveau`";
-        $query_run = mysqli_query($connection, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_assoc($query_run)) { 
-        ?>
-        <option value="<?php echo $row['Niveau_name']; ?>"><?php echo $row['Niveau_name']; ?></option>
-        <?php
-            }
-        }
-        ?>
-    </select>
-</div>
+            <div class="form-group">
+                <label for="niveau">Niveau</label>
+                <!-- Utiliser un seul champ (select) pour le niveau -->
+                <select name="niveau" class="form-control">
+                    <option value="" selected disabled>Sélectionner un niveau</option>
+                    <?php 
+                    $query = "SELECT * FROM `niveau`";
+                    $query_run = mysqli_query($connection, $query);
+                    if ($query_run) {
+                        while ($row = mysqli_fetch_assoc($query_run)) { 
+                    ?>
+                    <option value="<?php echo $row['Niveau_name']; ?>"><?php echo $row['Niveau_name']; ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
 
-<div class="form-group">
-    <label for="niveau">Groupe</label>
-    <!-- Utiliser un seul champ (select) pour le niveau -->
-    <select name="groupe" class="form-control">
-        <option value="" selected disabled>Sélectionner un groupe</option>
-        <?php 
-        $query = "SELECT * FROM `groupes`";
-        $query_run = mysqli_query($connection, $query);
-        if ($query_run) {
-            while ($row = mysqli_fetch_assoc($query_run)) { 
-        ?>
-        <option value="<?php echo $row['Groupe_name']; ?>"><?php echo $row['Groupe_name']; ?></option>
-        <?php
-            }
-        }
-        ?>
-    </select>
-</div>
+            <div class="form-group">
+                <label for="niveau">Groupe</label>
+                <!-- Utiliser un seul champ (select) pour le niveau -->
+                <select name="groupe" class="form-control">
+                    <option value="" selected disabled>Sélectionner un groupe</option>
+                    <?php 
+                    $query = "SELECT * FROM `groupes`";
+                    $query_run = mysqli_query($connection, $query);
+                    if ($query_run) {
+                        while ($row = mysqli_fetch_assoc($query_run)) { 
+                    ?>
+                    <option value="<?php echo $row['Groupe_name']; ?>"><?php echo $row['Groupe_name']; ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label> Image </label>
@@ -99,7 +107,7 @@ include('includes/navbar.php');
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         <button type="submit" name="etudiantbtn" class="btn btn-primary">Enregistrer</button>
       </div>
-         </form>
+    </form>
     </div>
   </div>
 </div>
@@ -142,7 +150,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] !='')
 
 
 <?php 
-$query = "SELECT e.EtudiantID, e.Etudiant_name, e.Etudiant_prenom, e.CIN, e.Email, e.Tele, e.Adresse, e.Date_inscription, n.Niveau_name, g.Groupe_name, e.Image
+$query = "SELECT e.EtudiantID, e.Etudiant_name, e.Etudiant_prenom, e.CIN , e.Password, e.Email, e.Tele, e.Adresse, e.Date_inscription, n.Niveau_name, g.Groupe_name, e.Image
 FROM etudiants e
 JOIN niveau n ON e.NiveauID = n.NiveauID
 JOIN groupes g ON e.GroupeID = g.GroupeID";
@@ -156,6 +164,7 @@ $query_run = mysqli_query($connection, $query);
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>CIN</th>
+                <th>Password</th>
                 <th>Email</th>
                 <th>Tele</th>
                 <th>Adresse</th>
@@ -177,6 +186,7 @@ $query_run = mysqli_query($connection, $query);
                         <td><?php echo $row['Etudiant_name']; ?></td>
                         <td><?php echo $row['Etudiant_prenom']; ?></td>
                         <td><?php echo $row['CIN']; ?></td>
+                        <td><?php echo $row['Password']; ?></td>
                         <td><?php echo $row['Email']; ?></td>
                         <td><?php echo $row['Tele']; ?></td>
                         <td><?php echo $row['Adresse']; ?></td>
