@@ -1,7 +1,10 @@
 <?php
+session_start();
 include('dbconfig.php');
-include('security.php');
-secUser();
+// include('security.php');
+if (!isset($_SESSION['EtudiantID'])) {
+    header('location: etudiant_log.php');
+}
 ?>
 
 
@@ -72,6 +75,12 @@ secUser();
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="etudiant_contact.php">
+                    <i class="fas fa-user"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -141,7 +150,7 @@ secUser();
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php echo $_SESSION['username']; ?>
+                                    <?php echo $_SESSION['Etudiant_name']; ?>
 
                                 </span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
@@ -178,7 +187,7 @@ secUser();
                             <div class="modal-body">Sélectionnez "Se déconnecter" ci-dessous si vous êtes prêt à mettre fin à votre session en cours.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                                <form action="logout.php" method="POST">
+                                <form action="etudiant_controller.php" method="POST">
                                     <button type="submit" name="logout_btn" class="btn btn-primary">Se déconnecter</button>
                                 </form>
 
@@ -189,55 +198,50 @@ secUser();
                 <div class="container-fluid">
 
 
-<body>
+                    <body>
 
 
-  <!-- Section Contact -->
-    <section class="contact-section py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Nous Contacter</h2>
-                    <p>Pour toute demande de renseignements, veuillez remplir le formulaire ci-dessous :</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Votre Nom</label>
-                            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Votre Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea class="form-control" id="message" rows="3" placeholder="Entrez votre message"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Envoyer</button>
-                    </form>
-                </div>
-        <--   <div class="col-md-6">
-    <h2>Nous Trouver</h2>
-    <!-- Lien vers Google Maps -->
-    <p><a href="https://maps.app.goo.gl/ZkmHuctxhW1SEUkG7" target="_blank">Cliquez ici pour ouvrir Google Maps</a></p>
-</div>--
-
-
-                    
-                    <!-- Social Links -->
-                    <div class="social-links">
-                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    </div>
+                        <!-- Section Contact -->
+                        <section class="contact-section py-5">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>Nous Contacter</h2>
+                                        <p>Pour toute demande de renseignements, veuillez remplir le formulaire ci-dessous :</p>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="name">Votre Nom</label>
+                                                <input type="text" class="form-control" id="name" placeholder="Entrez votre nom">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Votre Email</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message">Message</label>
+                                                <textarea class="form-control" id="message" rows="3" placeholder="Entrez votre message"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                        </form>
+                                        <br>
+                                        <div class="social-links">
+                                    <a href="#" class="btn btn-outline-dark"><i class="fab fa-facebook-f"></i> Facebook</a>
+                                    <a href="#" class="btn btn-outline-dark"><i class="fab fa-twitter"></i> Twitter</a>
+                                    <a href="#" class="btn btn-outline-dark"><i class="fab fa-instagram"></i> Instagram</a>
+                                    <a href="#" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                                </div>
+                                    </div>
+                                
+                                <!-- Social Links -->
+                            
+                            </div>
                 </div>
             </div>
-        </div>
-    </section>
+            </section>
 
 
 
-                        <?php
-                        include('includes/scripts.php');
-                        include('includes/footer.php');
-                        ?>
+            <?php
+            include('includes/scripts.php');
+            include('includes/footer.php');
+            ?>

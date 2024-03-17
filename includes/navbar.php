@@ -24,11 +24,11 @@
 <!-- Nav Item - Utilities Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="register.php">
-        <i class="fas fa-user"></i>
-        <span>Mon compte</span>
+        <i class="fas fa-key"></i>
+        <span>Administration</span>
     </a>
-    
 </li>
+
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="visiteurs.php">

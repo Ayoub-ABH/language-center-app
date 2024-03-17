@@ -3,25 +3,6 @@ include('dbconfig.php');
 session_start();
 
 
-
-
-/*if (isset($_POST['payer_btn'])) {
-    $etudiant_id = $_POST['etudiant_id'];
-    $date_paiement = $_POST['date_paiement'];
-
-    $insert_query = "INSERT INTO paiements (EtudiantID, DatePaiement) VALUES ('$etudiant_id', '$date_paiement')";
-    $insert_query_run = mysqli_query($connection, $insert_query);
-
-    if ($insert_query_run) {
-        $_SESSION['success'] = "Paiement effectué avec succès";
-    } else {
-        $_SESSION['status'] = "Échec du paiement";
-    }
-
-    header('Location: Ajouter_paiement.php');
-    exit(); // Assure que le script s'arrête ici pour éviter toute exécution supplémentaire
-}
-*/
 if (isset($_POST['delete_id'])) {
     $id_to_delete = $_POST['delete_id'];
 
@@ -40,36 +21,83 @@ if (isset($_POST['delete_id'])) {
 
 
 
-//-------------------------------------------------------------------------------
+//--------------------------------------  Administration-----------------------------------------
 
 
-if(isset($_POST['updatebtn']))
-{
-    $UserID = $_POST['edit_id'];
-    $username = $_POST['edit_username'];
-    $email = $_POST['edit_email'];
-    $password = $_POST['edit_password'];
-    $usertypeupdate = $_POST['update_usertype'];
+if(isset($_POST['adminbtn'])) {
+    $nom = $_POST['nom'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmepassword = $_POST['confirmepassword'];
+    $type = $_POST['type'];
 
-    $query = "UPDATE users SET Username='$username',Email='$email',Password='$password',Usertype='$usertypeupdate' WHERE UserID='$UserID' ";
+    // Vérifier si tous les champs sont remplis
+    if(empty($nom) || empty($password) || empty($type)) {
+        $_SESSION['status'] = "Veuillez remplir tous les champs.";
+        header('Location: register.php');
+        exit();
+    }
+
+    // Vérifier si le mot de passe correspond à la confirmation du mot de passe
+    if($password !== $confirmepassword) {
+        $_SESSION['status'] = "La confirmation du mot de passe ne correspond pas.";
+        header('Location: register.php');
+        exit();
+    }
+
+    // Vérifier si le nom d'utilisateur existe déjà dans la base de données
+    $query = "SELECT * FROM users WHERE Username='$nom'";
     $query_run = mysqli_query($connection, $query);
 
-if($query_run){
-$_SESSION['success'] = "Le utilisateur est mise à jour";
-header('location: register.php');
-}else{
-    $_SESSION['status'] = "Le utilisateur n'est pas mise à jour";
-header('location: register.php');
+    if(mysqli_num_rows($query_run) > 0) {
+        $_SESSION['status'] = "Le nom d'utilisateur existe déjà. Veuillez en choisir un autre.";
+        header('Location: register.php');
+        exit();
+    } else {
+        // Insérer les données dans la base de données
+        $query = "INSERT INTO users (Username, Email, Password, Usertype) VALUES ('$nom', '$email', '$password', '$type')";
+        $query_run = mysqli_query($connection, $query);
+
+        if($query_run) {
+            $_SESSION['success'] = "Utilisateur ajouté avec succès.";
+            header('Location: register.php');
+            exit();
+        } else {
+            $_SESSION['status'] = "Échec de l'ajout de l'utilisateur.";
+            header('Location: Ajouter_admin.php');
+            exit();
+        }
+    }
 }
+
+
+if(isset($_POST['updatabtn'])) {
+   
+    $UserID = mysqli_real_escape_string($connection, $_POST['edita_id']);
+    $username = mysqli_real_escape_string($connection, $_POST['edit_username']);
+    $email = mysqli_real_escape_string($connection, $_POST['edit_email']);
+    $password = mysqli_real_escape_string($connection, $_POST['edit_password']);
+    $usertypeupdate = mysqli_real_escape_string($connection, $_POST['update_usertype']);
+
+    $query = "UPDATE users SET Username='$username', Email='$email', Password='$password', Usertype='$usertypeupdate' WHERE UserID='$UserID' ";
+    $query_run = mysqli_query($connection, $query);
+
+    if($query_run){
+        $_SESSION['success'] = "L'utilisateur a été mis à jour avec succès.";
+        header('location: register.php');
+    } else {
+        $_SESSION['status'] = "Une erreur s'est produite lors de la mise à jour de l'utilisateur.";
+        header('location: register.php');
+    }
 }
 
 
 
 
 
-if(isset($_POST['delete_btn']))
+if(isset($_POST['deleta_btn']))
 {
-    $UserID = $_POST['delete_id'];
+    $UserID = $_POST['deleta_id'];
     $query = "DELETE FROM users WHERE UserID='$UserID' ";
     $query_run = mysqli_query($connection, $query);
     if($query_run)
@@ -100,7 +128,7 @@ if (isset($_POST['visiteurbtn'])) {
     $observation = $_POST['observation'];
 
     // Vérifier si tous les champs sont vides
-    if (empty($nom) || empty($prenom) || empty($cin) || empty($email) || empty($telephone) || empty($adresse) || empty($date_visite) || empty($niveau) || empty($observation)) {
+    if (empty($nom) || empty($prenom) || empty($telephone) ||  empty($date_visite)) {
         $_SESSION['status'] = "Remplir tous les champs";
         header('location: visiteurs.php');
         exit(); 
@@ -155,88 +183,116 @@ header('location: visiteurs.php');
 
 
 
-if(isset($_POST['deletev_btn']))
-{
-    $VisiteurID = $_POST['delete_id'];
+if(isset($_POST['deletev_btn'])) {
+    $VisiteurID = $_POST['deletev_id']; 
     $query = "DELETE FROM visiteurs WHERE VisiteurID='$VisiteurID' ";
     $query_run = mysqli_query($connection, $query);
-    if($query_run)
-    {
-        $_SESSION['success'] = "Le visiteur a été supprimer";
+    if($query_run) {
+        $_SESSION['success'] = "Le visiteur a été supprimé";
         header('location: visiteurs.php');
-        }
-        else
-        {
-        $_SESSION['status'] = "Le visiteur n'a pas été supprimer";
+    } else {
+        $_SESSION['status'] = "Le visiteur n'a pas été supprimé";
         header('location: visiteurs.php');
-        }
-
+    }
 }
+
 
 
 
 /*----------------------------etudiant------------------------------------- */
 
-// Vérifier si le formulaire a été soumis
 if (isset($_POST['etudiantbtn'])) {
     // Vérifier si les champs requis ne sont pas vides
-    if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['cin']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['adresse']) && !empty($_POST['date_inscription']) && !empty($_POST['niveau']) && !empty($_POST['groupe']) && !empty($_FILES['etudiant_image']['name'])) {
+    if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['telephone'])) {
         
         // Récupérer les données du formulaire
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $cin = $_POST['cin'];
+        $password = $_POST['password'];
+        $confirmepassword = $_POST['confirmepassword'];
         $email = $_POST['email'];
         $telephone = $_POST['telephone'];
         $adresse = $_POST['adresse'];
         $date_inscription = $_POST['date_inscription'];
         $niveau = $_POST['niveau'];
         $groupe = $_POST['groupe'];
-        $etudiant_image = $_FILES['etudiant_image']['name'];
-
-        if ($_SESSION['userType'] == "admin") {
-            // Traitement pour l'utilisateur admin
+        $image = $_FILES['etudiant_image']['name'];
+        $prix = $_POST['prix'];
+        $genre = $_POST['genre'];
+        $type_cours = $_POST['type_cours'];
+        
+        // Vérifier si les mots de passe correspondent
+        if ($password !== $confirmepassword) {
+            $_SESSION['status'] = "La confirmation du mot de passe ne correspond pas.";
+            header('location: etudiants.php');
+            exit(); 
+        }
+        
+        // Vérifier si une photo a été téléchargée
+        if (!empty($_FILES['etudiant_image']['name'])) {
+            $etudiant_image = $_FILES['etudiant_image']['name'];
+        
+            // Définir le chemin de destination
+            $target_path = "htdocs/language-center-app/upload/" . basename($etudiant_image);
+  
+        
+            // Vérifier si le fichier image existe déjà
+            if (file_exists($target_path)) {
+                $_SESSION['status'] = "L'image existe déjà : $etudiant_image";
+                header('location: etudiants.php');
+                exit();
+            } else {
+                // Déplacer le fichier téléchargé vers le répertoire d'upload
+                if (move_uploaded_file($_FILES["etudiant_image"]["tmp_name"], $target_path)) {
+                    // Succès de l'upload, continuez avec l'insertion dans la base de données
+                } else {
+                    // Échec de l'upload
+                    $_SESSION['status'] = "Erreur lors de l'upload de l'image.";
+                    header('location: etudiants.php');
+                    exit();
+                }
+            }
+        } else {
+            // Aucune photo téléchargée, définir l'image par défaut ou laisser vide
+            $etudiant_image = "";
         }
 
-        // Vérifier si le fichier image existe déjà
-        if (file_exists("upload/" . $etudiant_image)) {
-            $_SESSION['status'] = "L'image existe déjà : $etudiant_image";
+        // Requête SQL pour obtenir l'ID du groupe à partir du nom du groupe
+        $queryGroupe = "SELECT GroupeID FROM groupes WHERE Groupe_name = '$groupe'";
+        $resultGroupe = mysqli_query($connection, $queryGroupe);
+        $rowGroupe = mysqli_fetch_assoc($resultGroupe);
+        $groupeID = $rowGroupe['GroupeID'];
+
+        // Requête SQL pour obtenir l'ID du niveau à partir du nom du niveau
+        $queryNiveau = "SELECT NiveauID FROM niveau WHERE Niveau_name = '$niveau'";
+        $resultNiveau = mysqli_query($connection, $queryNiveau);
+        $rowNiveau = mysqli_fetch_assoc($resultNiveau);
+        $niveauID = $rowNiveau['NiveauID'];
+
+        // Insérer les données dans la base de données
+        $query = "INSERT INTO etudiants (Etudiant_name, Etudiant_prenom, CIN, Password, Email, Tele, Adresse, Date_inscription, NiveauID, GroupeID, Image, Prix, Genre, Type_cours) VALUES ('$nom', '$prenom', '$cin','$password', '$email', '$telephone', '$adresse', '$date_inscription', '$niveauID', '$groupeID', '$etudiant_image', '$prix', '$genre', '$type_cours')";
+        $query_run = mysqli_query($connection, $query);
+
+        // Vérifier si la requête d'insertion a réussi
+        if ($query_run) {
+            $_SESSION['success'] = "Étudiant ajouté avec succès";
             header('location: etudiants.php');
+            exit(); 
         } else {
-            // Déplacer le fichier téléchargé vers le répertoire d'upload
-            $target_path = "upload/" . $etudiant_image;
-            move_uploaded_file($_FILES["etudiant_image"]["tmp_name"], $target_path);
-
-            // Requête SQL pour obtenir l'ID du groupe à partir du nom du groupe
-            $queryGroupe = "SELECT GroupeID FROM groupes WHERE Groupe_name = '$groupe'";
-            $resultGroupe = mysqli_query($connection, $queryGroupe);
-            $rowGroupe = mysqli_fetch_assoc($resultGroupe);
-            $groupeID = $rowGroupe['GroupeID'];
-
-            // Requête SQL pour obtenir l'ID du niveau à partir du nom du niveau
-            $queryNiveau = "SELECT NiveauID FROM niveau WHERE Niveau_name = '$niveau'";
-            $resultNiveau = mysqli_query($connection, $queryNiveau);
-            $rowNiveau = mysqli_fetch_assoc($resultNiveau);
-            $niveauID = $rowNiveau['NiveauID'];
-
-            // Insérer les données dans la base de données
-            $query = "INSERT INTO etudiants (Etudiant_name, Etudiant_prenom, CIN, Email, Tele, Adresse, Date_inscription, NiveauID, GroupeID, Image) VALUES ('$nom', '$prenom', '$cin', '$email', '$telephone', '$adresse', '$date_inscription', '$niveauID', '$groupeID', '$etudiant_image')";
-            $query_run = mysqli_query($connection, $query);
-
-            // Vérifier si la requête d'insertion a réussi
-            if ($query_run) {
-                $_SESSION['success'] = "Étudiant ajouté avec succès";
-                header('location: etudiants.php');
-            } else {
-                $_SESSION['status'] = "Échec de l'ajout de l'étudiant";
-                header('location: etudiants.php');
-            }
+            $_SESSION['status'] = "Échec de l'ajout de l'étudiant";
+            header('location: etudiants.php');
+            exit(); 
         }
     } else {
         $_SESSION['status'] = "Veuillez remplir tous les champs du formulaire.";
         header('location: etudiants.php');
+        exit(); 
     }
 }
+
+
+
 
 
 
@@ -246,6 +302,7 @@ if(isset($_POST['updateebtn'])) {
     $nom = $_POST['edit_etudiantname'];
     $prenom = $_POST['edit_etudiantprenom'];
     $cin = $_POST['edit_etudiantcin'];
+    $password = $_POST['edit_etudiantpassword'];
     $email = $_POST['edit_email'];
     $telephone = $_POST['edit_etudianttele'];
     $adresse = $_POST['edit_etudiantadresse'];
@@ -282,7 +339,7 @@ if(isset($_POST['updateebtn'])) {
     $groupeID = $rowGroupe['GroupeID'];
 
     // Modifier les données de l'étudiant dans la base de données
-    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID'";
+    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Password = '$password', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID'";
     
     // Si un nouveau fichier image est téléchargé, inclure le champ Image dans la requête
     if(isset($_FILES['edit_etudiantimage']['name']) && !empty($_FILES['edit_etudiantimage']['name'])) {
@@ -308,7 +365,7 @@ if(isset($_POST['updateebtn'])) {
 
 
 if (isset($_POST['deletee_btn'])) {
-    $etudiantID = $_POST['delete_id'];
+    $etudiantID = $_POST['deletet_id'];
 
     $query = "DELETE FROM etudiants WHERE EtudiantID = '$etudiantID'";
  
@@ -411,66 +468,63 @@ if(isset($_POST['deletep_btn']))
 /*---------------------------------------------groupes------------------------------------------------- */
 
 
-if (isset($_POST['groupebtn'])) {
+if(isset($_POST['groupebtn'])) {
     $nom = $_POST['nom'];
     $niveau = $_POST['niveau'];
     $date_creation = $_POST['date_creation'];
+    $professeur_id = $_POST['professeur']; // Ajout de la récupération du professeur sélectionné
 
-    // Assurez-vous que tous les champs requis sont remplis
-    if (!empty($nom) && !empty($niveau) && !empty($date_creation)) {
-        // Assurez-vous que la session de l'utilisateur est correcte avant d'insérer les données
-        if ($_SESSION['userType'] == "admin") {
-            // Requête d'insertion pour ajouter un nouveau groupe
-            $query = "INSERT INTO groupes (Groupe_name, Niveau, Date_creation) VALUES ('$nom', '$niveau', '$date_creation')";
-            $query_run = mysqli_query($connection, $query);
+    // Échapper les caractères spéciaux pour éviter les attaques d'injection SQL
+    $nom = mysqli_real_escape_string($connection, $nom);
+    $niveau = mysqli_real_escape_string($connection, $niveau);
+    $date_creation = mysqli_real_escape_string($connection, $date_creation);
 
-            // Vérifiez si la requête d'insertion a réussi
-            if ($query_run) {
-                $_SESSION['success'] = "Le groupe a été ajouté avec succès.";
-                header('Location: groupes.php');
-            } else {
-                $_SESSION['status'] = "Échec de l'ajout du groupe. Veuillez réessayer.";
-                header('Location: groupes.php');
-            }
-        } else {
-            $_SESSION['status'] = "Vous n'avez pas les autorisations nécessaires pour ajouter un groupe.";
-            header('Location: groupes.php');
-        }
+    // Requête d'insertion avec le professeur sélectionné
+    $query = "INSERT INTO groupes (Groupe_name, Niveau, Date_creation, ProfesseurID) VALUES ('$nom', '$niveau', '$date_creation', '$professeur_id')";
+    $query_run = mysqli_query($connection, $query);
+
+    if($query_run) {
+        $_SESSION['success'] = "Groupe ajouté avec succès.";
+        header('Location: groupes.php');
+        exit(); // Assurez-vous de terminer le script après la redirection
     } else {
-        $_SESSION['status'] = "Veuillez remplir tous les champs.";
+        $_SESSION['status'] = "Erreur lors de l'ajout du groupe.". mysqli_error($connection);
+        header('Location: groupes.php');
+        exit(); // Assurez-vous de terminer le script après la redirection
+    }
+}
+
+
+
+
+
+if (isset($_POST['updategbtn'])) {
+    $edit_id = $_POST['edit_id'];
+    $edit_groupename = $_POST['edit_groupename'];
+    $edit_groupeniveau = $_POST['niveau'];
+    $edit_groupedate = $_POST['edit_groupedate'];
+    $edit_professeurid = $_POST['professeur'];
+
+
+    $query = "UPDATE groupes SET Groupe_name='$edit_groupename', Niveau='$edit_groupeniveau', Date_creation='$edit_groupedate', ProfesseurID='$edit_professeurid' WHERE GroupeID='$edit_id'";
+    $query_run = mysqli_query($connection, $query);
+
+    if ($query_run) {
+        $_SESSION['success'] = "Les données du groupe ont été mises à jour avec succès".mysqli_error($connection);
+        header('Location: groupes.php');
+    } else {
+        $_SESSION['status'] = "Échec de la mise à jour des données du groupe". mysqli_error($connection);
         header('Location: groupes.php');
     }
 }
 
 
 
-if(isset($_POST['updategbtn']))
-{
-  
-
-$GroupeID = $_POST['edit_id'];
-$nom = $_POST['edit_groupename'];
-$niveau = $_POST['edit_groupeniveau'];
-$date_creation = $_POST['edit_groupedate'];
-
-    $query = "UPDATE groupes SET groupe_name='$nom',Niveau='$niveau',Date_creation='$date_creation' WHERE GroupeID='$GroupeID' ";
-    $query_run = mysqli_query($connection, $query);
-
-if($query_run){
-$_SESSION['success'] = "Le groupe est mise à jour";
-header('location: groupes.php');
-}else{
-    $_SESSION['status'] = "Le groupe n'est pas mise à jour";
-header('location: groupes.php');
-}
-}
-
-
 
 
 if(isset($_POST['deleteg_btn']))
 {
-    $GroupeID = $_POST['delete_id'];
+    $GroupeID = $_POST['deleteg_id'];
     $query = "DELETE FROM groupes WHERE GroupeID='$GroupeID' ";
     $query_run = mysqli_query($connection, $query);
     if($query_run)
@@ -508,14 +562,14 @@ if(isset($_POST['login_btn']))
         $_SESSION['villeID'] = $usertypes['VilleID'];
         header('location: dashboard.php');
 	 }
-     else if($usertypes['Usertype'] == "user")
-     {
-        $_SESSION['username'] = $username_login;
-        $_SESSION['userType'] = $usertypes['Usertype'];
-        $_SESSION['EtudiantID'] = $usertypes['UserID'];
-        $_SESSION['villeID'] = $usertypes['VilleID'];
-        header('location: etudiant_espace.php');
-     }
+    //  else if($usertypes['Usertype'] == "user")
+    //  {
+    //     $_SESSION['username'] = $username_login;
+    //     $_SESSION['userType'] = $usertypes['Usertype'];
+    //     $_SESSION['EtudiantID'] = $usertypes['UserID'];
+    //     $_SESSION['villeID'] = $usertypes['VilleID'];
+    //     header('location: etudiant_espace.php');
+    //  }
      else if($usertypes['Usertype'] == "super")
      {
         $_SESSION['username'] = $username_login;

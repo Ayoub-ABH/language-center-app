@@ -64,8 +64,8 @@ if (!isset($_SESSION['EtudiantID'])) {
                  <h6 class="collapse-header">Espace Etudiant</h6>
                  <a class="collapse-item" href="etudiant_espace.php">Profile</a>
                  <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
+                 
                  <a class="collapse-item" href="etudiant_test.php">test</a>
-                 <a class="collapse-item" href="etudiant_test.php"> </a>
                </div>
            </div>
            </li>
@@ -232,38 +232,76 @@ if (!isset($_SESSION['EtudiantID'])) {
                             if (mysqli_num_rows($query_run) > 0) {
                                 $row = mysqli_fetch_assoc($query_run);
                             ?>
-                                  
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Nom etudiant</label>
-                                    <input type="text" name="etudiant_nom" class="form-control" value="<?php echo $row['Etudiant_name']; ?>">
-                                </div>
+                          
+                          <div class="container bootstrap snippet">
+                            
+                            <div class="row">
+    <div class="col-sm-3">
+        <div class="text-center">
+            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            <h6>Upload photo...</h6>
+            <input type="file" class="text-center center-block file-upload">
+        </div><br>
+        <ul class="list-group">
+        <li class="list-group-item"><span class="pull-left"><strong>Les stages</strong></li>
+            <li class="list-group-item">
+                <label><input type="checkbox" name="mois_stage[]" value="1"> aucun</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="2"> 1-2 mois</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="3"> 3-6 mois</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="3"> plus </label><br>
+                <!-- Ajoutez d'autres cases à cocher selon vos besoins -->
+           
+            </li>
+            <li class="list-group-item"><span class="pull-left"><strong>Experiences</strong></li>
+            <li class="list-group-item">
+               <label><input type="checkbox" name="mois_stage[]" value="1"> aucun</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="2"> 6 mois</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="3"> 1 ans</label><br>
+                <label><input type="checkbox" name="mois_stage[]" value="3"> plus </label><br>
+                </li>
+        </ul>
+    </div>
 
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Prenom etudiant</label>
-                                    <input type="text" name="etudiant_prenom" class="form-control" value="<?php echo $row['Etudiant_prenom']; ?>">
-                                </div>
 
-                                <div class="form-group col-md-4">
-                                    <label for="inputEmail4">CIN</label>
-                                    <input type="text" name="cin" class="form-control" value="<?php echo $row['CIN']; ?>">
-                                </div>
-
-                                <div class="form-group col-md-4">
+                                <div class="col-sm-9">
+                                <ul class="nav nav-tabs">
+   <h4 >Informations personnelles</h4>
+</ul>
+<br> 
+                                    <form class="form" action="##" method="post" id="registrationForm">
+                                        <div class="form-group">
+                                            <div class="col-xs-6">
+                                                <label for="inputEmail4">Nom etudiant</label>
+                                                <input type="text" name="etudiant_nom" class="form-control" value="<?php echo $row['Etudiant_name']; ?>">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="inputEmail4">Prenom etudiant</label>
+                                                <input type="text" name="etudiant_prenom" class="form-control" value="<?php echo $row['Etudiant_name']; ?>">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="tele">CIN</label>
+                                                <input type="text" name="cin" class="form-control" value="<?php echo $row['Tele']; ?>">
+                                            </div>
+                                            <div class="col-xs-6">
                                     <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control" value="<?php echo $row['Email']; ?>">
                                 </div>
+                                            <div class="col-xs-6">
+                                                <label for="tele">Téléphone</label>
+                                                <input type="text" name="tele" class="form-control" value="<?php echo $row['Tele']; ?>">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="adresse">Adresse</label>
+                                                <input type="text" name="adresse" class="form-control" value="<?php echo $row['Adresse']; ?>">
+                                            </div>
+                                       
+                                            <br> 
+                                <ul class="nav nav-tabs">
+   <h4 >Autres Informations </h4>
+</ul>
+<br> 
 
-
-                                <div class="form-group col-md-4">
-                                    <label for="tele">Téléphone</label>
-                                    <input type="text" name="tele" class="form-control" value="<?php echo $row['Tele']; ?>">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="adresse">Adresse</label>
-                                    <input type="text" name="adresse" class="form-control" value="<?php echo $row['Adresse']; ?>">
-                                </div>
-    
-                                <div class="form-group col-md-4">
+                                        <div class="col-xs-6">
     <label for="niveau_etude">Niveau d'étude</label>
     <select name="niveau_etude" class="form-control">
         <option value="niveau-bac" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-bac') echo 'selected'; ?>>Niveau Bac</option>
@@ -275,7 +313,7 @@ if (!isset($_SESSION['EtudiantID'])) {
     </select>
 </div>
 
-<div class="form-group col-md-4">
+<div class="col-xs-6">
     <label for="serie_bac">Série du bac</label>
     <select name="serie_bac" class="form-control">
         <option value="sciences_agronomiques" <?php if($row['serie_bac'] == 'sciences_agronomiques') echo 'selected'; ?>>BAC SCIENCES AGRONOMIQUES</option>
@@ -297,38 +335,42 @@ if (!isset($_SESSION['EtudiantID'])) {
 </div>
 
 
-<div class="form-group col-md-4">
+<div class="col-xs-6">
     <label for="annee_bac">Date d'obtention du bac</label>
     <input type="date" name="annee_bac" class="form-control" value="<?php echo isset($row['annee_bac']) ? $row['annee_bac'] : ''; ?>">
 </div>
 
-<div class="form-group col-md-4">
+<div class="col-xs-6">
     <label for="intitule_diplome">Intitulé du diplôme</label>
     <input type="text" name="intitule_diplome" class="form-control" value="<?php echo $row['intitule_diplome']; ?>">
 </div>
 
-<div class="form-group col-md-4">
+<div class="col-xs-6">
     <label for="annee_diplome">Année du diplôme</label>
     <input type="date" name="annee_diplome" class="form-control" value="<?php echo $row['annee_diplome']; ?>">
 </div>
 
-<div class="form-group col-md-4">
+<div class="col-xs-6">
     <label for="specialite">Spécialité</label>
     <input type="text" name="specialite" class="form-control" value="<?php echo $row['Specialite']; ?>">
 </div>
 
 
-                            <?php
+
+                                <?php
                             } else {
                                 echo "No Record Found";
                             }
-                            ?>
-
-                            <button type="submit" name="modiferEtudiant" class="btn btn-primary">Modifier</button>
+                                ?>
+                                <button type="submit" name="modiferEtudiant" class="btn btn-primary">Modifier</button>
+                            </div>
+                            </form>
                         </div>
-                    </form>
-                        
-                <?php
-                include('includes/scripts.php');
-                include('includes/footer.php');
-                ?>
+                </div>
+        </div>
+    </div>
+</body>
+<?php
+include('includes/scripts.php');
+include('includes/footer.php');
+?>

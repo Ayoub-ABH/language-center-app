@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita:wght@400;700&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Sansita', sans-serif;
     font-size: 18px;
     letter-spacing: 1.2px;
-    color:#f0e13eed;
+    color: #f0e13eed;
 }
 
 .wrapper {
@@ -41,10 +41,11 @@ h1 {
     transition: all .5s ease-in-out;
 }
 
-.form input {
+.form input,
+.form select { /* Apply same style for inputs and select */
     outline: 0;
     border: 1px solid rgba(255, 43, 43, 0.4);
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     padding: 8px 18px;
     margin-bottom: 12px;
     border-radius: 6px;
@@ -54,11 +55,13 @@ h1 {
     transition: all .3s ease;
 }
 
-.form input:hover {
-    background: rgba(255,255,255,0.3);
+.form input:hover,
+.form select:hover { /* Apply same style for inputs and select on hover */
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.form input:focus {
+.form input:focus,
+.form select:focus { /* Apply same style for inputs and select on focus */
     background: white;
     width: 320px;
     color: black;

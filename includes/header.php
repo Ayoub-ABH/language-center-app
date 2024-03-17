@@ -29,7 +29,10 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" /> 
 
-        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-9/yyof1FvY30xGYsm+JnMwlY3hRgNxz7fiYLH/IhxjLMEanRqrbcEKLTy10j2/a68pLlUz7/+9O07fF0/gJ+qg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body id="page-top">

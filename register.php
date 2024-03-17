@@ -4,106 +4,107 @@ include('security.php');
 secAdmin();
 include('includes/header.php');
 include('includes/navbar.php');
-
 ?>
 
 <div class="container-fluid">
-
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Mon profil
-
-        </h6>
-    </div>
-<div class="card-body">
-
-<?php
-
-if(isset($_SESSION['success']) && $_SESSION['success'] !='')
-{
-    echo '<h2 class="bg-primary text-white"> '.$_SESSION['success'].' </h2>
-    <meta http-equiv="refresh" content="5; url = register.php" />
-    ';
-    unset($_SESSION['success']);
-}
-
-if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-{
-    echo '<h2 class="bg-danger  text-white"> '.$_SESSION['status'].' </h2>';
-    unset($_SESSION['status']);
-}
-
-?>
-    <div class="table-responsive">
-
-
-<?php 
-$username = $_SESSION['username'];
-
-$query = "SELECT * FROM users WHERE Username = ? AND Usertype = 'admin'";
-$stmt = mysqli_prepare($connection, $query);
-// Lier les paramètres
-mysqli_stmt_bind_param($stmt, "i", $username);
-
-// Exécuter la requête préparée
-mysqli_stmt_execute($stmt);
-
-// Récupérer les résultats
-$query_run = mysqli_stmt_get_result($stmt);
-
-?>
-
-
-
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom d'utilisateur</th>
-                    <th>Email</th>
-                    <th>Mot de pasee</th>
-                    <th>Rôle</th>
-                    <th>Éditer</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if(mysqli_num_rows($query_run) > 0)
-                {
-                    while($row = mysqli_fetch_assoc($query_run))
-                    {
-                        ?>
-                <tr>
-                  <td><?php echo $row['UserID']; ?></td>
-                  <td><?php echo $row['Username']; ?></td>
-                  <td><?php echo $row['Email']; ?></td>
-                  <td><?php echo $row['Password']; ?></td>
-                  <td><?php echo $row['Usertype']; ?></td>
-                  <td>
-                      <form action="register_edit.php" method="post">
-                          <input type="hidden" name="edit_id" value="<?php echo $row['UserID']; ?>">
-                      <button type="submit" name="edit_btn"  class="btn btn-success">Éditer</button>
-                      </form>
-                  </td>
-
-                </tr>
-                <?php
-                }
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Administration
+                <button type="button" class="btn btn-primary" onclick="window.location.href='Ajouter_admin.php'">Ajouter</button>
+            </h6>
+        </div>
+        <div class="card-body">
+            <?php
+            if(isset($_SESSION['success']) && $_SESSION['success'] != '') {
+                echo '<h6 class="alert alert-success" role="alert"> '.$_SESSION['success'].' </h6>
+                <meta http-equiv="refresh" content="5; url = register.php" />';
+                unset($_SESSION['success']);
             }
-                 else{
-                        echo "no record found";
-                         }
-                    ?>
-            </tbody>
-        </table>
-       </div>
-     </div>
-   </div>
+
+            if(isset($_SESSION['status']) && $_SESSION['status'] != '') {
+                echo '<h6 class="alert alert-danger" role="alert"> '.$_SESSION['status'].' </h6>';
+                unset($_SESSION['status']);
+            }
+            ?>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+           
+                <?php 
+                $query = "SELECT * FROM users";
+                $query_run = mysqli_query($connection, $query);
+
+                ?>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom d'utilisateur</th>
+                            <th>Email</th>
+                            <th>Mot de passe</th>
+                            <th>Rôle</th>
+                            <th>Éditer</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if(mysqli_num_rows($query_run) > 0) {
+                            while($row = mysqli_fetch_assoc($query_run)) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['UserID']; ?></td>
+                                    <td><?php echo $row['Username']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+                                    <td><?php echo $row['Password']; ?></td>
+                                    <td><?php echo $row['Usertype']; ?></td>
+                                    <td>
+                                        <form action="register_edit.php" method="post">
+                                            <input type="hidden" name="edita_id" value="<?php echo $row['UserID']; ?>">
+                                            <button type="submit" name="updatabtn"  class="btn btn-success">Éditer</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal<?php echo $row['UserID']; ?>">Supprimer</button>
+                                        <!-- Ajouter une boîte de dialogue de confirmation de suppression pour chaque visiteur -->
+                                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['UserID']; ?>" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Voulez-vous vraiment supprimer cet utilisateur?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                        <form action="code.php" method="post">
+                                                            <input type="hidden" name="deleta_id" value="<?php echo $row['UserID']; ?>">
+                                                            <button type="submit" name="deleta_btn" class="btn btn-danger">Supprimer</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='7'>Aucun enregistrement trouvé</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
-            <!-- End of Main Content -->
 <?php
 include('includes/scripts.php');
 include('includes/footer.php');

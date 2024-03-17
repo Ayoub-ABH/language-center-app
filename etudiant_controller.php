@@ -40,6 +40,8 @@ if(isset($_POST['AjouterFichier']))
     $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
 
+    
+
 
     $upload_folder = 'upload/diplomes/';
 
@@ -60,14 +62,14 @@ if(isset($_POST['AjouterFichier']))
         exit;
     }
     // Generate a unique file name
-    $new_file_name = uniqid() .'_'. $file_name;
-    $path = $upload_folder . $new_file_name;
+    $uniq_file_name = uniqid().'_'. $file_name;
+    $path = $upload_folder . $uniq_file_name;
     
-    $query = "INSERT INTO fichiers (path, name, userID, uploadDateTime) VALUES ('$path', '$new_file_name', $user_id, NOW())";
+    $query = "INSERT INTO fichiers (path, name, userID, uploadDateTime) VALUES ('$path', '$file_name', $user_id, NOW())";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {
-        if (move_uploaded_file($file_tmp, $upload_folder . $new_file_name)) {
+        if (move_uploaded_file($file_tmp, $upload_folder . $uniq_file_name)) {
             $_SESSION['success'] = "Le fichier a été ajouté avec succès";
             header('location: etudiant_fichiers.php');
         } else {
@@ -88,7 +90,6 @@ if(isset($_POST['supprimerFichier']))
     $file_path = $_POST['fichierPath'];
 
 
-    echo $file_id;
     $query = "DELETE FROM fichiers WHERE fileID = $file_id";
     $query_run = mysqli_query($connection, $query);
 
@@ -127,5 +128,39 @@ if(isset($_POST['downloadFichier']))
         header('location: etudiant_fichiers.php');
     }
 
+}
+
+// login
+if(isset($_POST['login_btn']))
+{
+    $cin = $_POST['cin'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM etudiants WHERE CIN = '$cin' AND Password = '$password'";
+    $query_run = mysqli_query($connection, $query);
+
+    if(mysqli_num_rows($query_run) > 0)
+    {
+        // valid
+        $row = mysqli_fetch_assoc($query_run);
+        $_SESSION['EtudiantID'] = $row['EtudiantID'];
+        $_SESSION['Etudiant_name'] = $row['Etudiant_name'];
+        header('location: etudiant_espace.php');
+    }
+    else
+    {
+        // invalid
+        $_SESSION['status'] = "CIN ou mot de passe incorrect";
+        header('location: etudiant_log.php');
+    }
+}
+
+// logout
+if(isset($_POST['logout_btn']))
+{
+    session_destroy();
+    unset($_SESSION['EtudiantID']);
+    unset($_SESSION['Etudiant_name']);
+    header('location: log.php');
 }
 ?>

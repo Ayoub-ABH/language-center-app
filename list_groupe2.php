@@ -5,7 +5,12 @@ secAdmin();
 
 include('includes/header.php');
 include('includes/navbar.php');
+
+$selected_groupe = isset($_SESSION['selected_groupe']) ? $_SESSION['selected_groupe'] : '';
+$selected_niveau = isset($_SESSION['selected_niveau']) ? $_SESSION['selected_niveau'] : '';
 ?>
+
+
 
 
 
