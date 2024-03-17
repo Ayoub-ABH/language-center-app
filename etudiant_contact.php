@@ -223,17 +223,34 @@ if (!isset($_SESSION['EtudiantID'])) {
                                             </div>
                                             <button type="submit" class="btn btn-primary">Envoyer</button>
                                         </form>
+<<<<<<< HEAD
                                         <br>
                                         <div class="social-links">
+=======
+                                    </div>
+                                    <-- <div class="col-md-6">
+                                        <h2>Nous Trouver</h2>
+                                        <!-- Lien vers Google Maps -->
+                                        <p><a href="https://maps.app.goo.gl/ZkmHuctxhW1SEUkG7" target="_blank">Cliquez ici pour ouvrir Google Maps</a></p>
+                                </div>--
+
+
+
+                                <!-- Social Links -->
+                                <div class="social-links">
+>>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
                                     <a href="#" class="btn btn-outline-dark"><i class="fab fa-facebook-f"></i> Facebook</a>
                                     <a href="#" class="btn btn-outline-dark"><i class="fab fa-twitter"></i> Twitter</a>
                                     <a href="#" class="btn btn-outline-dark"><i class="fab fa-instagram"></i> Instagram</a>
                                     <a href="#" class="btn btn-outline-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
                                 </div>
+<<<<<<< HEAD
                                     </div>
                                 
                                 <!-- Social Links -->
                             
+=======
+>>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
                             </div>
                 </div>
             </div>

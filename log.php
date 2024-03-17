@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<?php
+
+session_start();
+if (isset($_SESSION['username'])) {
+    header('location: dashboard.php');
+}
+// include 'includes/header.php';
+?>
+>>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +26,15 @@
             <h1>Willkommen</h1>
             <form action="code.php" class="form" method="POST">
                 <?php
+<<<<<<< HEAD
                 session_start();
+=======
+>>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
                 if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                     echo '<h6 class="bg-danger  text-white"> ' . $_SESSION['status'] . ' </h6>';
                     unset($_SESSION['status']);
                 }
+<<<<<<< HEAD
                 ?>
                 <div class="styled-select">
                     <select id="userType" name="user_type">
@@ -28,6 +43,11 @@
                         <option value="teacher">Espace Enseignant</option>
                     </select>
                 </div>
+=======
+
+                ?>
+
+>>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
                 <input type="text" name="user" id="" placeholder="Username"> <br>
                 <input type="password" name="pass" id="" placeholder="Password"> <br>
                 <button type="submit" name="login_btn" id="login">Log In</button>
