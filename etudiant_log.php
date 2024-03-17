@@ -20,10 +20,6 @@
         <div class="container">
             <img src="img/logo_min.png" alt="Logo" class="logo">
             <h1>Willkommen</h1>
-<<<<<<< HEAD
-=======
-            <h6>Espace Etudiant</h6>
->>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
             <form action="etudiant_controller.php" class="form" method="POST">
                 <?php
                     if (isset($_SESSION['status']) && $_SESSION['status'] != '') {

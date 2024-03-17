@@ -19,7 +19,9 @@ if (!isset($_SESSION['EtudiantID'])) {
     <title>BILKER</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
@@ -40,7 +42,8 @@ if (!isset($_SESSION['EtudiantID'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="" data-toggle="collapse"
+                data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
 
                 <div class="sidebar-brand-text mx-3">BILKER</div>
             </a>
@@ -51,31 +54,32 @@ if (!isset($_SESSION['EtudiantID'])) {
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
-            </div> 
+            </div>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-user-graduate"></i> 
-            <span>Espace Etudiant</span>
-              </a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Espace Etudiant</span>
+                </a>
 
-               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                 <h6 class="collapse-header">Espace Etudiant</h6>
-                 <a class="collapse-item" href="etudiant_espace.php">Profile</a>
-                 <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
-                 <a class="collapse-item" href="etudiant_test.php">test</a>
-                 <a class="collapse-item" href="etudiant_test.php"> </a>
-               </div>
-           </div>
-           </li>
-           <li class="nav-item">
-           <a class="nav-link collapsed" href="etudiant_contact.php">
-        <i class="fas fa-user"></i>
-        <span>Contact</span>
-       </a>
-    
-</li>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Espace Etudiant</h6>
+                        <a class="collapse-item" href="etudiant_espace.php">Profile</a>
+                        <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
+                        <a class="collapse-item" href="etudiant_test.php">test</a>
+                        <a class="collapse-item" href="etudiant_test.php"> </a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="etudiant_contact.php">
+                    <i class="fas fa-user"></i>
+                    <span>Contact</span>
+                </a>
+
+            </li>
 
 
             <!-- Divider -->
@@ -106,9 +110,11 @@ if (!isset($_SESSION['EtudiantID'])) {
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -126,14 +132,18 @@ if (!isset($_SESSION['EtudiantID'])) {
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -147,7 +157,8 @@ if (!isset($_SESSION['EtudiantID'])) {
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php echo $_SESSION['Etudiant_name']; ?>
 
@@ -155,7 +166,8 @@ if (!isset($_SESSION['EtudiantID'])) {
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -174,7 +186,8 @@ if (!isset($_SESSION['EtudiantID'])) {
                 </a>
 
                 <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -183,11 +196,13 @@ if (!isset($_SESSION['EtudiantID'])) {
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body">Sélectionnez "Se déconnecter" ci-dessous si vous êtes prêt à mettre fin à votre session en cours.</div>
+                            <div class="modal-body">Sélectionnez "Se déconnecter" ci-dessous si vous êtes prêt à mettre
+                                fin à votre session en cours.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                                 <form action="etudiant_controller.php" method="POST">
-                                    <button type="submit" name="logout_btn" class="btn btn-primary">Se déconnecter</button>
+                                    <button type="submit" name="logout_btn" class="btn btn-primary">Se
+                                        déconnecter</button>
                                 </form>
 
                             </div>
@@ -231,16 +246,18 @@ if (!isset($_SESSION['EtudiantID'])) {
                             <?php
                             if (mysqli_num_rows($query_run) > 0) {
                                 $row = mysqli_fetch_assoc($query_run);
-                            ?>
-                                  
+                                ?>
+
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Nom etudiant</label>
-                                    <input type="text" name="etudiant_nom" class="form-control" value="<?php echo $row['Etudiant_name']; ?>">
+                                    <input type="text" name="etudiant_nom" class="form-control"
+                                        value="<?php echo $row['Etudiant_name']; ?>">
                                 </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Prenom etudiant</label>
-                                    <input type="text" name="etudiant_prenom" class="form-control" value="<?php echo $row['Etudiant_prenom']; ?>">
+                                    <input type="text" name="etudiant_prenom" class="form-control"
+                                        value="<?php echo $row['Etudiant_prenom']; ?>">
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -250,7 +267,8 @@ if (!isset($_SESSION['EtudiantID'])) {
 
                                 <div class="form-group col-md-4">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" class="form-control" value="<?php echo $row['Email']; ?>">
+                                    <input type="email" name="email" class="form-control"
+                                        value="<?php echo $row['Email']; ?>">
                                 </div>
 
 
@@ -260,65 +278,99 @@ if (!isset($_SESSION['EtudiantID'])) {
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="adresse">Adresse</label>
-                                    <input type="text" name="adresse" class="form-control" value="<?php echo $row['Adresse']; ?>">
+                                    <input type="text" name="adresse" class="form-control"
+                                        value="<?php echo $row['Adresse']; ?>">
                                 </div>
-    
+
                                 <div class="form-group col-md-4">
-    <label for="niveau_etude">Niveau d'étude</label>
-    <select name="niveau_etude" class="form-control">
-        <option value="niveau-bac" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-bac') echo 'selected'; ?>>Niveau Bac</option>
-        <option value="bac" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac') echo 'selected'; ?>>Bac</option>
-        <option value="bac+1" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+1') echo 'selected'; ?>>Bac +1</option>
-        <option value="bac+2" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+2') echo 'selected'; ?>>Bac +2</option>
-        <option value="bac+3" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+3') echo 'selected'; ?>>Bac +3</option>
-        <option value="plus" <?php if(isset($row['niveau_etude']) && $row['niveau_etude'] == 'plus') echo 'selected'; ?>>Plus</option>
-    </select>
-</div>
+                                    <label for="niveau_etude">Niveau d'étude</label>
+                                    <select name="niveau_etude" class="form-control">
+                                        <option value="niveau-bac" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-bac')
+                                            echo 'selected'; ?>>Niveau Bac</option>
+                                        <option value="bac" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac')
+                                            echo 'selected'; ?>>Bac</option>
+                                        <option value="bac+1" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+1')
+                                            echo 'selected'; ?>>Bac +1</option>
+                                        <option value="bac+2" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+2')
+                                            echo 'selected'; ?>>Bac +2</option>
+                                        <option value="bac+3" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+3')
+                                            echo 'selected'; ?>>Bac +3</option>
+                                        <option value="plus" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'plus')
+                                            echo 'selected'; ?>>Plus</option>
+                                    </select>
+                                </div>
 
-<div class="form-group col-md-4">
-    <label for="serie_bac">Série du bac</label>
-    <select name="serie_bac" class="form-control">
-        <option value="sciences_agronomiques" <?php if($row['serie_bac'] == 'sciences_agronomiques') echo 'selected'; ?>>BAC SCIENCES AGRONOMIQUES</option>
-        <option value="sciences_economiques" <?php if($row['serie_bac'] == 'sciences_economiques') echo 'selected'; ?>>BAC SCIENCES ÉCONOMIQUES</option>
-        <option value="techniques_gestion_comptabilite" <?php if($row['serie_bac'] == 'techniques_gestion_comptabilite') echo 'selected'; ?>>BAC TECHNIQUES DE GESTION ET COMPTABILITÉ</option>
-        <option value="svt" <?php if($row['serie_bac'] == 'svt') echo 'selected'; ?>>SVT BAC</option>
-        <option value="lettres" <?php if($row['serie_bac'] == 'lettres') echo 'selected'; ?>>BAC LETTRES</option>
-        <option value="sciences_mathematiques_a" <?php if($row['serie_bac'] == 'sciences_mathematiques_a') echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES A</option>
-        <option value="sciences_humaines" <?php if($row['serie_bac'] == 'sciences_humaines') echo 'selected'; ?>>SCIENCES HUMAINES</option>
-        <option value="sciences_mathematiques_b" <?php if($row['serie_bac'] == 'sciences_mathematiques_b') echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES B</option>
-        <option value="sciences_chariaa" <?php if($row['serie_bac'] == 'sciences_chariaa') echo 'selected'; ?>>SCIENCES DE LA CHARIAA</option>
-        <option value="langue_arabe" <?php if($row['serie_bac'] == 'langue_arabe') echo 'selected'; ?>>LANGUE ARABE</option>
-        <option value="arts_appliques" <?php if($row['serie_bac'] == 'arts_appliques') echo 'selected'; ?>>ARTS APPLIQUÉS</option>
-        <option value="sciences_physiques" <?php if($row['serie_bac'] == 'sciences_physiques') echo 'selected'; ?>>BAC SCIENCES PHYSIQUES</option>
-        <option value="sciences_technologies_electriques" <?php if($row['serie_bac'] == 'sciences_technologies_electriques') echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES ÉLECTRIQUES</option>
-        <option value="sciences_technologies_mecaniques" <?php if($row['serie_bac'] == 'sciences_technologies_mecaniques') echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES MÉCANIQUES</option>
-        <!-- Ajoutez d'autres options selon vos besoins -->
-    </select>
-</div>
+                                <div class="form-group col-md-4">
+                                    <label for="serie_bac">Série du bac</label>
+                                    <select name="serie_bac" class="form-control">
+                                        <option value="sciences_agronomiques" <?php if ($row['serie_bac'] == 'sciences_agronomiques')
+                                            echo 'selected'; ?>>BAC SCIENCES
+                                            AGRONOMIQUES</option>
+                                        <option value="sciences_economiques" <?php if ($row['serie_bac'] == 'sciences_economiques')
+                                            echo 'selected'; ?>>BAC SCIENCES
+                                            ÉCONOMIQUES</option>
+                                        <option value="techniques_gestion_comptabilite" <?php if ($row['serie_bac'] == 'techniques_gestion_comptabilite')
+                                            echo 'selected'; ?>>BAC
+                                            TECHNIQUES DE GESTION ET COMPTABILITÉ</option>
+                                        <option value="svt" <?php if ($row['serie_bac'] == 'svt')
+                                            echo 'selected'; ?>>SVT BAC
+                                        </option>
+                                        <option value="lettres" <?php if ($row['serie_bac'] == 'lettres')
+                                            echo 'selected'; ?>>
+                                            BAC LETTRES</option>
+                                        <option value="sciences_mathematiques_a" <?php if ($row['serie_bac'] == 'sciences_mathematiques_a')
+                                            echo 'selected'; ?>>BAC
+                                            SCIENCES MATHÉMATIQUES A</option>
+                                        <option value="sciences_humaines" <?php if ($row['serie_bac'] == 'sciences_humaines')
+                                            echo 'selected'; ?>>SCIENCES HUMAINES</option>
+                                        <option value="sciences_mathematiques_b" <?php if ($row['serie_bac'] == 'sciences_mathematiques_b')
+                                            echo 'selected'; ?>>BAC
+                                            SCIENCES MATHÉMATIQUES B</option>
+                                        <option value="sciences_chariaa" <?php if ($row['serie_bac'] == 'sciences_chariaa')
+                                            echo 'selected'; ?>>SCIENCES DE LA CHARIAA</option>
+                                        <option value="langue_arabe" <?php if ($row['serie_bac'] == 'langue_arabe')
+                                            echo 'selected'; ?>>LANGUE ARABE</option>
+                                        <option value="arts_appliques" <?php if ($row['serie_bac'] == 'arts_appliques')
+                                            echo 'selected'; ?>>ARTS APPLIQUÉS</option>
+                                        <option value="sciences_physiques" <?php if ($row['serie_bac'] == 'sciences_physiques')
+                                            echo 'selected'; ?>>BAC SCIENCES PHYSIQUES</option>
+                                        <option value="sciences_technologies_electriques" <?php if ($row['serie_bac'] == 'sciences_technologies_electriques')
+                                            echo 'selected'; ?>>
+                                            BAC SCIENCES ET TECHNOLOGIES ÉLECTRIQUES</option>
+                                        <option value="sciences_technologies_mecaniques" <?php if ($row['serie_bac'] == 'sciences_technologies_mecaniques')
+                                            echo 'selected'; ?>>
+                                            BAC SCIENCES ET TECHNOLOGIES MÉCANIQUES</option>
+                                        <!-- Ajoutez d'autres options selon vos besoins -->
+                                    </select>
+                                </div>
 
 
-<div class="form-group col-md-4">
-    <label for="annee_bac">Date d'obtention du bac</label>
-    <input type="date" name="annee_bac" class="form-control" value="<?php echo isset($row['annee_bac']) ? $row['annee_bac'] : ''; ?>">
-</div>
+                                <div class="form-group col-md-4">
+                                    <label for="annee_bac">Date d'obtention du bac</label>
+                                    <input type="date" name="annee_bac" class="form-control"
+                                        value="<?php echo isset($row['annee_bac']) ? $row['annee_bac'] : ''; ?>">
+                                </div>
 
-<div class="form-group col-md-4">
-    <label for="intitule_diplome">Intitulé du diplôme</label>
-    <input type="text" name="intitule_diplome" class="form-control" value="<?php echo $row['intitule_diplome']; ?>">
-</div>
+                                <div class="form-group col-md-4">
+                                    <label for="intitule_diplome">Intitulé du diplôme</label>
+                                    <input type="text" name="intitule_diplome" class="form-control"
+                                        value="<?php echo $row['intitule_diplome']; ?>">
+                                </div>
 
-<div class="form-group col-md-4">
-    <label for="annee_diplome">Année du diplôme</label>
-    <input type="date" name="annee_diplome" class="form-control" value="<?php echo $row['annee_diplome']; ?>">
-</div>
+                                <div class="form-group col-md-4">
+                                    <label for="annee_diplome">Année du diplôme</label>
+                                    <input type="date" name="annee_diplome" class="form-control"
+                                        value="<?php echo $row['annee_diplome']; ?>">
+                                </div>
 
-<div class="form-group col-md-4">
-    <label for="specialite">Spécialité</label>
-    <input type="text" name="specialite" class="form-control" value="<?php echo $row['Specialite']; ?>">
-</div>
+                                <div class="form-group col-md-4">
+                                    <label for="specialite">Spécialité</label>
+                                    <input type="text" name="specialite" class="form-control"
+                                        value="<?php echo $row['Specialite']; ?>">
+                                </div>
 
 
-                            <?php
+                                <?php
                             } else {
                                 echo "No Record Found";
                             }
@@ -327,8 +379,8 @@ if (!isset($_SESSION['EtudiantID'])) {
                             <button type="submit" name="modiferEtudiant" class="btn btn-primary">Modifier</button>
                         </div>
                     </form>
-                        
-                <?php
-                include('includes/scripts.php');
-                include('includes/footer.php');
-                ?>
+
+                    <?php
+                    include('includes/scripts.php');
+                    include('includes/footer.php');
+                    ?>

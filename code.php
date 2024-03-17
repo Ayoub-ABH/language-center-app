@@ -203,21 +203,14 @@ if(isset($_POST['deletev_btn'])) {
 
 if (isset($_POST['etudiantbtn'])) {
     // Vérifier si les champs requis ne sont pas vides
-<<<<<<< HEAD
     if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['telephone'])) {
-=======
-    if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['password']) && !empty($_POST['cin']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['adresse']) && !empty($_POST['date_inscription']) && !empty($_POST['niveau']) && !empty($_POST['groupe']) && !empty($_FILES['etudiant_image']['name'])) {
->>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
         
         // Récupérer les données du formulaire
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $cin = $_POST['cin'];
         $password = $_POST['password'];
-<<<<<<< HEAD
         $confirmepassword = $_POST['confirmepassword'];
-=======
->>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
         $email = $_POST['email'];
         $telephone = $_POST['telephone'];
         $adresse = $_POST['adresse'];
@@ -287,40 +280,9 @@ if (isset($_POST['etudiantbtn'])) {
             header('location: etudiants.php');
             exit(); 
         } else {
-<<<<<<< HEAD
             $_SESSION['status'] = "Échec de l'ajout de l'étudiant";
             header('location: etudiants.php');
             exit(); 
-=======
-            // Déplacer le fichier téléchargé vers le répertoire d'upload
-            $target_path = "upload/" . $etudiant_image;
-            move_uploaded_file($_FILES["etudiant_image"]["tmp_name"], $target_path);
-
-            // Requête SQL pour obtenir l'ID du groupe à partir du nom du groupe
-            $queryGroupe = "SELECT GroupeID FROM groupes WHERE Groupe_name = '$groupe'";
-            $resultGroupe = mysqli_query($connection, $queryGroupe);
-            $rowGroupe = mysqli_fetch_assoc($resultGroupe);
-            $groupeID = $rowGroupe['GroupeID'];
-
-            // Requête SQL pour obtenir l'ID du niveau à partir du nom du niveau
-            $queryNiveau = "SELECT NiveauID FROM niveau WHERE Niveau_name = '$niveau'";
-            $resultNiveau = mysqli_query($connection, $queryNiveau);
-            $rowNiveau = mysqli_fetch_assoc($resultNiveau);
-            $niveauID = $rowNiveau['NiveauID'];
-
-            // Insérer les données dans la base de données
-            $query = "INSERT INTO etudiants (Etudiant_name, Etudiant_prenom, CIN, Password, Email, Tele, Adresse, Date_inscription, NiveauID, GroupeID, Image) VALUES ('$nom', '$prenom', '$cin','$password', '$email', '$telephone', '$adresse', '$date_inscription', '$niveauID', '$groupeID', '$etudiant_image')";
-            $query_run = mysqli_query($connection, $query);
-
-            // Vérifier si la requête d'insertion a réussi
-            if ($query_run) {
-                $_SESSION['success'] = "Étudiant ajouté avec succès";
-                header('location: etudiants.php');
-            } else {
-                $_SESSION['status'] = "Échec de l'ajout de l'étudiant";
-                header('location: etudiants.php');
-            }
->>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
         }
     } else {
         $_SESSION['status'] = "Veuillez remplir tous les champs du formulaire.";

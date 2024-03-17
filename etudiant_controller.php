@@ -161,10 +161,6 @@ if(isset($_POST['logout_btn']))
     session_destroy();
     unset($_SESSION['EtudiantID']);
     unset($_SESSION['Etudiant_name']);
-<<<<<<< HEAD
     header('location: log.php');
-=======
-    header('location: etudiant_log.php');
->>>>>>> a8a4c66109726189c9ae83bb2012ccb0140e87db
 }
 ?>
