@@ -2,8 +2,8 @@
 session_start(); // Démarrer la session si ce n'est pas déjà fait
 
 include('dbconfig.php');
-include('security.php');
-secAdmin();
+//include('security.php');
+//secAdmin();
 
 if (isset($_POST['marquer_presence']) || isset($_POST['marquer_absence'])) {
     $etudiant_id = $_POST['etudiant_id'];
@@ -19,8 +19,11 @@ if (isset($_POST['marquer_presence']) || isset($_POST['marquer_absence'])) {
 
     if ($presence_query_run) {
         $_SESSION['success'] = "La présence/absence a été enregistrée avec succès.";
+        header('location: list_groupe2.php');
     } else {
         $_SESSION['status'] = "Erreur lors de l'enregistrement de la présence/absence.";
+        header('location: list_groupe2.php');
     }
 }
+
 ?>
