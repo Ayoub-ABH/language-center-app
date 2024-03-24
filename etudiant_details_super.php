@@ -1,10 +1,10 @@
 <?php
 include('dbconfig.php');
 include('security.php');
-secAdmin();
+secSuper();
 
 include('includes/header.php');
-include('includes/navbar.php');
+include('includes/navbar_super.php');
 
 if (isset($_GET['id'])) {
     $studentId = $_GET['id'];

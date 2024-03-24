@@ -234,7 +234,7 @@ if (isset($_POST['etudiantbtn'])) {
             $etudiant_image = $_FILES['etudiant_image']['name'];
         
             // Définir le chemin de destination
-            $target_path = "htdocs/language-center-app/upload/" . basename($etudiant_image);
+            $target_path = "upload/images/" . basename($etudiant_image);
   
         
             // Vérifier si le fichier image existe déjà
@@ -295,8 +295,6 @@ if (isset($_POST['etudiantbtn'])) {
 
 
 
-
-
 if(isset($_POST['updateebtn'])) {
     $EtudiantID = $_POST['edit_id'];
     $nom = $_POST['edit_etudiantname'];
@@ -309,21 +307,41 @@ if(isset($_POST['updateebtn'])) {
     $date_inscription = $_POST['edit_etudiantdate'];
     $niveau = $_POST['edit_etudiantniveau'];
     $groupe = $_POST['edit_etudiantgroupe'];
+    $genre = $_POST['edit_etudiantgenre'];
+    $prix = $_POST['edit_etudiantprix'];
+    $type_cours = $_POST['type_cours'];
 
     // Vérifier si un nouveau fichier d'image est téléchargé
     if(isset($_FILES['edit_etudiantimage']['name']) && !empty($_FILES['edit_etudiantimage']['name'])) {
         $etudiant_image = $_FILES['edit_etudiantimage']['name'];
 
         // Vérifier le type de fichier
-        $imageFileType = strtolower(pathinfo($_FILES['edit_etudiantimage']['name'],PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($_FILES['edit_etudiantimage']['name'], PATHINFO_EXTENSION));
         if($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif" ) {
             $_SESSION['status'] = "Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
             header('location: etudiants.php');
             exit();
         }
+
+        // Définir le chemin de destination pour télécharger l'image
+        $target_dir = "upload/images/";
+        $target_path = $target_dir . basename($etudiant_image);
+
+        // Télécharger l'image
+        if (move_uploaded_file($_FILES["edit_etudiantimage"]["tmp_name"], $target_path)) {
+            // Succès de l'upload, continuez avec la mise à jour dans la base de données
+        } else {
+            // Échec de l'upload
+            $_SESSION['status'] = "Erreur lors de l'upload de l'image.";
+            header('location: etudiants.php');
+            exit();
+        }
     } else {
         // Utiliser l'image existante
-        $etudiant_image = $_POST['edit_etudiantimage_old'];
+        $queryImage = "SELECT Image FROM etudiants WHERE EtudiantID = '$EtudiantID'";
+        $resultImage = mysqli_query($connection, $queryImage);
+        $rowImage = mysqli_fetch_assoc($resultImage);
+        $etudiant_image = $rowImage['Image'];
     }
 
     // Récupérer l'ID du niveau en fonction de son nom
@@ -339,14 +357,7 @@ if(isset($_POST['updateebtn'])) {
     $groupeID = $rowGroupe['GroupeID'];
 
     // Modifier les données de l'étudiant dans la base de données
-    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Password = '$password', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID'";
-    
-    // Si un nouveau fichier image est téléchargé, inclure le champ Image dans la requête
-    if(isset($_FILES['edit_etudiantimage']['name']) && !empty($_FILES['edit_etudiantimage']['name'])) {
-        $query .= ", Image='$etudiant_image'";
-    }
-
-    $query .= " WHERE EtudiantID='$EtudiantID'";
+    $query = "UPDATE etudiants SET Etudiant_name='$nom', Etudiant_prenom='$prenom', CIN='$cin', Password='$password', Email='$email', Tele='$telephone', Adresse='$adresse', Date_inscription='$date_inscription', NiveauID='$niveauID', GroupeID='$groupeID', Genre='$genre', Image='$etudiant_image', Prix='$prix', type_cours='$type_cours' WHERE EtudiantID='$EtudiantID'";
     
     $query_run = mysqli_query($connection, $query);
 
@@ -358,6 +369,7 @@ if(isset($_POST['updateebtn'])) {
         header('location: etudiants.php');
     }
 }
+
 
 
 

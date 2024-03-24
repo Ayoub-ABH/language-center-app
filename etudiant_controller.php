@@ -2,8 +2,7 @@
 include('dbconfig.php');
 session_start();
 
-if(isset($_POST['modiferEtudiant']))
-{
+if(isset($_POST['modiferEtudiant'])) {
     $etudiant_id = $_SESSION['EtudiantID'];
     $etudiant_name = $_POST['etudiant_nom'];
     $etudiant_prenom = $_POST['etudiant_prenom'];
@@ -11,10 +10,29 @@ if(isset($_POST['modiferEtudiant']))
     $etudiant_email = $_POST['email'];
     $etudiant_tele = $_POST['tele'];
     $etudiant_adresse = $_POST['adresse'];
+    $niveau_etude = $_POST['niveau_etude']; 
+    $serie_bac = $_POST['serie_bac']; 
+    $annee_bac = $_POST['annee_bac']; 
+    $intitule_diplome = $_POST['intitule_diplome']; 
+    $annee_diplome = $_POST['annee_diplome']; 
+    $specialite = $_POST['specialite']; 
 
     // Check if all attributes are not empty
     if(!empty($etudiant_name) && !empty($etudiant_prenom) && !empty($etudiant_cin) && !empty($etudiant_email) && !empty($etudiant_tele) && !empty($etudiant_adresse)) {
-        $query = "UPDATE etudiants SET Etudiant_name = '$etudiant_name', Etudiant_prenom = '$etudiant_prenom', CIN = '$etudiant_cin', Email = '$etudiant_email', Tele = '$etudiant_tele', Adresse = '$etudiant_adresse' WHERE EtudiantID = $etudiant_id";
+        $query = "UPDATE etudiants SET 
+                  Etudiant_name = '$etudiant_name', 
+                  Etudiant_prenom = '$etudiant_prenom', 
+                  CIN = '$etudiant_cin', 
+                  Email = '$etudiant_email', 
+                  Tele = '$etudiant_tele', 
+                  Adresse = '$etudiant_adresse', 
+                  niveau_etude = '$niveau_etude', 
+                  serie_bac = '$serie_bac', 
+                  annee_bac = '$annee_bac', 
+                  intitule_diplome = '$intitule_diplome', 
+                  annee_diplome = '$annee_diplome', 
+                  Specialite = '$specialite' 
+                  WHERE EtudiantID = $etudiant_id";
         $query_run = mysqli_query($connection, $query);
 
         if ($query_run) {
@@ -28,8 +46,8 @@ if(isset($_POST['modiferEtudiant']))
         $_SESSION['status'] = "Veuillez remplir tous les champs";
         header('location: etudiant_espace.php');
     }
-
 }
+
 
 if(isset($_POST['AjouterFichier'])) 
 {

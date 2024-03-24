@@ -110,7 +110,7 @@ include('includes/navbar.php');
             <div class="form-group">
     <label>Image</label>
     <input type="file" name="etudiant_image" id="etudiant_image" class="form-control" placeholder="Entrer Image" onchange="previewImage()">
-    <img id="preview" src="upload/<?php echo $etudiant_image; ?>" alt="Aperçu de l'image" style="max-width: 15%; margin-top: 10px; display: none;">
+    <img id="preview" src="upload/images<?php echo $etudiant_image; ?>" alt="Aperçu de l'image" style="max-width: 15%; margin-top: 10px; display: none;">
    
 
 </div>

@@ -27,37 +27,38 @@ include('includes/navbar.php');
             }
             ?>
         </div>
-
         <div class="card-body">
-            <div class="table-responsive">
-            <?php 
-$query = "SELECT e.EtudiantID, e.Etudiant_name, e.Etudiant_prenom, e.CIN , e.Password, e.Email, e.Tele, e.Adresse, e.Date_inscription, n.Niveau_name, g.Groupe_name, e.Image
+    <div class="table-responsive">
+
+        <?php
+        $query = "SELECT e.EtudiantID, e.Etudiant_name, e.Etudiant_prenom, e.CIN , e.Password, e.Email, e.Tele, e.Adresse, e.Date_inscription, n.Niveau_name, g.Groupe_name, e.Image
 FROM etudiants e
 JOIN niveau n ON e.NiveauID = n.NiveauID
 JOIN groupes g ON e.GroupeID = g.GroupeID";
 
-$query_run = mysqli_query($connection, $query);
-?>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <th<tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>CIN</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Tele</th>
-                <th>Adresse</th>
-                <th>Date d'inscription</th>
-                <th>Niveau</th>
-                <th>Groupe</th>
-                <th>Image</th>
-                <th>Éditer</th>
-                <th>Supprimer</th>
-            </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+        $query_run = mysqli_query($connection, $query);
+        ?>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>CIN</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Tele</th>
+                    <th>Adresse</th>
+                    <th>Date d'inscription</th>
+                    <th>Niveau</th>
+                    <th>Groupe</th>
+                    <th>Image</th>
+                    <th>Éditer</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
                         if(mysqli_num_rows($query_run) > 0) {
                             while($row = mysqli_fetch_assoc($query_run)) {
                         ?>
@@ -73,7 +74,7 @@ $query_run = mysqli_query($connection, $query);
                         <td><?php echo $row['Date_inscription']; ?></td>
                         <td><?php echo $row['Niveau_name']; ?></td>
                         <td><?php echo $row['Groupe_name']; ?></td>
-                        <td><?php echo '<img src="upload/' . $row['Image'] . '" width="100px;" height="100px;" alt="Image">'; ?></td>
+                        <td><?php echo '<img src="upload/images/' . $row['Image'] . '" width="100px;" height="100px;" alt="Image">'; ?></td>
                         <td>
                             <form action="etudiant_edit.php" method="post">
                                 <input type="hidden" name="edit_id" value="<?php echo $row['EtudiantID']; ?>">
@@ -100,24 +101,25 @@ $query_run = mysqli_query($connection, $query);
                                             <form action="code.php" method="post">
                                                 <input type="hidden" name="deletet_id" value="<?php echo $row['EtudiantID']; ?>">
                                                 <button type="submit" name="deletee_btn" class="btn btn-danger">Supprimer</button>
-                                            </form>
+                    
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                         <?php
-                            }
-                        } else {
-                            echo "<tr><td colspan='12'>Aucun enregistrement trouvé</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>Aucun enregistrement trouvé</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+</div>
+</div>
 </div>
 
 <?php

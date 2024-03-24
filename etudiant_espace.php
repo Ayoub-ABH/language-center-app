@@ -365,9 +365,30 @@ if (!isset($_SESSION['EtudiantID'])) {
 
                                 <div class="form-group col-md-4">
                                     <label for="specialite">Spécialité</label>
-                                    <input type="text" name="specialite" class="form-control"
-                                        value="<?php echo $row['Specialite']; ?>">
+                                    <select name="specialite" class="form-control">
+                                        <option value="Économie" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Économie')
+                                            echo 'selected'; ?>>Économie</option>
+                                        <option value="Entrepreneuriat" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Entrepreneuriat')
+                                            echo 'selected'; ?>>Entrepreneuriat
+                                        </option>
+                                        <option value="Digital" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Digital')
+                                            echo 'selected'; ?>>Digital</option>
+                                        <option value="Mécanique" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Mécanique')
+                                            echo 'selected'; ?>>Mécanique</option>
+                                        <option value="Electricité" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Electricité')
+                                            echo 'selected'; ?>>Electricité</option>
+                                        <option value="Audiovisuel et Infographie" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Audiovisuel et Infographie')
+                                            echo 'selected'; ?>>
+                                            Audiovisuel et Infographie</option>
+                                        <!-- Ajoutez les autres options ici -->
+                                        <option value="Industrie" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Industrie')
+                                            echo 'selected'; ?>>Industrie</option>
+                                        <option value="Informatique télécom web" <?php if (isset($row['Specialite']) && $row['Specialite'] == 'Informatique télécom web')
+                                            echo 'selected'; ?>>Informatique
+                                            télécom web</option>
+                                    </select>
                                 </div>
+
 
 
                                 <?php
