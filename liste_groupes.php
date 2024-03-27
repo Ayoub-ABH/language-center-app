@@ -71,7 +71,7 @@ include('includes/navbar.php');
             $selectedNiveau = isset($_POST['niveau']) ? $_POST['niveau'] : '';
             $selectedProfesseur = isset($_POST['professeur']) ? $_POST['professeur'] : '';
 
-            $query = "SELECT * FROM `groupes` WHERE Niveau = '$selectedNiveau' AND ProfesseurID = '$selectedProfesseur'";
+            $query = "SELECT * FROM `groupes` WHERE Niveau  = '$selectedNiveau' AND ProfesseurID = '$selectedProfesseur'";
             $query_run = mysqli_query($connection, $query);
 
             if (mysqli_num_rows($query_run) > 0) {
@@ -89,7 +89,7 @@ include('includes/navbar.php');
                     <?php
                 }
             } else {
-                echo "Aucun trouvé";
+                echo "Aucun trouvé". mysqli_error($connection);
             }
         }
         ?>
