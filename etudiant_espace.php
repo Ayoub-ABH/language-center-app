@@ -228,7 +228,7 @@ if (!isset ($_SESSION['EtudiantID'])) {
                             }
 
                             ?>
-                        
+
                         </div>
                     </div>
 
@@ -238,7 +238,7 @@ if (!isset ($_SESSION['EtudiantID'])) {
                     $query = "SELECT * FROM etudiants WHERE EtudiantID = $etudiantID";
                     $query_run = mysqli_query($connection, $query);
                     ?>
-                    
+
                     <form role="form" method="post" action="etudiant_controller.php" style="margin-bottom : 170px"
                         enctype="multipart/form-data">
                         <div class="form-row">
@@ -255,7 +255,7 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                             <div class="text-center">
                                                 <img src="upload/images/<?php echo $row['Image']; ?>"
                                                     class="avatar img-circle img-thumbnail" alt="avatar"
-                                                    style="width: 150px; height: 160px;">
+                                                    style="width: 250px; height: 225px;">
                                                 <h6>
                                                     <?php echo $row['Etudiant_name'] . ' ' . $row['Etudiant_prenom']; ?>
                                                 </h6>
@@ -275,7 +275,6 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                         mois</label><br>
                                                     <label><input type="checkbox" name="mois_stage[]" value="3"> plus
                                                     </label><br>
-                                                    <!-- Ajoutez d'autres cases à cocher selon vos besoins -->
 
                                                 </li>
                                                 <li class="list-group-item"><span
@@ -293,15 +292,12 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                             </ul>
                                         </div>
 
-                          
-
-
                                         <div class="col-sm-9">
                                             <ul class="nav nav-tabs">
                                                 <h4>Informations personnelles</h4>
                                             </ul>
                                             <br>
-                                            <form class="form" action="etudiant_controller.php" method="post" >
+                                            <form class="form" action="etudiant_controller.php" method="post">
                                                 <div class="form-group">
                                                     <div class="col-xs-6">
                                                         <label for="inputEmail4">Nom etudiant</label>
@@ -422,9 +418,6 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                             value="<?php echo $row['annee_diplome']; ?>">
                                                     </div>
 
-
-
-
                                                     <div class="col-xs-6">
                                                         <label for="specialite">Spécialité</label>
                                                         <select name="specialite" class="form-control">
@@ -497,7 +490,8 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                 echo "No Record Found";
                             }
                             ?>
-                                                <button type="submit" name="modiferEtudiant" class="btn btn-primary">Modifier</button>
+                                                <button type="submit" name="modiferEtudiant"
+                                                    class="btn btn-primary">Modifier</button>
                                             </div>
                                         </form>
                                     </div>

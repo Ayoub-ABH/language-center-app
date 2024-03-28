@@ -3,62 +3,63 @@ include ('dbconfig.php');
 session_start();
 
 
+if (isset($_POST['modiferEtudiant'])) {
+  
 
+    $etudiant_id = $_SESSION['EtudiantID'];
 
-if (isset ($_POST['modiferEtudiant'])) {
-    if (isset ($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $etudiant_id = $_SESSION['EtudiantID'];
-        $etudiant_name = $_POST['etudiant_nom'];
-        $etudiant_prenom = $_POST['etudiant_prenom'];
-        $etudiant_cin = $_POST['cin'];
-        $etudiant_email = $_POST['email'];
-        $etudiant_tele = $_POST['tele'];
-        $etudiant_adresse = $_POST['adresse'];
-        $niveau_etude = $_POST['niveau_etude'];
-        $serie_bac = $_POST['serie_bac'];
-        $annee_bac = $_POST['annee_bac'];
-        $intitule_diplome = $_POST['intitule_diplome'];
-        $annee_diplome = $_POST['annee_diplome'];
-        $specialite = $_POST['specialite'];
-        $filename = $_FILES['image']['name'];
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $destination = 'upload/images/' . $filename;
-        move_uploaded_file($tmp_name, $destination);
+    $etudiant_nom = $_POST['etudiant_nom'];
+    $etudiant_prenom = $_POST['etudiant_prenom'];
+    $cin = $_POST['cin'];
+    $email = $_POST['email'];
+    $tele = $_POST['tele'];
+    $adresse = $_POST['adresse'];
+    $niveau_etude = $_POST['niveau_etude'];
+    $serie_bac = $_POST['serie_bac'];
+    $annee_bac = $_POST['annee_bac'];
+    $intitule_diplome = $_POST['intitule_diplome'];
+    $annee_diplome = $_POST['annee_diplome'];
+    $specialite = $_POST['specialite'];
+    $parcours_souhaite = $_POST['parcours_souhaite'];
+    $filename = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+    $destination = 'upload/images/' . $filename;
+    move_uploaded_file($tmp_name, $destination);
 
-        // Check if all attributes are not empty
-        if (!empty ($etudiant_name) && !empty ($etudiant_prenom) && !empty ($etudiant_cin) && !empty ($etudiant_email) && !empty ($etudiant_tele) && !empty ($etudiant_adresse)) {
-            $query = "UPDATE etudiants SET 
-                  Etudiant_name = '$etudiant_name', 
-                  Etudiant_prenom = '$etudiant_prenom', 
-                  CIN = '$etudiant_cin', 
-                  Email = '$etudiant_email', 
-                  Tele = '$etudiant_tele', 
-                  Adresse = '$etudiant_adresse', 
-                  niveau_etude = '$niveau_etude', 
-                  serie_bac = '$serie_bac', 
-                  annee_bac = '$annee_bac', 
-                  intitule_diplome = '$intitule_diplome', 
-                  annee_diplome = '$annee_diplome', 
-                  Specialite = '$specialite' , 
-                  Image = '$filename'
-                  WHERE EtudiantID = $etudiant_id";
-                   
-            $query_run = mysqli_query($connection, $query);
-           
+    if (!empty($etudiant_nom) && !empty($etudiant_prenom) && !empty($cin) && !empty($email) && !empty($tele) && !empty($adresse)) {
 
-            if ($query_run) {
-                $_SESSION['success'] = "Votre information est mise à jour avec succès" . mysqli_error($connection);
-                header('location: etudiant_espace.php');
-            } else {
-                $_SESSION['status'] = "Votre information n'est pas mise à jour" . mysqli_error($connection);
-                header('location: etudiant_espace.php');
-            }
+        $query = "UPDATE etudiants SET 
+            Etudiant_name = '$etudiant_nom', 
+            Etudiant_prenom = '$etudiant_prenom', 
+            CIN = '$cin', 
+            Email = '$email', 
+            Tele = '$tele', 
+            Adresse = '$adresse', 
+            niveau_etude = '$niveau_etude', 
+            serie_bac = '$serie_bac', 
+            annee_bac = '$annee_bac', 
+            intitule_diplome = '$intitule_diplome', 
+            annee_diplome = '$annee_diplome', 
+            Specialite = '$specialite',
+            Parcours_souhaite = '$parcours_souhaite',
+            Image = '$filename'
+            WHERE EtudiantID = $etudiant_id";
+
+        $query_run = mysqli_query($connection, $query);
+
+        if ($query_run) {
+            $_SESSION['success'] = "Vos informations ont été mises à jour avec succès.";
+            header('location: etudiant_espace.php');
         } else {
-            $_SESSION['status'] = "Veuillez remplir tous les champs";
+            $_SESSION['status'] = "Erreur lors de la mise à jour des informations : " . mysqli_error($connection);
             header('location: etudiant_espace.php');
         }
+    } else {
+        $_SESSION['status'] = "Veuillez remplir tous les champs.";
+        header('location: etudiant_espace.php');
     }
 }
+
 
 
 if (isset ($_POST['AjouterFichier'])) {
@@ -67,10 +68,6 @@ if (isset ($_POST['AjouterFichier'])) {
     $file_size = $_FILES['file']['size'];
     $file_tmp = $_FILES['file']['tmp_name'];
     $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-
-
-
-
 
     $upload_folder = 'upload/diplomes/';
 
