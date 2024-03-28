@@ -56,25 +56,25 @@ if (!isset ($_SESSION['EtudiantID'])) {
                 Interface
             </div>
             <!-- Nav Item - Pages Collapse Menu -->
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="etudiant_espace.php">
                     <i class="fas fa-user-graduate"></i>
-                    <span>Espace Etudiant</span>
+                    <span>Mon profil</span>
                 </a>
 
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Espace Etudiant</h6>
-                        <a class="collapse-item" href="etudiant_espace.php">Profile</a>
-                        <a class="collapse-item" href="etudiant_fichiers.php">Votre fichiers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="etudiant_fichiers.php">
+                    <i class="fas fa-file"></i>
+                    <span>Mes documents</span>
+                </a>
 
-                    </div>
-                </div>
+            </li>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="etudiant_contact.php">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a>
 
@@ -289,6 +289,41 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                     <label><input type="checkbox" name="mois_stage[]" value="3"> plus
                                                     </label><br>
                                                 </li>
+
+                                                <li class="list-group-item"><span class="pull-left"><strong>Mot de
+                                                            passe</strong></li>
+                                                <li class="list-group-item"><span class="pull-left"><strong>Mot de
+                                                            passe</strong></li>
+                                                <li class="list-group-item">
+                                                    <label for="ancien_mot_de_passe">Ancien mot de passe</label>
+                                                    <div class="input-group">
+                                                        <input type="password" name="ancien_mot_de_passe"
+                                                            class="form-control" id="ancien_mot_de_passe"
+                                                            value="<?php echo $row['Password']; ?>">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-eye" id="toggleAncienMotDePasse"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+                                                    <div class="input-group">
+                                                        <input type="password" name="nouveau_mot_de_passe"
+                                                            class="form-control" id="nouveau_mot_de_passe">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-eye-slash"
+                                                                    id="toggleNouveauMotDePasse"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <button type="button" class="btn btn-primary" id="updatePasswordBtn">
+                                                        <i class="fas fa-sync-alt"></i>
+                                                    </button>
+                                                </li>
+
+
                                             </ul>
                                         </div>
 
@@ -499,6 +534,37 @@ if (!isset ($_SESSION['EtudiantID'])) {
                             </div>
                         </div>
 </body>
+<script>
+    document.getElementById('toggleAncienMotDePasse').addEventListener('click', function () {
+        var ancienMotDePasseInput = document.getElementById('ancien_mot_de_passe');
+        var toggleAncienMotDePasseIcon = document.getElementById('toggleAncienMotDePasse');
+        if (ancienMotDePasseInput.type === 'password') {
+            ancienMotDePasseInput.type = 'text';
+            toggleAncienMotDePasseIcon.classList.remove('fa-eye');
+            toggleAncienMotDePasseIcon.classList.add('fa-eye-slash');
+        } else {
+            ancienMotDePasseInput.type = 'password';
+            toggleAncienMotDePasseIcon.classList.remove('fa-eye-slash');
+            toggleAncienMotDePasseIcon.classList.add('fa-eye');
+        }
+    });
+
+    document.getElementById('toggleNouveauMotDePasse').addEventListener('click', function () {
+        var nouveauMotDePasseInput = document.getElementById('nouveau_mot_de_passe');
+        var toggleNouveauMotDePasseIcon = document.getElementById('toggleNouveauMotDePasse');
+        if (nouveauMotDePasseInput.type === 'password') {
+            nouveauMotDePasseInput.type = 'text';
+            toggleNouveauMotDePasseIcon.classList.remove('fa-eye');
+            toggleNouveauMotDePasseIcon.classList.add('fa-eye-slash');
+        } else {
+            nouveauMotDePasseInput.type = 'password';
+            toggleNouveauMotDePasseIcon.classList.remove('fa-eye-slash');
+            toggleNouveauMotDePasseIcon.classList.add('fa-eye');
+        }
+    });
+</script>
+
+
 <?php
 include ('includes/scripts.php');
 include ('includes/footer.php');

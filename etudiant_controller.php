@@ -167,7 +167,7 @@ if (isset ($_POST['login_btn'])) {
         $row = mysqli_fetch_assoc($query_run);
         $_SESSION['EtudiantID'] = $row['EtudiantID'];
         $_SESSION['Etudiant_name'] = $row['Etudiant_name'];
-        header('location: etudiant_update_password.php');
+        header('location: etudiant_espace.php');
     } else {
         // invalid
         $_SESSION['status'] = "CIN ou mot de passe incorrect";
@@ -181,49 +181,6 @@ if (isset ($_POST['logout_btn'])) {
     unset($_SESSION['EtudiantID']);
     unset($_SESSION['Etudiant_name']);
     header('location: etudiant_log.php');
-}
-
-
-
-
-
-
-
-// changement de mot de passe 
-if (isset($_POST['changer_mdp_btn'])) {
-   
-    if (isset($_POST['ancien_mot_de_passe'], $_POST['nouveau_mot_de_passe']) && !empty($_POST['ancien_mot_de_passe']) && !empty($_POST['nouveau_mot_de_passe'])) {
-        
-        $ancien_mot_de_passe = $_POST['ancien_mot_de_passe'];
-        $nouveau_mot_de_passe = $_POST['nouveau_mot_de_passe'];
-
-        $ancien_mot_de_passe = mysqli_real_escape_string($connection, $ancien_mot_de_passe);
-        $nouveau_mot_de_passe = mysqli_real_escape_string($connection, $nouveau_mot_de_passe);
-
-        $etudiant_id = $_SESSION['EtudiantID'];
-
-        $query = "SELECT * FROM etudiants WHERE EtudiantID = '$etudiant_id' AND Password = '$ancien_mot_de_passe'";
-        $query_run = mysqli_query($connection, $query);
-
-        if (mysqli_num_rows($query_run) == 1) { 
-            $update_query = "UPDATE etudiants SET Password = '$nouveau_mot_de_passe' WHERE EtudiantID = '$etudiant_id'";
-            if (mysqli_query($connection, $update_query)) {
-                $_SESSION['status'] = "Le mot de passe a été mis à jour avec succès.";
-            } else {
-                $_SESSION['status'] = "Erreur lors de la mise à jour du mot de passe: " . mysqli_error($connection);
-            }
-        } else {
-            $_SESSION['status'] = "L'ancien mot de passe est incorrect.";
-        }
-    } else {
-        $_SESSION['status'] = "Veuillez remplir tous les champs.";
-    }
-
-    header('location: etudiant_espace.php');
-    exit();
-} else {
-    header('location: etudiant_log.php'); 
-    exit();
 }
 
 ?>
