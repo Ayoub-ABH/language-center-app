@@ -161,8 +161,19 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php echo $_SESSION['Etudiant_name']; ?>
 
-                                </span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                    <?php
+                                    $image_base_path = 'upload/images/';
+                                    $query_image = "SELECT Image FROM etudiants WHERE EtudiantID = {$_SESSION['EtudiantID']}";
+                                    $result_image = mysqli_query($connection, $query_image);
+                                    if ($result_image && mysqli_num_rows($result_image) > 0) {
+                                        $row_image = mysqli_fetch_assoc($result_image);
+                                        $image_name = $row_image['Image'];
+                                        $image_path = $image_base_path . $image_name;
+                                    } else {
+                                        $image_path = 'img/undraw_profile.svg';
+                                    }
+                                    ?>
+                                    <img class="img-profile rounded-circle" src="<?php echo $image_path; ?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
