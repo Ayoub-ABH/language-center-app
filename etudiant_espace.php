@@ -292,8 +292,6 @@ if (!isset ($_SESSION['EtudiantID'])) {
 
                                                 <li class="list-group-item"><span class="pull-left"><strong>Mot de
                                                             passe</strong></li>
-                                                <li class="list-group-item"><span class="pull-left"><strong>Mot de
-                                                            passe</strong></li>
                                                 <li class="list-group-item">
                                                     <label for="ancien_mot_de_passe">Ancien mot de passe</label>
                                                     <div class="input-group">
