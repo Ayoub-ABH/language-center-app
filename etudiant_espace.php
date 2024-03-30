@@ -263,73 +263,63 @@ if (!isset ($_SESSION['EtudiantID'])) {
 
                                     <div class="row">
                                         <div class="col-sm-3">
+
+                                            <!-- form -->
+                                            <form class="form" action="etudiant_controller.php" method="post">
+
                                             <div class="text-center">
-                                                <img src="upload/images/<?php echo $row['Image']; ?>"
-                                                    class="avatar img-circle img-thumbnail" alt="avatar"
-                                                    style="width: 250px; height: 225px;">
+                                                <img src="upload/images/<?php echo $row['Image']; ?>" class="avatar img-circle img-thumbnail" alt="avatar" style="width: 250px; height: 225px;">
                                                 <h6>
                                                     <?php echo $row['Etudiant_name'] . ' ' . $row['Etudiant_prenom']; ?>
                                                 </h6>
-                                                <input type="file" name="image"
-                                                    class="text-center center-block file-upload">
+                                                <input type="file" name="image" class="text-center center-block file-upload">
                                             </div>
-
+                                            
                                             <ul class="list-group">
-                                                <li class="list-group-item"><span class="pull-left"><strong>Les
-                                                            stages</strong></li>
+                                                <li class="list-group-item"><span class="pull-left"><strong>Les stages</strong></li>
+                                                
                                                 <li class="list-group-item">
-                                                    <label><input type="checkbox" name="mois_stage[]" value="1">
-                                                        aucun</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="2"> 1-2
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> 3-6
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> plus
-                                                    </label><br>
-
+                                                    <label><input type="radio" name="mois_stage" value="aucun" <?php echo ($row['mois_stage'] == 'aucun') ? 'checked' : ''; ?>> aucun</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="1-2 mois" <?php echo ($row['mois_stage'] == '1-2 mois') ? 'checked' : ''; ?>> 1-2 mois</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="3-6 mois" <?php echo ($row['mois_stage'] == '3-6 mois') ? 'checked' : ''; ?>> 3-6 mois</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="plus" <?php echo ($row['mois_stage'] == 'plus') ? 'checked' : ''; ?>> plus</label><br>
                                                 </li>
-                                                <li class="list-group-item"><span
-                                                        class="pull-left"><strong>Experiences</strong></li>
+                                                <li class="list-group-item"><span class="pull-left"><strong>Experiences</strong></li>
                                                 <li class="list-group-item">
-                                                    <label><input type="checkbox" name="mois_stage[]" value="1">
-                                                        aucun</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="2"> 6
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> 1
-                                                        ans</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> plus
-                                                    </label><br>
+                                                    <label><input type="radio" name="experience" value="aucun" <?php echo ($row['experience'] == 'aucun') ? 'checked' : ''; ?>> aucun</label><br>
+                                                    <label><input type="radio" name="experience" value="6 mois" <?php echo ($row['experience'] == '6 mois') ? 'checked' : ''; ?>> 6 mois</label><br>
+                                                    <label><input type="radio" name="experience" value="1 ans" <?php echo ($row['experience'] == '1 ans') ? 'checked' : ''; ?>> 1 ans</label><br>
+                                                    <label><input type="radio" name="experience" value="plus" <?php echo ($row['experience'] == 'plus') ? 'checked' : ''; ?>> plus</label><br>
                                                 </li>
 
                                                 <li class="list-group-item"><span class="pull-left"><strong>Mot de
                                                             passe</strong></li>
                                                 <li class="list-group-item">
-                                                    <label for="ancien_mot_de_passe">Ancien mot de passe</label>
-                                                    <div class="input-group">
-                                                        <input type="password" name="ancien_mot_de_passe"
-                                                            class="form-control" id="ancien_mot_de_passe"
-                                                            value="<?php echo $row['Password']; ?>">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-eye" id="toggleAncienMotDePasse"></i>
-                                                            </span>
+                                                    
+                                                        <label for="ancien_mot_de_passe">Ancien mot de passe</label>
+                                                        <div class="input-group">
+                                                            <!-- <input type="password" name="ancien_mot_de_passe"class="form-control" id="ancien_mot_de_passe" value="<?php echo $row['Password']; ?>"> -->
+                                                            <input type="password" name="ancien_mot_de_passe"class="form-control" id="ancien_mot_de_passe">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">
+                                                                    <i class="fas fa-eye" id="toggleAncienMotDePasse"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
-                                                    <div class="input-group">
-                                                        <input type="password" name="nouveau_mot_de_passe"
-                                                            class="form-control" id="nouveau_mot_de_passe">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-eye-slash"
-                                                                    id="toggleNouveauMotDePasse"></i>
-                                                            </span>
+                                                        <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+                                                        <div class="input-group">
+                                                            <input type="password" name="nouveau_mot_de_passe" class="form-control" id="nouveau_mot_de_passe">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">
+                                                                    <i class="fas fa-eye-slash"
+                                                                        id="toggleNouveauMotDePasse"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <br>
-                                                    <button type="button" class="btn btn-primary" id="updatePasswordBtn">
-                                                        <i class="fas fa-sync-alt"></i>
-                                                    </button>
+                                                        <br>
+                                                        <!-- <button type="button" class="btn btn-primary" id="updatePasswordBtn">
+                                                            <i class="fas fa-sync-alt"></i>
+                                                        </button> -->
                                                 </li>
 
 
@@ -341,7 +331,6 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                 <h4>Informations personnelles</h4>
                                             </ul>
                                             <br>
-                                            <form class="form" action="etudiant_controller.php" method="post">
                                                 <div class="form-group">
                                                     <div class="col-xs-6">
                                                         <label for="inputEmail4">Nom etudiant</label>
@@ -354,9 +343,9 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                             value="<?php echo $row['Etudiant_name']; ?>">
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <label for="tele">CIN</label>
-                                                        <input type="text" name="cin" class="form-control"
-                                                            value="<?php echo $row['Tele']; ?>">
+                                                        <label for="CIN">CIN</label>
+                                                        <input type="text" name="CIN" class="form-control"
+                                                            value="<?php echo $row['CIN']; ?>">
                                                     </div>
                                                     <div class="col-xs-6">
                                                         <label for="email">Email</label>
@@ -538,6 +527,7 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                                     class="btn btn-primary">Modifier</button>
                                             </div>
                                         </form>
+                                        <!-- end form -->
                                     </div>
                                 </div>
                             </div>
