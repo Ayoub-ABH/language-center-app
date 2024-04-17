@@ -13,15 +13,30 @@
         Interface
     </div>
 
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="superadmin.php">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+
+    </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="liste_etudiants_super.php">
-            <i class="fas fa-user-graduate"></i>
-            <span>Etudiants</span>
+            <i class="fas fa-school"></i>
+            <span>Bilker Issan Schule</span>
+        </a>
+
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="super_test.php">
+            <i class="fas fa-school"></i>
+            <span>test</span>
         </a>
 
     </li>
 
-
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

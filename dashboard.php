@@ -13,131 +13,167 @@ include('includes/navbar.php');
     <!-- Content Row -->
     <div class="row">
 
-        <!-- Total Visiteurs -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total Visiteurs</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                require 'dbconfig.php';
-                                $query = "SELECT VisiteurID FROM visiteurs ";
-                                $query_run = mysqli_query($connection, $query);
-
-                                $row = mysqli_num_rows($query_run);
-
-                                echo '<h5>' . $row . '</h5>'
-                                ?>
-
-
-                            </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+    <a href="all_visiteurs.php" style="text-decoration: none; color: inherit;">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Visiteurs
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-friends fa-2x" style="color:#c8241c;"></i>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php
+                            require 'dbconfig.php';
+                            $query = "SELECT VisiteurID FROM visiteurs ";
+                            $query_run = mysqli_query($connection, $query);
+                            $row = mysqli_num_rows($query_run);
+                            echo '<h5>' . $row . '</h5>'
+                            ?>
                         </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user-friends fa-2x" style="color:#c8241c;"></i>
                     </div>
                 </div>
             </div>
         </div>
+    </a>
+</div>
+
 
         <!-- TOTAL Etudiants -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                TOTAL Etudiants</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                require 'dbconfig.php';
-                                $query = "SELECT EtudiantID FROM etudiants ";
-                                $query_run = mysqli_query($connection, $query);
-
-                                $row = mysqli_num_rows($query_run);
-
-                                echo '<h5>' . $row . '</h5>'
-                                ?>
-
-
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-graduation-cap fa-2x" style="color:#c8241c;"></i>
-                        </div>
+    <a href="etudiants_all_classes.php" class="card border-left-success shadow h-100 py-2" style="text-decoration: none;">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        TOTAL Étudiants
                     </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php
+                        require 'dbconfig.php';
+                        $query = "SELECT COUNT(*) as total FROM etudiants";
+                        $query_run = mysqli_query($connection, $query);
+
+                        if ($query_run) {
+                            $row = mysqli_fetch_assoc($query_run)['total'];
+                            echo '<h5>' . $row . '</h5>';
+                        } else {
+                            echo "Erreur lors de l'exécution de la requête";
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-graduation-cap fa-2x" style="color:#c8241c;"></i>
                 </div>
             </div>
         </div>
+    </a>
+</div>
 
-        <!-- Total Professeurs -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total Professeurs</div>
-
-
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                require 'dbconfig.php';
-                                $query = "SELECT ProfesseurID FROM professeurs ";
-                                $query_run = mysqli_query($connection, $query);
-
-                                $row = mysqli_num_rows($query_run);
-
-                                echo '<h5>' . $row . '</h5>'
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="col-auto">
-                            <i class="fas fa-chalkboard-teacher fa-2x" style="color:#c8241c;"></i>
-                        </div>
+<!-- Total Professeurs -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <a href="all_professeurs.php" class="card border-left-info shadow h-100 py-2" style="text-decoration: none;">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Total Professeurs
                     </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php
+                        require 'dbconfig.php';
+                        $query = "SELECT ProfesseurID FROM professeurs ";
+                        $query_run = mysqli_query($connection, $query);
+
+                        $row = mysqli_num_rows($query_run);
+
+                        echo '<h5>' . $row . '</h5>'
+                        ?>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <i class="fas fa-chalkboard-teacher fa-2x" style="color:#c8241c;"></i>
                 </div>
             </div>
         </div>
+    </a>
+</div>
+
 
 
         <!-- Total Groupes -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total Groupes</div>
-
-
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php
-                                require 'dbconfig.php';
-                                $query = "SELECT GroupeID FROM groupes ";
-                                $query_run = mysqli_query($connection, $query);
-
-                                $row = mysqli_num_rows($query_run);
-
-                                echo '<h5>' . $row . '</h5>'
-                                ?>
-                            </div>
+    <div class="card border-left-info shadow h-100 py-2">
+        <a href="etudiants_all_groupes.php" style="text-decoration: none; color: inherit;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Total Groupes
                         </div>
-
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php
+                            require 'dbconfig.php';
+                            $query = "SELECT GroupeID FROM groupes ";
+                            $query_run = mysqli_query($connection, $query);
+                            $row = mysqli_num_rows($query_run);
+                            echo '<h5><a href="etudiants_all_groups.php" style="text-decoration: none; color: inherit;">' . $row . '</a></h5>';
+                            ?>
                         </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x" style="color:#c8241c;"></i>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
+    </div>
+</div>
+
+<!-- Total Étudiants Exclus -->
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-danger shadow h-100 py-2">
+        <a href="etudiants_exclus.php" style="text-decoration: none; color: inherit;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            XEtudiants
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php
+                            require 'dbconfig.php';
+                            $query = "SELECT COUNT(*) as total FROM x_etudiants";
+                            $query_run = mysqli_query($connection, $query);
+
+                            if ($query_run) {
+                                $row = mysqli_fetch_assoc($query_run)['total'];
+                                echo '<h5>' . $row . '</h5>';
+                            } else {
+                                echo "Erreur lors de l'exécution de la requête";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user-times fa-2x" style="color:#c8241c;"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
 
     </div>
 </div>
+
+
 
 
     <!-- Content Row -->

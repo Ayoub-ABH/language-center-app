@@ -194,17 +194,16 @@ include('includes/navbar_super.php');
                     {
                         "data": "Specialite",
                         "render": function (data, type, row, meta) {
-                            return moment(row.Specialite).format('DD-MM-YYYY'); 
+                            return moment(row.annee_diplome).format('DD-MM-YYYY'); 
                         }
                     },
                     {
                         "data": "annee_diplome",
                         "render": function (data, type, row, meta) {
-                            return `${row.annee_diplome}`;
+                            return `${row.Specialite}`; 
                         }
                     },
-                     
-                        // Add rendering for other columns as needed
+                
                     ]
                 });
             }

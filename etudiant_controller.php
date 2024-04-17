@@ -5,12 +5,10 @@ session_start();
 
 if (isset($_POST['modiferEtudiant'])) {
   
-
     $etudiant_id = $_SESSION['EtudiantID'];
-
     $etudiant_nom = $_POST['etudiant_nom'];
     $etudiant_prenom = $_POST['etudiant_prenom'];
-    $cin = $_POST['cin'];
+    $cin = $_POST['CIN'];
     $email = $_POST['email'];
     $tele = $_POST['tele'];
     $adresse = $_POST['adresse'];
@@ -21,28 +19,82 @@ if (isset($_POST['modiferEtudiant'])) {
     $annee_diplome = $_POST['annee_diplome'];
     $specialite = $_POST['specialite'];
     $parcours_souhaite = $_POST['parcours_souhaite'];
-    $filename = $_FILES['image']['name'];
-    $tmp_name = $_FILES['image']['tmp_name'];
-    $destination = 'upload/images/' . $filename;
-    move_uploaded_file($tmp_name, $destination);
+    $mois_stage = $_POST['mois_stage'];
+    $experience = $_POST['experience'];
+    $mot_de_passe = $_POST['ancien_mot_de_passe'];
+    $nouveau_mot_de_passe = $_POST['nouveau_mot_de_passe'];
 
-    if (!empty($etudiant_nom) && !empty($etudiant_prenom) && !empty($cin) && !empty($email) && !empty($tele) && !empty($adresse)) {
+    if (!empty($mot_de_passe) && !empty($nouveau_mot_de_passe)) {
+        $query = "SELECT * FROM etudiants WHERE EtudiantID = $etudiant_id AND Password = '$mot_de_passe'";
+        $query_run = mysqli_query($connection, $query);
+
+        if (mysqli_num_rows($query_run) > 0) {
+            $query = "UPDATE etudiants SET Password = '$nouveau_mot_de_passe' WHERE EtudiantID = $etudiant_id";
+            $query_run = mysqli_query($connection, $query);
+        } else {
+            $_SESSION['status'] = "Mot de passe incorrect";
+            header('location: etudiant_espace.php');
+            exit;
+        }
+    }
+
+    $filename = $_FILES['image']['name'];
+
+    if (!empty($filename)) {
+        $tmp_name = $_FILES['image']['tmp_name'];
+        $destination = 'upload/images/' . $filename;
+        $imageFileType = strtolower(pathinfo($destination, PATHINFO_EXTENSION));
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            $_SESSION['status'] = "Le fichier doit être une image";
+            header('location: etudiant_espace.php');
+            exit;
+        } else if ($_FILES['image']['size'] > 6 * 1024 * 1024) {
+            $_SESSION['status'] = "Le fichier doit être moins de 6 Mo";
+            header('location: etudiant_espace.php');
+            exit;
+        } else {
+            // Vérification si le fichier existe déjà
+            if (!file_exists($destination)) {
+                // Déplacer le fichier vers sa destination avec le nouveau nom
+                move_uploaded_file($tmp_name, $destination);
+                $query = "UPDATE etudiants SET Image = '$filename' WHERE EtudiantID = $etudiant_id";
+                $query_run = mysqli_query($connection, $query);
+            } else {
+                // Renommer le fichier avec un nom unique
+                $new_filename = uniqid() . '_' . $filename;
+                $destination = 'upload/images/' . $new_filename;
+                move_uploaded_file($tmp_name, $destination);
+                $query = "UPDATE etudiants SET Image = '$new_filename' WHERE EtudiantID = $etudiant_id";
+                $query_run = mysqli_query($connection, $query);
+            }
+        }
+    }
+
+    //print all inputs
+    // foreach ($_POST as $key => $value) {
+    //     echo $key . " : " . $value . "<br>";
+    // }
+
+    if (!empty($etudiant_nom) && !empty($etudiant_prenom) && !empty($cin) && !empty($email) && !empty($tele) && !empty($adresse)
+        && !empty($niveau_etude) && !empty($serie_bac) && !empty($annee_bac) && !empty($intitule_diplome) && !empty($annee_diplome) 
+        && !empty($specialite) && !empty($parcours_souhaite) && !empty($mois_stage) && !empty($experience)){
 
         $query = "UPDATE etudiants SET 
-            Etudiant_name = '$etudiant_nom', 
-            Etudiant_prenom = '$etudiant_prenom', 
-            CIN = '$cin', 
-            Email = '$email', 
-            Tele = '$tele', 
-            Adresse = '$adresse', 
-            niveau_etude = '$niveau_etude', 
-            serie_bac = '$serie_bac', 
-            annee_bac = '$annee_bac', 
-            intitule_diplome = '$intitule_diplome', 
-            annee_diplome = '$annee_diplome', 
+            Etudiant_name = '$etudiant_nom',
+            Etudiant_prenom = '$etudiant_prenom',
+            CIN = '$cin',
+            Email = '$email',
+            Tele = '$tele',
+            Adresse = '$adresse',
+            niveau_etude = '$niveau_etude',
+            serie_bac = '$serie_bac',
+            annee_bac = '$annee_bac',
+            intitule_diplome = '$intitule_diplome',
+            annee_diplome = '$annee_diplome',
             Specialite = '$specialite',
-            Parcours_souhaite = '$parcours_souhaite',
-            Image = '$filename'
+            parcours_souhaite = '$parcours_souhaite',
+            mois_stage = '$mois_stage',
+            experience = '$experience'
             WHERE EtudiantID = $etudiant_id";
 
         $query_run = mysqli_query($connection, $query);
@@ -59,6 +111,7 @@ if (isset($_POST['modiferEtudiant'])) {
         header('location: etudiant_espace.php');
     }
 }
+
 
 
 

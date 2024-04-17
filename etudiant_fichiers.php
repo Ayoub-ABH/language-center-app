@@ -2,7 +2,7 @@
 session_start();
 include ('dbconfig.php');
 // include('security.php');
-if (!isset ($_SESSION['EtudiantID'])) {
+if (!isset($_SESSION['EtudiantID'])) {
     header('location: etudiant_log.php');
 }
 ?>
@@ -45,9 +45,7 @@ if (!isset ($_SESSION['EtudiantID'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="" data-toggle="collapse"
-                data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="etudiant_espace.php">
                 <div class="sidebar-brand-text mx-3">BILKER</div>
             </a>
 
@@ -164,8 +162,19 @@ if (!isset ($_SESSION['EtudiantID'])) {
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php echo $_SESSION['Etudiant_name']; ?>
 
-                                </span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                    <?php
+                                    $image_base_path = 'upload/images/';
+                                    $query_image = "SELECT Image FROM etudiants WHERE EtudiantID = {$_SESSION['EtudiantID']}";
+                                    $result_image = mysqli_query($connection, $query_image);
+                                    if ($result_image && mysqli_num_rows($result_image) > 0) {
+                                        $row_image = mysqli_fetch_assoc($result_image);
+                                        $image_name = $row_image['Image'];
+                                        $image_path = $image_base_path . $image_name;
+                                    } else {
+                                        $image_path = 'img/undraw_profile.svg';
+                                    }
+                                    ?>
+                                    <img class="img-profile rounded-circle" src="<?php echo $image_path; ?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -218,14 +227,14 @@ if (!isset ($_SESSION['EtudiantID'])) {
                         <div class="card-header py-3">
                             <?php
 
-                            if (isset ($_SESSION['success']) && $_SESSION['success'] != '') {
+                            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
                                 echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
                                 <meta http-equiv="refresh" content="5; url = etudiant_fichiers.php" />
                                 ';
                                 unset($_SESSION['success']);
                             }
 
-                            if (isset ($_SESSION['status']) && $_SESSION['status'] != '') {
+                            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                 echo '<h6 class="alert alert-danger" role="alert"> ' . $_SESSION['status'] . ' </h6>';
                                 unset($_SESSION['status']);
                             }

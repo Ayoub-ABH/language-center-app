@@ -48,7 +48,7 @@
     <div id="collapseGroupes" class="collapse" aria-labelledby="headingGroupes" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="groupes.php">Ajouter Groupes</a>
-            <a class="collapse-item" href="liste_groupes.php">liste groupes</a>
+            <a class="collapse-item" href="etudiants_all_groupes.php">liste groupes</a>
         </div>
     </div>
 </li>
@@ -67,7 +67,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEtudiants"
         aria-expanded="true" aria-controls="collapseEtudiants">
         <i class="fas fa-user-graduate"></i>
-        <span>Étudiants</span>
+        <span>Etudiants</span>
     </a>
     <div id="collapseEtudiants" class="collapse" aria-labelledby="headingEtudiants" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -77,7 +77,19 @@
     </div>
 </li>
 
-
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseXEtudiants"
+        aria-expanded="true" aria-controls="collapseXEtudiants">
+        <i class="fas fa-user-graduate"></i>
+        <span>XEtudiants</span>
+    </a>
+    <div id="collapseXEtudiants" class="collapse" aria-labelledby="headingXEtudiants" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="x_etudiants.php">Ajouter Etudiants</a>
+            <a class="collapse-item" href="liste_x_etudiants.php">liste Etudiants</a>
+        </div>
+    </div>
+</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbsence"
