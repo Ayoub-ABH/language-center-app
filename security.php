@@ -15,6 +15,7 @@ if(!(isset($_SESSION['username'])) && !(isset($_SESSION['userType']))){
 }
 
 
+
 // function secUser(){
 //     if($_SESSION['userType'] == 'admin' ){
 //         header('location: dashboard.php');

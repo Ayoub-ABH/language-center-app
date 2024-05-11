@@ -70,12 +70,12 @@ include('includes/navbar.php');
                                     <td><?php echo $row['Adresse']; ?></td>
                                     <td><?php echo $row['Date_inscription']; ?></td>
                                     <td><?php echo $row['NiveauID']; ?></td>
-                                    <td><?php echo '<img src="upload/images/' . ($row['Image'] ? $row['Image'] : 'blanc.png') . '" width="100px;" height="100px;" alt="Image">'; ?></td>
                                     <td><?php echo $row['certifie']; ?></td> 
+                                    <td><?php echo '<img src="upload/images_etudiants_exclus/' . ($row['Image'] ? $row['Image'] : 'blanc.png') . '" width="100px;" height="100px;" alt="Image">'; ?></td>
                                     <td>
                                         <form action="x_etudiant_edit.php" method="post">
                                             <input type="hidden" name="edit_id" value="<?php echo $row['ID']; ?>">
-                                            <button type="submit" name="edit_btn" class="btn btn-success">Éditer</button>
+                                            <button type="submit" name="editx_btn" class="btn btn-success">Éditer</button>
                                         </form>
                                     </td>
                                     <td>
@@ -96,8 +96,8 @@ include('includes/navbar.php');
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                                                         <form action="code.php" method="post">
-                                                            <input type="hidden" name="delete_id" value="<?php echo $row['ID']; ?>">
-                                                            <button type="submit" name="delete_btn" class="btn btn-danger">Supprimer</button>
+                                                            <input type="hidden" name="deletex_id" value="<?php echo $row['ID']; ?>">
+                                                            <button type="submit" name="deletex_btn" class="btn btn-danger">Supprimer</button>
                                                         </form>
                                                     </div>
                                                 </div>

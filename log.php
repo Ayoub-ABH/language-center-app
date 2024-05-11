@@ -41,6 +41,9 @@
             if (userType === "student") {
                 window.location.href = "etudiant_log.php"; 
             }
+            if (userType === "teacher") {
+                window.location.href = "prof_log.php"; 
+            }
         });
 
         document.getElementById("login").addEventListener("click", function () {

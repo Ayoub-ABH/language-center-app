@@ -50,7 +50,7 @@ include 'includes/navbar_super.php';
                             ?>
                         </select>
                     </div>
-                    <button type="submit" name="Afficher_etudiants" class="btn btn-primary">Filtrer</button>
+                    <button  id="btn-filtrer" type="submit" name="Afficher_etudiants" class="btn btn-primary">Filtrer</button>
                 </form>
                 <!-- Fin du formulaire de filtrage -->
             </div>

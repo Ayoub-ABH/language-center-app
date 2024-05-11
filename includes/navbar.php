@@ -99,7 +99,7 @@
     </a>
     <div id="collapseAbsence" class="collapse" aria-labelledby="headingAbsence" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="list_groupe2.php">Ajouter Absence</a>
+            <a class="collapse-item" href="absence.php">Ajouter Absence</a>
             <a class="collapse-item" href="liste_absence.php">liste Absence</a>
         </div>
     </div>
@@ -126,6 +126,13 @@
 
 <!-- Divider -->
 <hr class="sidebar-divider">
+
+<!-- Nav Item - Charts -->
+<li class="nav-item">
+    <a class="nav-link" href="documents.php">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Documents</span></a>
+</li>
 
 
 <!-- Nav Item - Charts -->

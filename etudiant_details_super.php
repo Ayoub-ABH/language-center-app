@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="input-address">Address</label>
                                         <input id="input-address" class="form-control form-control-alternative"
-                                            placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                                            placeholder="Home Address" value="<?php echo $rowStudent['Adresse'] ?>" 
                                             type="text" disabled>
                                     </div>
                                 </div>
@@ -97,25 +97,12 @@ if (isset($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-md-12">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="input-city">City</label>
-                                        <input type="text" id="input-city" class="form-control form-control-alternative"
-                                            placeholder="City" value="New York" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group focused">
-                                        <label class="form-control-label" for="input-country">Country</label>
-                                        <input type="text" id="input-country" class="form-control form-control-alternative"
-                                            placeholder="Country" value="United States" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-country">Postal code</label>
-                                        <input type="number" id="input-postal-code"
-                                            class="form-control form-control-alternative" placeholder="Postal code" disabled>
+                                        <label class="form-control-label" for="input-tele">Telephone</label>
+                                        <input id="input-tele" class="form-control form-control-alternative"
+                                            placeholder="tele" value="<?php echo $rowStudent['Tele'] ?>" type="text"
+                                            disabled>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +150,16 @@ if (isset($_GET['id'])) {
                                     </div>
                                 </div>
 
-
+<div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-emil">Specialite</label>
+                                        <input id="input-email" class="form-control form-control-alternative"
+                                            placeholder="specialite" value="<?php echo $rowStudent['Specialite'] ?>" type="text"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group focused">

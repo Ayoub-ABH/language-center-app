@@ -15,20 +15,18 @@ include('includes/navbar.php');
         </div>
         <div class="card-body">
 
-            <?php
+        <?php
+      if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+        echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
+                <meta http-equiv="refresh" content="5; url = liste_absence.php" />';
+        unset($_SESSION['success']);
+      }
 
-            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-                echo '<h2 class="bg-primary text-white"> ' . $_SESSION['success'] . ' </h2>
-                    <meta http-equiv="refresh" content="5; url = liste_absence.php" />';
-                unset($_SESSION['success']);
-            }
-
-            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                echo '<h2 class="bg-danger  text-white"> ' . $_SESSION['status'] . ' </h2>';
-                unset($_SESSION['status']);
-            }
-
-            ?>
+      if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+        echo '<h6 class="alert alert-danger" role="alert"> ' . $_SESSION['status'] . ' </h6>';
+        unset($_SESSION['status']);
+      }
+      ?>
             <div class="table-responsive">
 
                  <?php

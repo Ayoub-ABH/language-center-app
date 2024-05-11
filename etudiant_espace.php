@@ -2,7 +2,7 @@
 session_start();
 include ('dbconfig.php');
 // include('security.php');
-if (!isset($_SESSION['EtudiantID'])) {
+if (!isset ($_SESSION['EtudiantID'])) {
     header('location: etudiant_log.php');
 }
 ?>
@@ -42,10 +42,11 @@ if (!isset($_SESSION['EtudiantID'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="etudiant_espace.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="" data-toggle="collapse"
+                data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+
                 <div class="sidebar-brand-text mx-3">BILKER</div>
             </a>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -124,7 +125,7 @@ if (!isset($_SESSION['EtudiantID'])) {
 
 
 
-
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -225,14 +226,14 @@ if (!isset($_SESSION['EtudiantID'])) {
                         <div class="card-header py-3">
                             <?php
 
-                            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+                            if (isset ($_SESSION['success']) && $_SESSION['success'] != '') {
                                 echo '<h6 class="alert alert-success" role="alert"> ' . $_SESSION['success'] . ' </h6>
                                 <meta http-equiv="refresh" content="5; url = etudiant_espace.php" />
                                 ';
                                 unset($_SESSION['success']);
                             }
 
-                            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+                            if (isset ($_SESSION['status']) && $_SESSION['status'] != '') {
                                 echo '<h6 class="alert alert-danger" role="alert"> ' . $_SESSION['status'] . ' </h6>';
                                 unset($_SESSION['status']);
                             }
@@ -262,84 +263,74 @@ if (!isset($_SESSION['EtudiantID'])) {
 
                                     <div class="row">
                                         <div class="col-sm-3">
+
+                                            <!-- form -->
+                                            <form class="form" action="etudiant_controller.php" method="post">
+
                                             <div class="text-center">
-                                                <img src="upload/images/<?php echo $row['Image']; ?>"
-                                                    class="avatar img-circle img-thumbnail" alt="avatar"
-                                                    style="width: 250px; height: 225px;">
+                                                <img src="upload/images/<?php echo $row['Image']; ?>" class="avatar img-circle img-thumbnail" alt="avatar" style="width: 250px; height: 225px;">
                                                 <h6>
                                                     <?php echo $row['Etudiant_name'] . ' ' . $row['Etudiant_prenom']; ?>
                                                 </h6>
-                                                <input type="file" name="image"
-                                                    class="text-center center-block file-upload">
+                                                <input type="file" name="image" class="text-center center-block file-upload">
                                             </div>
-
+                                            
                                             <ul class="list-group">
-                                                <li class="list-group-item"><span class="pull-left"><strong>Les
-                                                            stages</strong></li>
+                                                <li class="list-group-item"><span class="pull-left"><strong>Les stages</strong></li>
+                                                
                                                 <li class="list-group-item">
-                                                    <label><input type="checkbox" name="mois_stage[]" value="1">
-                                                        aucun</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="2"> 1-2
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> 3-6
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> plus
-                                                    </label><br>
-
+                                                    <label><input type="radio" name="mois_stage" value="aucun" <?php echo ($row['mois_stage'] == 'aucun') ? 'checked' : ''; ?>> aucun</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="1-2 mois" <?php echo ($row['mois_stage'] == '1-2 mois') ? 'checked' : ''; ?>> 1-2 mois</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="3-6 mois" <?php echo ($row['mois_stage'] == '3-6 mois') ? 'checked' : ''; ?>> 3-6 mois</label><br>
+                                                    <label><input type="radio" name="mois_stage" value="plus" <?php echo ($row['mois_stage'] == 'plus') ? 'checked' : ''; ?>> plus</label><br>
                                                 </li>
-                                                <li class="list-group-item"><span
-                                                        class="pull-left"><strong>Experiences</strong></li>
+                                                <li class="list-group-item"><span class="pull-left"><strong>Experiences</strong></li>
                                                 <li class="list-group-item">
-                                                    <label><input type="checkbox" name="mois_stage[]" value="1">
-                                                        aucun</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="2"> 6
-                                                        mois</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> 1
-                                                        ans</label><br>
-                                                    <label><input type="checkbox" name="mois_stage[]" value="3"> plus
-                                                    </label><br>
+                                                    <label><input type="radio" name="experience" value="aucun" <?php echo ($row['experience'] == 'aucun') ? 'checked' : ''; ?>> aucun</label><br>
+                                                    <label><input type="radio" name="experience" value="6 mois" <?php echo ($row['experience'] == '6 mois') ? 'checked' : ''; ?>> 6 mois</label><br>
+                                                    <label><input type="radio" name="experience" value="1 ans" <?php echo ($row['experience'] == '1 ans') ? 'checked' : ''; ?>> 1 ans</label><br>
+                                                    <label><input type="radio" name="experience" value="plus" <?php echo ($row['experience'] == 'plus') ? 'checked' : ''; ?>> plus</label><br>
                                                 </li>
 
                                                 <li class="list-group-item"><span class="pull-left"><strong>Mot de
                                                             passe</strong></li>
                                                 <li class="list-group-item">
-                                                    <label for="ancien_mot_de_passe">Ancien mot de passe</label>
-                                                    <div class="input-group">
-                                                        <input type="password" name="ancien_mot_de_passe"
-                                                            class="form-control" id="ancien_mot_de_passe"
-                                                            value="<?php echo $row['Password']; ?>">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-eye" id="toggleAncienMotDePasse"></i>
-                                                            </span>
+                                                    
+                                                        <label for="ancien_mot_de_passe">Ancien mot de passe</label>
+                                                        <div class="input-group">
+                                                            <!-- <input type="password" name="ancien_mot_de_passe"class="form-control" id="ancien_mot_de_passe" value="<?php echo $row['Password']; ?>"> -->
+                                                            <input type="password" name="ancien_mot_de_passe"class="form-control" id="ancien_mot_de_passe">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">
+                                                                    <i class="fas fa-eye" id="toggleAncienMotDePasse"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
-                                                    <div class="input-group">
-                                                        <input type="password" name="nouveau_mot_de_passe"
-                                                            class="form-control" id="nouveau_mot_de_passe">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">
-                                                                <i class="fas fa-eye-slash"
-                                                                    id="toggleNouveauMotDePasse"></i>
-                                                            </span>
+                                                        <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+                                                        <div class="input-group">
+                                                            <input type="password" name="nouveau_mot_de_passe" class="form-control" id="nouveau_mot_de_passe">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">
+                                                                    <i class="fas fa-eye-slash"
+                                                                        id="toggleNouveauMotDePasse"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <br>
-                                                    <button type="button" class="btn btn-primary" id="updatePasswordBtn">
-                                                        <i class="fas fa-sync-alt"></i>
-                                                    </button>
+                                                        <br>
+                                                        <!-- <button type="button" class="btn btn-primary" id="updatePasswordBtn">
+                                                            <i class="fas fa-sync-alt"></i>
+                                                        </button> -->
                                                 </li>
 
 
-                                                </ul>
+                                            </ul>
                                         </div>
+
                                         <div class="col-sm-9">
                                             <ul class="nav nav-tabs">
                                                 <h4>Informations personnelles</h4>
                                             </ul>
                                             <br>
-                                            <form class="form" action="etudiant_controller.php" method="post">
                                                 <div class="form-group">
                                                     <div class="col-xs-6">
                                                         <label for="inputEmail4">Nom etudiant</label>
@@ -349,12 +340,12 @@ if (!isset($_SESSION['EtudiantID'])) {
                                                     <div class="col-xs-6">
                                                         <label for="inputEmail4">Prenom etudiant</label>
                                                         <input type="text" name="etudiant_prenom" class="form-control"
-                                                            value="<?php echo $row['Etudiant_name']; ?>">
+                                                            value="<?php echo $row['Etudiant_prenom']; ?>">
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <label for="tele">CIN</label>
-                                                        <input type="text" name="cin" class="form-control"
-                                                            value="<?php echo $row['Tele']; ?>">
+                                                        <label for="CIN">CIN</label>
+                                                        <input type="text" name="CIN" class="form-control"
+                                                            value="<?php echo $row['CIN']; ?>">
                                                     </div>
                                                     <div class="col-xs-6">
                                                         <label for="email">Email</label>
@@ -372,169 +363,201 @@ if (!isset($_SESSION['EtudiantID'])) {
                                                             value="<?php echo $row['Adresse']; ?>">
                                                     </div>
 
-                                                <br>
-                                                <ul class="nav nav-tabs">
-                                                    <h4>Autres Informations </h4>
-                                                </ul>
-                                                <br>
+                                                    <br>
+                                                    <ul class="nav nav-tabs">
+                                                        <h4>Autres Informations </h4>
+                                                    </ul>
+                                                    <br>
 
-                                                <div class="col-xs-6">
-                                                    <label for="niveau_etude">Niveau d'étude</label>
-                                                    <select name="niveau_etude" class="form-control">
-                                                        <option value="niveau-bac" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-bac')
-                                                            echo 'selected'; ?>>
-                                                            Niveau Bac</option>
-                                                        <option value="bac" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac')
-                                                            echo 'selected'; ?>>Bac
-                                                        </option>
-                                                        <option value="bac+1" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+1')
-                                                            echo 'selected'; ?>>Bac +1
-                                                        </option>
-                                                        <option value="bac+2" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+2')
-                                                            echo 'selected'; ?>>Bac +2
-                                                        </option>
-                                                        <option value="bac+3" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'bac+3')
-                                                            echo 'selected'; ?>>Bac +3
-                                                        </option>
-                                                        <option value="plus" <?php if (isset($row['niveau_etude']) && $row['niveau_etude'] == 'plus')
-                                                            echo 'selected'; ?>>Plus
-                                                        </option>
-                                                    </select>
-                                                </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="niveau_etude">Niveau d'étude</label>
+                                                        <select name="niveau_etude" class="form-control">
+                                                        <option value="aucun" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'aucun')
+                                                                echo 'selected'; ?>>
+                                                                Aucun</option>
+                                                        <option value="niveau-primaire" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-primaire')
+                                                                echo 'selected'; ?>>
+                                                                Niveau Primaire</option>
+                                                            <option value="niveau-college" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-college')
+                                                                echo 'selected'; ?>>Niveau Collège
+                                                            </option>
+                                                            <option value="niveau-bac" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'niveau-bac')
+                                                                echo 'selected'; ?>>
+                                                                Niveau Bac</option>
+                                                            <option value="bac" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'bac')
+                                                                echo 'selected'; ?>>Bac
+                                                            </option>
+                                                            <option value="bac+1" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'bac+1')
+                                                                echo 'selected'; ?>>Bac +1
+                                                            </option>
+                                                            <option value="bac+2" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'bac+2')
+                                                                echo 'selected'; ?>>Bac +2
+                                                            </option>
+                                                            <option value="bac+3" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'bac+3')
+                                                                echo 'selected'; ?>>Bac +3
+                                                            </option>
+                                                            <option value="plus" <?php if (isset ($row['niveau_etude']) && $row['niveau_etude'] == 'plus')
+                                                                echo 'selected'; ?>>Plus
+                                                            </option>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="col-xs-6">
-                                                    <label for="serie_bac">Série du bac</label>
-                                                    <select name="serie_bac" class="form-control">
-                                                        <option value="sciences_agronomiques" <?php if ($row['serie_bac'] == 'sciences_agronomiques')
-                                                            echo 'selected'; ?>>BAC SCIENCES AGRONOMIQUES</option>
-                                                        <option value="sciences_economiques" <?php if ($row['serie_bac'] == 'sciences_economiques')
-                                                            echo 'selected'; ?>>BAC SCIENCES ÉCONOMIQUES</option>
-                                                        <option value="techniques_gestion_comptabilite" <?php if ($row['serie_bac'] == 'techniques_gestion_comptabilite')
-                                                            echo 'selected'; ?>>BAC TECHNIQUES DE GESTION ET
-                                                            COMPTABILITÉ</option>
-                                                        <option value="svt" <?php if ($row['serie_bac'] == 'svt')
-                                                            echo 'selected'; ?>>SVT BAC</option>
-                                                        <option value="lettres" <?php if ($row['serie_bac'] == 'lettres')
-                                                            echo 'selected'; ?>>BAC LETTRES</option>
-                                                        <option value="sciences_mathematiques_a" <?php if ($row['serie_bac'] == 'sciences_mathematiques_a')
-                                                            echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES A</option>
-                                                        <option value="sciences_humaines" <?php if ($row['serie_bac'] == 'sciences_humaines')
-                                                            echo 'selected'; ?>>SCIENCES HUMAINES</option>
-                                                        <option value="sciences_mathematiques_b" <?php if ($row['serie_bac'] == 'sciences_mathematiques_b')
-                                                            echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES B</option>
-                                                        <option value="sciences_chariaa" <?php if ($row['serie_bac'] == 'sciences_chariaa')
-                                                            echo 'selected'; ?>>SCIENCES DE LA CHARIAA</option>
-                                                        <option value="langue_arabe" <?php if ($row['serie_bac'] == 'langue_arabe')
-                                                            echo 'selected'; ?>>
-                                                            LANGUE ARABE</option>
-                                                        <option value="arts_appliques" <?php if ($row['serie_bac'] == 'arts_appliques')
-                                                            echo 'selected'; ?>>
-                                                            ARTS APPLIQUÉS</option>
-                                                        <option value="sciences_physiques" <?php if ($row['serie_bac'] == 'sciences_physiques')
-                                                            echo 'selected'; ?>>BAC SCIENCES PHYSIQUES</option>
-                                                        <option value="sciences_technologies_electriques" <?php if ($row['serie_bac'] == 'sciences_technologies_electriques')
-                                                            echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES ÉLECTRIQUES
-                                                        </option>
-                                                        <option value="sciences_technologies_mecaniques" <?php if ($row['serie_bac'] == 'sciences_technologies_mecaniques')
-                                                            echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES MÉCANIQUES
-                                                        </option>
-                                                    </select>
-                                                </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="serie_bac">Série du bac</label>
+                                                        <select name="serie_bac" class="form-control">
+                                                        <option value="aucun" <?php if ($row['serie_bac'] == 'aucun')
+                                                                echo 'selected'; ?>>Aucun</option>
+                                                            <option value="sciences_agronomiques" <?php if ($row['serie_bac'] == 'sciences_agronomiques')
+                                                                echo 'selected'; ?>>BAC SCIENCES AGRONOMIQUES</option>
+                                                            <option value="sciences_economiques" <?php if ($row['serie_bac'] == 'sciences_economiques')
+                                                                echo 'selected'; ?>>BAC SCIENCES ÉCONOMIQUES</option>
+                                                            <option value="techniques_gestion_comptabilite" <?php if ($row['serie_bac'] == 'techniques_gestion_comptabilite')
+                                                                echo 'selected'; ?>>BAC TECHNIQUES DE GESTION ET
+                                                                COMPTABILITÉ</option>
+                                                            <option value="svt" <?php if ($row['serie_bac'] == 'svt')
+                                                                echo 'selected'; ?>>SVT BAC</option>
+                                                            <option value="lettres" <?php if ($row['serie_bac'] == 'lettres')
+                                                                echo 'selected'; ?>>BAC LETTRES</option>
+                                                            <option value="sciences_mathematiques_a" <?php if ($row['serie_bac'] == 'sciences_mathematiques_a')
+                                                                echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES A</option>
+                                                            <option value="sciences_humaines" <?php if ($row['serie_bac'] == 'sciences_humaines')
+                                                                echo 'selected'; ?>>SCIENCES HUMAINES</option>
+                                                            <option value="sciences_mathematiques_b" <?php if ($row['serie_bac'] == 'sciences_mathematiques_b')
+                                                                echo 'selected'; ?>>BAC SCIENCES MATHÉMATIQUES B</option>
+                                                            <option value="sciences_chariaa" <?php if ($row['serie_bac'] == 'sciences_chariaa')
+                                                                echo 'selected'; ?>>SCIENCES DE LA CHARIAA</option>
+                                                            <option value="langue_arabe" <?php if ($row['serie_bac'] == 'langue_arabe')
+                                                                echo 'selected'; ?>>
+                                                                LANGUE ARABE</option>
+                                                            <option value="arts_appliques" <?php if ($row['serie_bac'] == 'arts_appliques')
+                                                                echo 'selected'; ?>>
+                                                                ARTS APPLIQUÉS</option>
+                                                            <option value="sciences_physiques" <?php if ($row['serie_bac'] == 'sciences_physiques')
+                                                                echo 'selected'; ?>>BAC SCIENCES PHYSIQUES</option>
+                                                            <option value="sciences_technologies_electriques" <?php if ($row['serie_bac'] == 'sciences_technologies_electriques')
+                                                                echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES ÉLECTRIQUES
+                                                            </option>
+                                                            <option value="sciences_technologies_mecaniques" <?php if ($row['serie_bac'] == 'sciences_technologies_mecaniques')
+                                                                echo 'selected'; ?>>BAC SCIENCES ET TECHNOLOGIES MÉCANIQUES
+                                                            </option>
+                                                        </select>
+                                                    </div>
 
 
-                                                <div class="col-xs-6">
-                                                    <label for="annee_bac">Date d'obtention du bac</label>
-                                                    <input type="date" name="annee_bac" class="form-control"
-                                                        value="<?php echo isset($row['annee_bac']) ? $row['annee_bac'] : ''; ?>">
-                                                </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="annee_bac">Date d'obtention du bac</label>
+                                                        <input type="date" name="annee_bac" class="form-control"
+                                                            value="<?php echo isset ($row['annee_bac']) ? $row['annee_bac'] : ''; ?>">
+                                                    </div>
 
-                                                <div class="col-xs-6">
-                                                    <label for="intitule_diplome">Intitulé du diplôme</label>
-                                                    <input type="text" name="intitule_diplome" class="form-control"
-                                                        value="<?php echo $row['intitule_diplome']; ?>">
-                                                </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="intitule_diplome">Intitulé du diplôme</label>
+                                                        <input type="text" name="intitule_diplome" class="form-control"
+                                                            value="<?php echo $row['intitule_diplome']; ?>">
+                                                    </div>
 
-                                                <div class="col-xs-6">
-                                                    <label for="annee_diplome">Année du diplôme</label>
-                                                    <input type="date" name="annee_diplome" class="form-control"
-                                                        value="<?php echo $row['annee_diplome']; ?>">
-                                                </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="annee_diplome">Année du diplôme</label>
+                                                        <input type="date" name="annee_diplome" class="form-control"
+                                                            value="<?php echo $row['annee_diplome']; ?>">
+                                                    </div>
 
-                                                <div class="col-xs-6">
-                                                    <label for="specialite">Spécialité</label>
-                                                    <select name="specialite" class="form-control">
-                                                        <?php
-                                                        $specialites = [
-                                                            "Économie",
-                                                            "Entrepreneuriat",
-                                                            "Digital",
-                                                            "Mécanique",
-                                                            "Electricité"
-                                                            ,
-                                                            "Audiovisuel et Infographie",
-                                                            "Gestion des entreprises",
-                                                            "Développement Durable",
-                                                            "Administration"
-                                                            ,
-                                                            "Information et Multimédia",
-                                                            "Management",
-                                                            "Finance",
-                                                            "Sciences politiques",
-                                                            "Logistique",
-                                                            "Psychologie",
-                                                            "Immobilier",
-                                                            "Enseignement",
-                                                            "Langues",
-                                                            "Banque assurance",
-                                                            "Médical",
-                                                            "Commerce distribution",
-                                                            "Droit",
-                                                            "Ressources humaines",
-                                                            "Biologie chimie pharmacie",
-                                                            "Journalisme",
-                                                            "Aéronautique et espace",
-                                                            "Tourisme",
-                                                            "Bâtiment - Travaux publics",
-                                                            "Agroalimentaire et alimentaire",
-                                                            "Artisanat - métiers d'art",
-                                                            "Sport",
-                                                            "Communication",
-                                                            "Audit comptabilité gestion",
-                                                            "Sciences humaines",
-                                                            "Marketing",
-                                                            "Environnement",
-                                                            "Industrie",
-                                                            "Informatique télécom web",
-                                                            "Bâtiment génie civil"
-                                                        ];
-                                                        foreach ($specialites as $specialite) {
-                                                            // Vérifier si la spécialité correspond à celle récupérée de la base de données
-                                                            $selected = ($row['Specialite'] == $specialite) ? 'selected' : '';
-                                                            echo "<option value=\"$specialite\" $selected>$specialite</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <label for="parcours_souhaite">Parcours souhaite </label>
-                                                    <select name="parcours_souhaite" class="form-control">
-                                                        <option value="travail" <?php if ($row['parcours_souhaite'] == 'travail')
-                                                            echo 'selected'; ?>>Travail</option>
-                                                        <option value="etude" <?php if ($row['parcours_souhaite'] == 'etude')
-                                                            echo 'selected'; ?>>Etude</option>
-                                                        <option value="formation" <?php if ($row['parcours_souhaite'] == 'formation')
-                                                            echo 'selected'; ?>>Formation</option>
-                                                    </select>
-                                                </div><br>
+                                                    <div class="col-xs-6">
+                                                        <label for="specialite">Spécialité</label>
+                                                        <select name="specialite" class="form-control">
+                                                            <?php
+                                                            $specialites = [
+                                                                 "aucun",
+                                                                "Économie",
+                                                                "Entrepreneuriat",
+                                                                "Digital",
+                                                                "Mécanique",
+                                                                "Electricité"
+                                                                ,
+                                                                "Audiovisuel et Infographie",
+                                                                "Gestion des entreprises",
+                                                                "Développement Durable",
+                                                                "Administration"
+                                                                ,
+                                                                "Information et Multimédia",
+                                                                "Management",
+                                                                "Finance",
+                                                                "Sciences politiques",
+                                                                "Logistique",
+                                                                "Psychologie",
+                                                                "Immobilier",
+                                                                "Enseignement",
+                                                                "Langues",
+                                                                "Banque assurance",
+                                                                "Médical",
+                                                                "Commerce distribution",
+                                                                "Droit",
+                                                                "Ressources humaines",
+                                                                "Biologie chimie pharmacie",
+                                                                "Journalisme",
+                                                                "Aéronautique et espace",
+                                                                "Tourisme",
+                                                                "Bâtiment - Travaux publics",
+                                                                "Agroalimentaire et alimentaire",
+                                                                "Artisanat - métiers d'art",
+                                                                "Sport",
+                                                                "Communication",
+                                                                "Audit comptabilité gestion",
+                                                                "Sciences humaines",
+                                                                "Marketing",
+                                                                "Environnement",
+                                                                "Industrie",
+                                                                "Informatique télécom web",
+                                                                "Infirmier Polyvalent",
+                                                                "Assistant Médical",
+                                                                "Infirmier de Bloc Opératoire",
+                                                                "Aide-soignant",
+                                                                "Infirmier Anesthésiste",
+                                                                "Radiologie",
+                                                                "Infirmier coordinateur",
+                                                                "Infirmier Puériculteur",
+                                                                "Menuisier/Charpentier",
+                                                                "Peintre",
+                                                                "Forgeron",
+                                                                "Cuisinier",
+                                                                "Maçon",
+                                                                "Tailleur",
+                                                                "Coiffeur",
+                                                                "Plombier",
+                                                                "Jardinier",
+                                                                "Graphiste",
+                                                                "Technicien en climatisation et réfrigération",
+                                                                "Technicien en réparation électronique",
+                                                                "Technicien en Maintenance Automobile"
 
-                                                <div class="form-group">
-                                                    <label> Motivation </label>
-                                                    <textarea name="motivation" class="form-control"
-                                                        placeholder="Entrer la motivation"
-                                                        maxlength="255"><?php echo $row['motivation'] ?></textarea>
-                                                </div>
 
-                                                <?php
+                                                            ];
+
+                                                            
+                                                            foreach ($specialites as $specialite) {
+                                                                // Vérifier si la spécialité correspond à celle récupérée de la base de données
+                                                                $selected = ($row['Specialite'] == $specialite) ? 'selected' : '';
+                                                                echo "<option value=\"$specialite\" $selected>$specialite</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <label for="parcours_souhaite">Parcours souhaite </label>
+                                                        <select name="parcours_souhaite" class="form-control">
+                                                        <option value="aucun" <?php if ($row['parcours_souhaite'] == 'aucun')
+                                                                echo 'selected'; ?>>Aucun</option>
+                                                            <option value="travail" <?php if ($row['parcours_souhaite'] == 'travail')
+                                                                echo 'selected'; ?>>Travail</option>
+                                                            <option value="etude" <?php if ($row['parcours_souhaite'] == 'etude')
+                                                                echo 'selected'; ?>>Etude</option>
+                                                            <option value="formation" <?php if ($row['parcours_souhaite'] == 'formation')
+                                                                echo 'selected'; ?>>Formation</option>
+                                                        </select>
+                                                    </div><br>
+
+
+                                                    <?php
                             } else {
                                 echo "No Record Found";
                             }
@@ -543,6 +566,7 @@ if (!isset($_SESSION['EtudiantID'])) {
                                                     class="btn btn-primary">Modifier</button>
                                             </div>
                                         </form>
+                                        <!-- end form -->
                                     </div>
                                 </div>
                             </div>

@@ -84,6 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['status'] = "Méthode de requête non autorisée.";
 }
 
-header('Location: marque_abs.php'); 
+header('Location: marque_abs_prof.php'); 
 exit();
 ?>
